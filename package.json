@@ -1,0 +1,39 @@
+{
+  "name": "bachelor-thesis",
+  "version": "1.0.0",
+  "description": "This repo host my code of my bachelor thesis regarding the implementation of language (R to Python) and api migration (TBD to Pyro).",
+  "exports": "./src/index.js",
+  "types": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src -e ts,json --exec 'ts-node src/index.ts'",
+    "dev:test": "nodemon src -e ts,json --exec 'node --inspect-brk --loader ts-node/esm src/index.ts'",
+    "antlr:generate": "antlr4 -Dlanguage=TypeScript -lib grammars -o ./lib -visitor -Xexact-output-dir grammars/R.g4",
+    "lint": "eslint src",
+    "format": "npx prettier --write src",
+    "format:check": "npx prettier --check src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphael-dick/bachelor-thesis.git"
+  },
+  "author": "Raphael Dick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raphael-dick/bachelor-thesis/issues"
+  },
+  "homepage": "https://github.com/raphael-dick/bachelor-thesis#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "antlr4": "^4.12.0"
+  }
+}

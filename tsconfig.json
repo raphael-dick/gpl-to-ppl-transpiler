@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022"],
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "outDir": "build",
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "paths": {
+      "/*.ts": [
+        "./*.ts"
+      ],
+      "/*.js": [
+        "./*.js"
+      ],
+      "/*": [
+        "./*.ts",
+        "./*.js",
+        "./*"
+      ]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "lib/**/*"
+  ],
+
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
+}
