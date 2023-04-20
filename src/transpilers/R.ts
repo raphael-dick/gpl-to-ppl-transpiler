@@ -1,10 +1,11 @@
+import ApiVisitor from '/src/interfaces/ApiVisitor.ts';
 import IntermediateVisitor from '/src/interfaces/IntermediateVisitor';
 import antlr from 'antlr4'
 import Lexer from '../../lib/RLexer'
 import Parser from '../../lib/RParser'
-import RVisitor from '../visitors/RVisitor';
+import RVisitor from '../visitors/languages/RVisitor';
 
-export async function transpile(input: string, generator: IntermediateVisitor) {
+export async function transpile(input: string, generator: IntermediateVisitor, apis: ApiVisitor[]) {
   const chars = new antlr.CharStream(input);
   const lexer = new Lexer(chars);
 
@@ -13,7 +14,7 @@ export async function transpile(input: string, generator: IntermediateVisitor) {
   const parser = new Parser(tokens);
   const tree = parser.prog();
 
-  const gen = new RVisitor( generator )
+  const gen = new RVisitor( generator, apis )
   const output = gen.start( tree )
 
   return output

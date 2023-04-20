@@ -47,8 +47,8 @@ expr:
 	| ('-' | '+') expr										# UnhandeledExpression
 	| expr ':' expr											# UnhandeledExpression
 	| expr USER_OP expr										# UnhandeledExpression // anything wrappedin %: '%' .* '%'
-	| expr ('*' | '/') expr									# UnhandeledExpression
-	| expr ('+' | '-') expr									# UnhandeledExpression
+	| expr ('*' | '/') expr									# BasicCalculation
+	| expr ('+' | '-') expr									# BasicCalculation
 	| expr ('>' | '>=' | '<' | '<=' | '==' | '!=') expr		# UnhandeledExpression
 	| '!' expr												# UnhandeledExpression
 	| expr ('&' | '&&') expr								# UnhandeledExpression
@@ -71,7 +71,7 @@ expr:
 	| ID													# Id // e.g. Variable Names
 	| STRING												# String
 	| HEX													# UnhandeledExpression
-	| INT													# UnhandeledExpression
+	| INT													# Int
 	| FLOAT													# UnhandeledExpression
 	| COMPLEX												# UnhandeledExpression
 	| 'NULL'												# UnhandeledExpression

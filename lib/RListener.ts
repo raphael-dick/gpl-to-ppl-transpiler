@@ -9,6 +9,8 @@ import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { StringContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
+import { IntContext } from "./RParser";
+import { BasicCalculationContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
 import { FormlistContext } from "./RParser";
 import { FormContext } from "./RParser";
@@ -91,6 +93,30 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFunctionCall?: (ctx: FunctionCallContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Int`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterInt?: (ctx: IntContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Int`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitInt?: (ctx: IntContext) => void;
+	/**
+	 * Enter a parse tree produced by the `BasicCalculation`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterBasicCalculation?: (ctx: BasicCalculationContext) => void;
+	/**
+	 * Exit a parse tree produced by the `BasicCalculation`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitBasicCalculation?: (ctx: BasicCalculationContext) => void;
 	/**
 	 * Enter a parse tree produced by `RParser.exprlist`.
 	 * @param ctx the parse tree

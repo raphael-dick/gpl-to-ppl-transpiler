@@ -533,7 +533,7 @@ export default class RParser extends Parser {
 				break;
 			case 18:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new IntContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 88;
@@ -713,7 +713,7 @@ export default class RParser extends Parser {
 						break;
 					case 6:
 						{
-						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
+						localctx = new BasicCalculationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 114;
 						if (!(this.precpred(this._ctx, 33))) {
@@ -734,7 +734,7 @@ export default class RParser extends Parser {
 						break;
 					case 7:
 						{
-						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
+						localctx = new BasicCalculationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 117;
 						if (!(this.precpred(this._ctx, 32))) {
@@ -1483,9 +1483,6 @@ export class UnhandeledExpressionContext extends ExprContext {
 	public HEX(): TerminalNode {
 		return this.getToken(RParser.HEX, 0);
 	}
-	public INT(): TerminalNode {
-		return this.getToken(RParser.INT, 0);
-	}
 	public FLOAT(): TerminalNode {
 		return this.getToken(RParser.FLOAT, 0);
 	}
@@ -1626,6 +1623,63 @@ export class FunctionCallContext extends ExprContext {
 	public accept<Result>(visitor: RVisitor<Result>): Result {
 		if (visitor.visitFunctionCall) {
 			return visitor.visitFunctionCall(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class IntContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public INT(): TerminalNode {
+		return this.getToken(RParser.INT, 0);
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterInt) {
+	 		listener.enterInt(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitInt) {
+	 		listener.exitInt(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitInt) {
+			return visitor.visitInt(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class BasicCalculationContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterBasicCalculation) {
+	 		listener.enterBasicCalculation(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitBasicCalculation) {
+	 		listener.exitBasicCalculation(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitBasicCalculation) {
+			return visitor.visitBasicCalculation(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

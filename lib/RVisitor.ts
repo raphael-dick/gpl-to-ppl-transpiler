@@ -9,6 +9,8 @@ import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { StringContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
+import { IntContext } from "./RParser";
+import { BasicCalculationContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
 import { FormlistContext } from "./RParser";
 import { FormContext } from "./RParser";
@@ -65,6 +67,20 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitFunctionCall?: (ctx: FunctionCallContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `Int`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInt?: (ctx: IntContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `BasicCalculation`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBasicCalculation?: (ctx: BasicCalculationContext) => Result;
 	/**
 	 * Visit a parse tree produced by `RParser.exprlist`.
 	 * @param ctx the parse tree

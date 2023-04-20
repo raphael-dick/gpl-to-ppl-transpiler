@@ -1,18 +1,20 @@
-import { FunctionCallContext, IdContext, StringContext, UnhandeledExpressionContext } from './../../lib/RParser';
+import ApiVisitor from '/src/interfaces/ApiVisitor.ts';
+import { BasicCalculationContext, FunctionCallContext, IdContext, IntContext, StringContext, UnhandeledExpressionContext } from '../../../lib/RParser';
 import IntermediateVisitor from '/src/interfaces/IntermediateVisitor';
 
-import Visitor from '../../lib/RVisitor'
-import { ExprlistContext, ProgContext, VariableDeclarationContext } from '../../lib/RParser';
+import Visitor from '../../../lib/RVisitor'
+import { ExprlistContext, ProgContext, VariableDeclarationContext } from '../../../lib/RParser';
 import { ParseTree } from 'antlr4';
 
 export default class RVisitor extends Visitor<string> {
 
   private target: IntermediateVisitor
+  private apis: ApiVisitor[]
 
-  constructor(target: IntermediateVisitor) {
+  constructor(target: IntermediateVisitor, apis: ApiVisitor[]) {
     super();
-
     this.target = target
+    this.apis = apis
   }
 
   start( ctx: ProgContext ) {
@@ -61,7 +63,7 @@ export default class RVisitor extends Visitor<string> {
   /* Handling of expressions below */
 
   visitUnhandeledExpression = (ctx: UnhandeledExpressionContext) => {
-    return `<<<<Unhandled Expression: '${ctx.getText()}'>>>>`
+    return this.target.handleUnhandeledExpression(ctx.getText())
   }
 
   visitVariableDeclaration = (ctx: VariableDeclarationContext) => {
@@ -74,8 +76,15 @@ export default class RVisitor extends Visitor<string> {
   visitFunctionCall = (ctx: FunctionCallContext) => {
     const name = ctx.getChild(0).getText()
     const args = this.visit(ctx.sublist()).filter((item: string) => item && !item?.includes(','))
+
+    for( const api of this.apis ) {
+      const result = api.lookup(name, args)
+      if( result ) return result
+    }
+
+    return this.target.handleUnhandeledExpression(`${ctx.getText()} is not defined in one of apis`)
     
-    return this.target.handleFunctionCall(name, args)
+    // return this.target.handleFunctionCall(name, args)
   }
 
   visitString = (ctx: StringContext) => {
@@ -85,5 +94,28 @@ export default class RVisitor extends Visitor<string> {
   visitId = (ctx: IdContext) => {
     return ctx.getText()
   }
+
+  visitInt = (ctx: IntContext) => {
+    return ctx.getText()
+  }
+
+  visitBasicCalculation = (ctx: BasicCalculationContext) => {
+    const item1 = this.visit( ctx.getChild(0) )
+    const sign = ctx.getChild(1).getText()
+    const item2 = this.visit( ctx.getChild(2) )
+
+    switch (sign) {
+      case '+':
+        return this.target.handleAddition(item1, item2)
+      case '-':
+        return this.target.handleSubstraction(item1, item2)
+      case '*':
+        return this.target.handleMultiplication(item1, item2)
+      case '/':
+        return this.target.handleDivision(item1, item2)
+      default:
+        return this.target.handleUnhandeledExpression(sign)
+    }
+  };
 
 }
