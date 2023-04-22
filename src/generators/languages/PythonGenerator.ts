@@ -1,5 +1,8 @@
 import IntermediateVisitor from "../../interfaces/IntermediateVisitor";
 
+/**
+ * The Python Langauge Generator
+ */
 export default class PythonGenerator extends IntermediateVisitor {
 
   handleAddition = (summand1: string, summand2: string) => {

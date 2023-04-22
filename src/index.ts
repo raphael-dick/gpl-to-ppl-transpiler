@@ -6,18 +6,17 @@ import { transpileR } from './transpilers';
 import RStandardApiVisitor from './visitors/apis/RStandardApiVisitor';
 import RStatisticsApiVisitor from './visitors/apis/RStatisticsApiVisitor';
 
-const input = readFileSync('examples/test.R').toString() // relative to root of project
-// const input = expressions.join('\n')
+const input = readFileSync('examples/test.R').toString() // read input code from file (path is relative to root of project)
 
-const apis = [ 
+const apis = [ // list of apis that should be transpiled
   new RStandardApiVisitor( new PythonStandardApiGenerator() ) ,
   new RStatisticsApiVisitor( new PythonStatisticsApiGenerator() ) ,
 ]
 
 const output = await transpileR(input, new PythonGenerator(), apis)
 
-mkdirSync('examples/out', { recursive: true })
-writeFileSync('examples/out/test.py', output)
+mkdirSync('examples/out', { recursive: true }) // ensure the output dir exists
+writeFileSync('examples/out/test.py', output) // save the output as a file
 
 console.log("\n---------");
 console.log("| INPUT |");

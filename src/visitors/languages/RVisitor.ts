@@ -8,15 +8,30 @@ import { ParseTree } from 'antlr4';
 
 export default class RVisitor extends Visitor<string> {
 
+  /** the generator for generating the output code */
   private target: IntermediateVisitor
+
+  /** a list of apis which are handled during the transpilation */
   private apis: ApiVisitor[]
 
+  /**
+   * Setup the transpiler
+   * 
+   * @param target the generator for generating the output code
+   * @param apis a list of apis which are handled during the transpilation
+   */
   constructor(target: IntermediateVisitor, apis: ApiVisitor[]) {
     super();
     this.target = target
     this.apis = apis
   }
 
+  /**
+   * Transpiles the input parse tree into output code
+   * 
+   * @param ctx the context of the programm (the tree generated from the lexer)
+   * @returns the code in the output language
+   */
   start( ctx: ProgContext ) {
     return this.visitProg(ctx)
   }
