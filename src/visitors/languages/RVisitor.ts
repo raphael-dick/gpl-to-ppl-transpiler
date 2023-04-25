@@ -1,9 +1,9 @@
-import ApiVisitor from '/src/interfaces/ApiVisitor.ts';
-import { BasicCalculationContext, FunctionCallContext, IdContext, IntContext, StringContext, UnhandeledExpressionContext } from '../../../lib/RParser';
-import IntermediateVisitor from '/src/interfaces/IntermediateVisitor';
+import ApiVisitor from '@interfaces/ApiVisitor.ts';
+import { BasicCalculationContext, FunctionCallContext, IdContext, IntContext, StringContext, UnhandeledExpressionContext } from '@lib/RParser';
+import IntermediateVisitor from '@interfaces/IntermediateVisitor';
 
-import Visitor from '../../../lib/RVisitor'
-import { ExprlistContext, ProgContext, VariableDeclarationContext } from '../../../lib/RParser';
+import Visitor from '@lib/RVisitor'
+import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/RParser';
 import { ParseTree } from 'antlr4';
 
 export default class RVisitor extends Visitor<string> {

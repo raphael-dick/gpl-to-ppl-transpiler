@@ -20,18 +20,20 @@
     "strictNullChecks": false,
     "allowImportingTsExtensions": true,
     "noEmit": true,
+    "baseUrl": ".",
     "paths": {
-      "/*.ts": [
-        "./*.ts"
-      ],
-      "/*.js": [
-        "./*.js"
-      ],
-      "/*": [
-        "./*.ts",
-        "./*.js",
-        "./*"
-      ]
+      // custom path aliases
+      "@src/*": ["src/*"],
+      "@generators/*": ["src/generators/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@transpilers/*": ["src/transpilers/*"],
+      "@visitors/*": ["src/visitors/*"],
+      "@lib/*": ["lib/*"],
+
+      // allowing imports of .ts files without the extension
+      "/*.ts": ["./*.ts"],
+      "/*.js": ["./*.js"],
+      "/*": ["./*.ts","./*.js","./*"]
     }
   },
   "include": ["src/**/*"],
@@ -41,6 +43,7 @@
 
   "ts-node": {
     "esm": true,
-    "experimentalSpecifierResolution": "node"
+    "experimentalSpecifierResolution": "node",
+    "require": ["tsconfig-paths/register"]
   }
 }

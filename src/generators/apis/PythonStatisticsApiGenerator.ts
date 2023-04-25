@@ -1,4 +1,4 @@
-import StatisticsApi from '../../interfaces/apis/StatisticsApi';
+import StatisticsApi from '@interfaces/apis/StatisticsApi';
 
 /**
  * The Python API Generator for the Statistics API

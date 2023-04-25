@@ -1,9 +1,9 @@
-import ApiVisitor from '/src/interfaces/ApiVisitor.ts';
-import IntermediateVisitor from '/src/interfaces/IntermediateVisitor';
+import ApiVisitor from '@interfaces/ApiVisitor.ts';
+import IntermediateVisitor from '@interfaces/IntermediateVisitor';
 import antlr from 'antlr4'
-import Lexer from '../../lib/RLexer'
-import Parser from '../../lib/RParser'
-import RVisitor from '../visitors/languages/RVisitor';
+import Lexer from '@lib/RLexer'
+import Parser from '@lib/RParser'
+import RVisitor from '@visitors/languages/RVisitor';
 
 /**
  * Transpile R code into the supplied output language using the generators and supplies apis

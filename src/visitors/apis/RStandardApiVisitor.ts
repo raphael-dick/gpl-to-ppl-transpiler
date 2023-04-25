@@ -1,5 +1,5 @@
-import StandardApi from "../../interfaces/apis/StandardApi";
-import ApiVisitor from "../../interfaces/ApiVisitor";
+import StandardApi from "@interfaces/apis/StandardApi";
+import ApiVisitor from "@interfaces/ApiVisitor";
 
 export default class RStandardApiVisitor extends ApiVisitor {
 

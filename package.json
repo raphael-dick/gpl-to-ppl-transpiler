@@ -6,8 +6,7 @@
   "types": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src -e ts,json --exec 'ts-node src/index.ts'",
-    "dev:test": "nodemon src -e ts,json --exec 'node --inspect-brk --loader ts-node/esm src/index.ts'",
+    "dev": "nodemon src -e ts,json --exec 'node --loader ./loader.js src/index.ts'",
     "antlr:generate": "antlr4 -Dlanguage=TypeScript -lib grammars -o ./lib -visitor -Xexact-output-dir grammars/R.g4",
     "lint": "eslint src",
     "format": "npx prettier --write src",
@@ -35,6 +34,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "antlr4": "^4.12.0"
+    "antlr4": "^4.12.0",
+    "tsconfig-paths": "^4.2.0"
   }
 }

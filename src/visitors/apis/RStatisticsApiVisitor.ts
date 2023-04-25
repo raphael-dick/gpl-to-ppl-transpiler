@@ -1,6 +1,5 @@
-import StatisticsApi from '../../interfaces/apis/StatisticsApi';
-import StandardApi from "../../interfaces/apis/StandardApi";
-import ApiVisitor from "../../interfaces/ApiVisitor";
+import StatisticsApi from '@interfaces/apis/StatisticsApi';
+import ApiVisitor from "@interfaces/ApiVisitor";
 
 export default class RStatisticsApiVisitor extends ApiVisitor {
 
