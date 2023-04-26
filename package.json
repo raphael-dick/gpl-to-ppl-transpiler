@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nodemon src -e ts,json --exec 'node --loader ./loader.js src/index.ts'",
     "antlr:generate": "antlr4 -Dlanguage=TypeScript -lib grammars -o ./lib -visitor -Xexact-output-dir grammars/R.g4",
-    "lint": "eslint src",
+    "lint": "eslint --ignore-path .eslintignore src",
+    "lint:fix": "eslint --ignore-path .eslintignore --fix src",
     "format": "npx prettier --write src",
     "format:check": "npx prettier --check src"
   },
@@ -24,10 +25,11 @@
   "homepage": "https://github.com/raphael-dick/bachelor-thesis#readme",
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
-    "eslint": "^8.38.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "ts-node": "^10.9.1",
