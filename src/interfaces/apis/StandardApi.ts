@@ -6,5 +6,5 @@ export default abstract class StandardApi {
    * Handles a console output
    * @param content the text content of the print statement
    */
-  abstract handlePrint: (content: string) => string;
+  abstract handlePrint: (content: string) => string
 }

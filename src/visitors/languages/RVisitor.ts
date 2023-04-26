@@ -1,17 +1,17 @@
-import ApiVisitor from '@interfaces/ApiVisitor.ts';
-import { BasicCalculationContext, FunctionCallContext, IdContext, IntContext, StringContext, UnhandeledExpressionContext } from '@lib/RParser';
-import IntermediateVisitor from '@interfaces/IntermediateVisitor';
+import ApiVisitor from '@interfaces/ApiVisitor.ts'
+import { BasicCalculationContext, FunctionCallContext, IdContext, IntContext, StringContext, UnhandeledExpressionContext } from '@lib/RParser'
+import IntermediateVisitor from '@interfaces/IntermediateVisitor'
 
-import Visitor from '@lib/RVisitor';
-import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/RParser';
-import { ParseTree } from 'antlr4';
+import Visitor from '@lib/RVisitor'
+import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/RParser'
+import { ParseTree } from 'antlr4'
 
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
-  private target: IntermediateVisitor;
+  private target: IntermediateVisitor
 
   /** a list of apis which are handled during the transpilation */
-  private apis: ApiVisitor[];
+  private apis: ApiVisitor[]
 
   /**
    * Setup the transpiler
@@ -20,9 +20,9 @@ export default class RVisitor extends Visitor<string> {
    * @param apis a list of apis which are handled during the transpilation
    */
   constructor(target: IntermediateVisitor, apis: ApiVisitor[]) {
-    super();
-    this.target = target;
-    this.apis = apis;
+    super()
+    this.target = target
+    this.apis = apis
   }
 
   /**
@@ -32,101 +32,101 @@ export default class RVisitor extends Visitor<string> {
    * @returns the code in the output language
    */
   start(ctx: ProgContext) {
-    return this.visitProg(ctx);
+    return this.visitProg(ctx)
   }
 
   visitProg = (ctx: ProgContext) => {
-    return this.visitExprlist(ctx);
-  };
+    return this.visitExprlist(ctx)
+  }
 
   visitExprlist = (ctx: ExprlistContext) => {
-    let code = '';
+    let code = ''
 
     for (let i = 0; i < ctx.getChildCount(); i++) {
-      const child = ctx.getChild(i);
+      const child = ctx.getChild(i)
 
       // console.log(child.getText().replace('\n', 'NL'));
-      code += this.visit(child);
+      code += this.visit(child)
     }
 
-    return code.trim();
-  };
+    return code.trim()
+  }
 
   visit = (ctx: ParseTree) => {
-    const text = ctx?.getText?.();
-    let result = undefined;
+    const text = ctx?.getText?.()
+    let result = undefined
 
     switch (text) {
       case '<EOF>':
-        break;
+        break
       case '\n':
       case '\r':
-        result = text;
-        break;
+        result = text
+        break
 
       default:
-        result = super.visit(ctx);
-        break;
+        result = super.visit(ctx)
+        break
     }
 
-    return result ?? '';
-  };
+    return result ?? ''
+  }
 
   /* Handling of expressions below */
 
   visitUnhandeledExpression = (ctx: UnhandeledExpressionContext) => {
-    return this.target.handleUnhandeledExpression(ctx.getText());
-  };
+    return this.target.handleUnhandeledExpression(ctx.getText())
+  }
 
   visitVariableDeclaration = (ctx: VariableDeclarationContext) => {
-    const name = this.visit(ctx.getChild(0));
-    const value = this.visit(ctx.getChild(2));
+    const name = this.visit(ctx.getChild(0))
+    const value = this.visit(ctx.getChild(2))
 
-    return this.target.handleVariableDeclaration(name, value);
-  };
+    return this.target.handleVariableDeclaration(name, value)
+  }
 
   visitFunctionCall = (ctx: FunctionCallContext) => {
-    const name = ctx.getChild(0).getText();
-    const args = this.visit(ctx.sublist()).filter((item: string) => item && !item?.includes(','));
+    const name = ctx.getChild(0).getText()
+    const args = this.visit(ctx.sublist()).filter((item: string) => item && !item?.includes(','))
 
     for (const api of this.apis) {
-      const result = api.lookup(name, args);
-      if (result) return result;
+      const result = api.lookup(name, args)
+      if (result) return result
     }
 
-    return this.target.handleUnhandeledExpression(`${ctx.getText()} is not defined in one of apis`);
+    return this.target.handleUnhandeledExpression(`${ctx.getText()} is not defined in one of apis`)
 
     // return this.target.handleFunctionCall(name, args)
-  };
+  }
 
   visitString = (ctx: StringContext) => {
-    return ctx.getText();
-  };
+    return ctx.getText()
+  }
 
   visitId = (ctx: IdContext) => {
-    return ctx.getText();
-  };
+    return ctx.getText()
+  }
 
   visitInt = (ctx: IntContext) => {
-    return ctx.getText();
-  };
+    return ctx.getText()
+  }
 
   visitBasicCalculation = (ctx: BasicCalculationContext) => {
-    const item1 = this.visit(ctx.getChild(0));
-    const sign = ctx.getChild(1).getText();
-    const item2 = this.visit(ctx.getChild(2));
+    const item1 = this.visit(ctx.getChild(0))
+    const sign = ctx.getChild(1).getText()
+    const item2 = this.visit(ctx.getChild(2))
 
     switch (sign) {
       case '+':
-        return this.target.handleAddition(item1, item2);
+        return this.target.handleAddition(item1, item2)
       case '-':
-        return this.target.handleSubstraction(item1, item2);
+        return this.target.handleSubstraction(item1, item2)
       case '*':
-        return this.target.handleMultiplication(item1, item2);
+        return this.target.handleMultiplication(item1, item2)
       case '/':
-        return this.target.handleDivision(item1, item2);
+        return this.target.handleDivision(item1, item2)
       default:
-        return this.target.handleUnhandeledExpression(sign);
+        return this.target.handleUnhandeledExpression(sign)
     }
-  };
+  }
 }

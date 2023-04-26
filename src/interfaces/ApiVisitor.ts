@@ -9,5 +9,5 @@ export default abstract class ApiVisitor {
    *
    * @returns a 'string' if the call is handled by this api or 'undefined' otherwise
    */
-  abstract lookup: (expression: string, args: string[]) => string | undefined;
+  abstract lookup: (expression: string, args: string[]) => string | undefined
 }

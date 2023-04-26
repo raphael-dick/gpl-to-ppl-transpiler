@@ -7,7 +7,7 @@ export default abstract class IntermediateVisitor {
    * Output if an expression is not currently handled by the transpiler
    * @param expression the name of the expression or error message
    */
-  abstract handleUnhandeledExpression: (expression: string) => string;
+  abstract handleUnhandeledExpression: (expression: string) => string
 
   // -------------- //
   // Basic Features //
@@ -18,14 +18,14 @@ export default abstract class IntermediateVisitor {
    * @param name the variable name
    * @param value the value that gets assigned to the variable
    */
-  abstract handleVariableDeclaration: (name: string, value: string) => string;
+  abstract handleVariableDeclaration: (name: string, value: string) => string
 
   /**
    * The call of a funtion
    * @param name the name of function
    * @param args a list of args which are supplied to the function
    */
-  abstract handleFunctionCall: (name: string, args: string[]) => string;
+  abstract handleFunctionCall: (name: string, args: string[]) => string
 
   // ------------ //
   // Calculations //
@@ -36,26 +36,26 @@ export default abstract class IntermediateVisitor {
    * @param summand1 the first summand
    * @param summand2 the second summand
    */
-  abstract handleAddition: (summand1: string, summand2: string) => string;
+  abstract handleAddition: (summand1: string, summand2: string) => string
 
   /**
    * The subtraction of 2 numbers
    * @param minuend the minuend
    * @param subtrahend the subtrahend
    */
-  abstract handleSubstraction: (minuend: string, subtrahend: string) => string;
+  abstract handleSubstraction: (minuend: string, subtrahend: string) => string
 
   /**
    * The multipilcation of 2 numbers
    * @param factor1 the first factor
    * @param factor2 the second factor
    */
-  abstract handleMultiplication: (factor1: string, factor2: string) => string;
+  abstract handleMultiplication: (factor1: string, factor2: string) => string
 
   /**
    * The division of 2 numbers
    * @param dividend the dividend
    * @param divisior the divisor
    */
-  abstract handleDivision: (dividend: string, divisior: string) => string;
+  abstract handleDivision: (dividend: string, divisior: string) => string
 }
