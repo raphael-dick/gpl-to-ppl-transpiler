@@ -9,6 +9,7 @@ import { GroupContext } from "./RParser";
 import { FloatContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
+import { FunctionDefinitionContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { StringContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
@@ -96,6 +97,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
+	/**
+	 * Enter a parse tree produced by the `FunctionDefinition`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionDefinition?: (ctx: FunctionDefinitionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `FunctionDefinition`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionDefinition?: (ctx: FunctionDefinitionContext) => void;
 	/**
 	 * Enter a parse tree produced by the `Id`
 	 * labeled alternative in `RParser.expr`.

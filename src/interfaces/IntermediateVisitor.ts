@@ -95,4 +95,12 @@ export default abstract class IntermediateVisitor {
    * @param value the gourps content
    */
   abstract handleGroup: (value: string) => string
+
+  /**
+   * Definition of an function
+   * @param name the name of the function
+   * @param args the args
+   * @param body the functions body
+   */
+  abstract handleFunctionDefinition: (name: string, args: string, body: string) => string
 }

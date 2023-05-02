@@ -56,7 +56,7 @@ expr:
 	| '~' expr												# UnhandeledExpression
 	| expr '~' expr											# UnhandeledExpression
 	| expr ('<-' | '<<-' | '=' | '->' | '->>' | ':=') expr	# VariableDeclaration
-	| 'function' '(' formlist? ')' expr						# UnhandeledExpression // define function
+	| expr '<-' 'function' '(' formlist? ')' expr			# FunctionDefinition // define function
 	| 'return(' expr ')'									# ReturnStatement // return statement
 	| expr '(' sublist ')'									# FunctionCall // call function
 	| '{' exprlist '}'										# UnhandeledExpression // compound statement

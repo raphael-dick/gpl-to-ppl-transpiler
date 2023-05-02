@@ -9,6 +9,7 @@ import { GroupContext } from "./RParser";
 import { FloatContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
+import { FunctionDefinitionContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { StringContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
@@ -70,6 +71,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitVariableDeclaration?: (ctx: VariableDeclarationContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `FunctionDefinition`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFunctionDefinition?: (ctx: FunctionDefinitionContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `Id`
 	 * labeled alternative in `RParser.expr`.

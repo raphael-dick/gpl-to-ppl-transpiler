@@ -50,7 +50,7 @@ eps_theta = 0.15
 
 
 
-compute.LL = <<<<Unhandled Expression: 'function(y=y,Rth=Rth,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma){<missing '}'>'>>>>
+def compute.LL(,,y,,,,Rth,,,,eta_star,,,,If_A,,,,Vf,,,,sigma) <<<<Unhandled Expression: '{<missing '}'>'>>>>
 mu = Rth * eta_star * If_A * Vf
 sig = sigma
 <<<<Unhandled Expression: 'LL<-sum(dnorm(x=y,mean=mu,sd=sig,log=TRUE)) is not defined in one of apis'>>>>

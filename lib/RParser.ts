@@ -185,7 +185,7 @@ export default class RParser extends Parser {
 			this.state = 24;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 69209088) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & 3206544731) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 69209088) !== 0) || ((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & 1603272365) !== 0)) {
 				{
 				this.state = 22;
 				this._errHandler.sync(this);
@@ -194,7 +194,6 @@ export default class RParser extends Parser {
 				case 11:
 				case 21:
 				case 26:
-				case 33:
 				case 34:
 				case 36:
 				case 37:
@@ -297,9 +296,9 @@ export default class RParser extends Parser {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 101;
+			this.state = 94;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 4, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 3, this._ctx) ) {
 			case 1:
 				{
 				localctx = new UnhandeledExpressionContext(this, localctx);
@@ -343,40 +342,28 @@ export default class RParser extends Parser {
 				break;
 			case 4:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new ReturnStatementContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 36;
-				this.match(RParser.T__32);
+				this.match(RParser.T__35);
 				this.state = 37;
-				this.match(RParser.T__33);
-				this.state = 39;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-				if (((((_la - 55)) & ~0x1F) === 0 && ((1 << (_la - 55)) & 131) !== 0)) {
-					{
-					this.state = 38;
-					this.formlist();
-					}
-				}
-
-				this.state = 41;
+				this.expr(0);
+				this.state = 38;
 				this.match(RParser.T__34);
-				this.state = 42;
-				this.expr(25);
 				}
 				break;
 			case 5:
 				{
-				localctx = new ReturnStatementContext(this, localctx);
+				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 43;
-				this.match(RParser.T__35);
-				this.state = 44;
-				this.expr(0);
-				this.state = 45;
-				this.match(RParser.T__34);
+				this.state = 40;
+				this.match(RParser.T__36);
+				this.state = 41;
+				this.exprlist();
+				this.state = 42;
+				this.match(RParser.T__37);
 				}
 				break;
 			case 6:
@@ -384,12 +371,16 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
+				this.state = 44;
+				this.match(RParser.T__38);
+				this.state = 45;
+				this.match(RParser.T__33);
+				this.state = 46;
+				this.expr(0);
 				this.state = 47;
-				this.match(RParser.T__36);
+				this.match(RParser.T__34);
 				this.state = 48;
-				this.exprlist();
-				this.state = 49;
-				this.match(RParser.T__37);
+				this.expr(21);
 				}
 				break;
 			case 7:
@@ -397,16 +388,20 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 51;
+				this.state = 50;
 				this.match(RParser.T__38);
-				this.state = 52;
+				this.state = 51;
 				this.match(RParser.T__33);
-				this.state = 53;
+				this.state = 52;
 				this.expr(0);
-				this.state = 54;
+				this.state = 53;
 				this.match(RParser.T__34);
+				this.state = 54;
+				this.expr(0);
 				this.state = 55;
-				this.expr(21);
+				this.match(RParser.T__39);
+				this.state = 56;
+				this.expr(20);
 				}
 				break;
 			case 8:
@@ -414,20 +409,20 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 57;
-				this.match(RParser.T__38);
 				this.state = 58;
-				this.match(RParser.T__33);
+				this.match(RParser.T__40);
 				this.state = 59;
-				this.expr(0);
+				this.match(RParser.T__33);
 				this.state = 60;
-				this.match(RParser.T__34);
+				this.match(RParser.ID);
 				this.state = 61;
-				this.expr(0);
+				this.match(RParser.T__41);
 				this.state = 62;
-				this.match(RParser.T__39);
+				this.expr(0);
 				this.state = 63;
-				this.expr(20);
+				this.match(RParser.T__34);
+				this.state = 64;
+				this.expr(19);
 				}
 				break;
 			case 9:
@@ -435,20 +430,16 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 65;
-				this.match(RParser.T__40);
 				this.state = 66;
-				this.match(RParser.T__33);
+				this.match(RParser.T__42);
 				this.state = 67;
-				this.match(RParser.ID);
+				this.match(RParser.T__33);
 				this.state = 68;
-				this.match(RParser.T__41);
-				this.state = 69;
 				this.expr(0);
-				this.state = 70;
+				this.state = 69;
 				this.match(RParser.T__34);
-				this.state = 71;
-				this.expr(19);
+				this.state = 70;
+				this.expr(18);
 				}
 				break;
 			case 10:
@@ -456,16 +447,10 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
+				this.state = 72;
+				this.match(RParser.T__43);
 				this.state = 73;
-				this.match(RParser.T__42);
-				this.state = 74;
-				this.match(RParser.T__33);
-				this.state = 75;
-				this.expr(0);
-				this.state = 76;
-				this.match(RParser.T__34);
-				this.state = 77;
-				this.expr(18);
+				this.expr(17);
 				}
 				break;
 			case 11:
@@ -473,10 +458,10 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 79;
-				this.match(RParser.T__43);
-				this.state = 80;
-				this.expr(17);
+				this.state = 74;
+				this.match(RParser.T__44);
+				this.state = 75;
+				this.expr(16);
 				}
 				break;
 			case 12:
@@ -484,10 +469,8 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 81;
-				this.match(RParser.T__44);
-				this.state = 82;
-				this.expr(16);
+				this.state = 76;
+				this.match(RParser.T__45);
 				}
 				break;
 			case 13:
@@ -495,75 +478,75 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 83;
-				this.match(RParser.T__45);
+				this.state = 77;
+				this.match(RParser.T__46);
 				}
 				break;
 			case 14:
+				{
+				localctx = new GroupContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 78;
+				this.match(RParser.T__33);
+				this.state = 79;
+				this.expr(0);
+				this.state = 80;
+				this.match(RParser.T__34);
+				}
+				break;
+			case 15:
+				{
+				localctx = new IdContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 82;
+				this.match(RParser.ID);
+				}
+				break;
+			case 16:
+				{
+				localctx = new StringContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 83;
+				this.match(RParser.STRING);
+				}
+				break;
+			case 17:
 				{
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 84;
-				this.match(RParser.T__46);
-				}
-				break;
-			case 15:
-				{
-				localctx = new GroupContext(this, localctx);
-				this._ctx = localctx;
-				_prevctx = localctx;
-				this.state = 85;
-				this.match(RParser.T__33);
-				this.state = 86;
-				this.expr(0);
-				this.state = 87;
-				this.match(RParser.T__34);
-				}
-				break;
-			case 16:
-				{
-				localctx = new IdContext(this, localctx);
-				this._ctx = localctx;
-				_prevctx = localctx;
-				this.state = 89;
-				this.match(RParser.ID);
-				}
-				break;
-			case 17:
-				{
-				localctx = new StringContext(this, localctx);
-				this._ctx = localctx;
-				_prevctx = localctx;
-				this.state = 90;
-				this.match(RParser.STRING);
+				this.match(RParser.HEX);
 				}
 				break;
 			case 18:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new IntContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 91;
-				this.match(RParser.HEX);
+				this.state = 85;
+				this.match(RParser.INT);
 				}
 				break;
 			case 19:
 				{
-				localctx = new IntContext(this, localctx);
+				localctx = new FloatContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 92;
-				this.match(RParser.INT);
+				this.state = 86;
+				this.match(RParser.FLOAT);
 				}
 				break;
 			case 20:
 				{
-				localctx = new FloatContext(this, localctx);
+				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 93;
-				this.match(RParser.FLOAT);
+				this.state = 87;
+				this.match(RParser.COMPLEX);
 				}
 				break;
 			case 21:
@@ -571,8 +554,8 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 94;
-				this.match(RParser.COMPLEX);
+				this.state = 88;
+				this.match(RParser.T__47);
 				}
 				break;
 			case 22:
@@ -580,8 +563,8 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 95;
-				this.match(RParser.T__47);
+				this.state = 89;
+				this.match(RParser.T__48);
 				}
 				break;
 			case 23:
@@ -589,8 +572,8 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 96;
-				this.match(RParser.T__48);
+				this.state = 90;
+				this.match(RParser.T__49);
 				}
 				break;
 			case 24:
@@ -598,8 +581,8 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 97;
-				this.match(RParser.T__49);
+				this.state = 91;
+				this.match(RParser.T__50);
 				}
 				break;
 			case 25:
@@ -607,8 +590,8 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 98;
-				this.match(RParser.T__50);
+				this.state = 92;
+				this.match(RParser.T__51);
 				}
 				break;
 			case 26:
@@ -616,22 +599,13 @@ export default class RParser extends Parser {
 				localctx = new UnhandeledExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 99;
-				this.match(RParser.T__51);
-				}
-				break;
-			case 27:
-				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
-				this._ctx = localctx;
-				_prevctx = localctx;
-				this.state = 100;
+				this.state = 93;
 				this.match(RParser.T__52);
 				}
 				break;
 			}
 			this._ctx.stop = this._input.LT(-1);
-			this.state = 157;
+			this.state = 159;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 6, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
@@ -641,18 +615,18 @@ export default class RParser extends Parser {
 					}
 					_prevctx = localctx;
 					{
-					this.state = 155;
+					this.state = 157;
 					this._errHandler.sync(this);
 					switch ( this._interp.adaptivePredict(this._input, 5, this._ctx) ) {
 					case 1:
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 103;
+						this.state = 96;
 						if (!(this.precpred(this._ctx, 40))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 40)");
 						}
-						this.state = 104;
+						this.state = 97;
 						_la = this._input.LA(1);
 						if(!(_la===5 || _la===6)) {
 						this._errHandler.recoverInline(this);
@@ -661,7 +635,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 105;
+						this.state = 98;
 						this.expr(41);
 						}
 						break;
@@ -669,11 +643,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 106;
+						this.state = 99;
 						if (!(this.precpred(this._ctx, 39))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 39)");
 						}
-						this.state = 107;
+						this.state = 100;
 						_la = this._input.LA(1);
 						if(!(_la===7 || _la===8)) {
 						this._errHandler.recoverInline(this);
@@ -682,7 +656,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 108;
+						this.state = 101;
 						this.expr(40);
 						}
 						break;
@@ -690,13 +664,13 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 109;
+						this.state = 102;
 						if (!(this.precpred(this._ctx, 38))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 38)");
 						}
-						this.state = 110;
+						this.state = 103;
 						this.match(RParser.T__8);
-						this.state = 111;
+						this.state = 104;
 						this.expr(38);
 						}
 						break;
@@ -704,13 +678,13 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 112;
+						this.state = 105;
 						if (!(this.precpred(this._ctx, 36))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 36)");
 						}
-						this.state = 113;
+						this.state = 106;
 						this.match(RParser.T__11);
-						this.state = 114;
+						this.state = 107;
 						this.expr(37);
 						}
 						break;
@@ -718,13 +692,13 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 115;
+						this.state = 108;
 						if (!(this.precpred(this._ctx, 35))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 35)");
 						}
-						this.state = 116;
+						this.state = 109;
 						this.match(RParser.USER_OP);
-						this.state = 117;
+						this.state = 110;
 						this.expr(36);
 						}
 						break;
@@ -732,11 +706,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new BasicCalculationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 118;
+						this.state = 111;
 						if (!(this.precpred(this._ctx, 34))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 34)");
 						}
-						this.state = 119;
+						this.state = 112;
 						_la = this._input.LA(1);
 						if(!(_la===13 || _la===14)) {
 						this._errHandler.recoverInline(this);
@@ -745,7 +719,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 120;
+						this.state = 113;
 						this.expr(35);
 						}
 						break;
@@ -753,11 +727,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new BasicCalculationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 121;
+						this.state = 114;
 						if (!(this.precpred(this._ctx, 33))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 33)");
 						}
-						this.state = 122;
+						this.state = 115;
 						_la = this._input.LA(1);
 						if(!(_la===10 || _la===11)) {
 						this._errHandler.recoverInline(this);
@@ -766,7 +740,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 123;
+						this.state = 116;
 						this.expr(34);
 						}
 						break;
@@ -774,11 +748,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 124;
+						this.state = 117;
 						if (!(this.precpred(this._ctx, 32))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 32)");
 						}
-						this.state = 125;
+						this.state = 118;
 						_la = this._input.LA(1);
 						if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 2064384) !== 0))) {
 						this._errHandler.recoverInline(this);
@@ -787,7 +761,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 126;
+						this.state = 119;
 						this.expr(33);
 						}
 						break;
@@ -795,11 +769,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 127;
+						this.state = 120;
 						if (!(this.precpred(this._ctx, 30))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 30)");
 						}
-						this.state = 128;
+						this.state = 121;
 						_la = this._input.LA(1);
 						if(!(_la===22 || _la===23)) {
 						this._errHandler.recoverInline(this);
@@ -808,7 +782,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 129;
+						this.state = 122;
 						this.expr(31);
 						}
 						break;
@@ -816,11 +790,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 130;
+						this.state = 123;
 						if (!(this.precpred(this._ctx, 29))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 29)");
 						}
-						this.state = 131;
+						this.state = 124;
 						_la = this._input.LA(1);
 						if(!(_la===24 || _la===25)) {
 						this._errHandler.recoverInline(this);
@@ -829,7 +803,7 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 132;
+						this.state = 125;
 						this.expr(30);
 						}
 						break;
@@ -837,13 +811,13 @@ export default class RParser extends Parser {
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 133;
+						this.state = 126;
 						if (!(this.precpred(this._ctx, 27))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 27)");
 						}
-						this.state = 134;
+						this.state = 127;
 						this.match(RParser.T__25);
-						this.state = 135;
+						this.state = 128;
 						this.expr(28);
 						}
 						break;
@@ -851,11 +825,11 @@ export default class RParser extends Parser {
 						{
 						localctx = new VariableDeclarationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 136;
+						this.state = 129;
 						if (!(this.precpred(this._ctx, 26))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 26)");
 						}
-						this.state = 137;
+						this.state = 130;
 						_la = this._input.LA(1);
 						if(!(((((_la - 27)) & ~0x1F) === 0 && ((1 << (_la - 27)) & 63) !== 0))) {
 						this._errHandler.recoverInline(this);
@@ -864,64 +838,94 @@ export default class RParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 138;
+						this.state = 131;
 						this.expr(27);
 						}
 						break;
 					case 13:
 						{
-						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
+						localctx = new FunctionDefinitionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 139;
-						if (!(this.precpred(this._ctx, 42))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 42)");
+						this.state = 132;
+						if (!(this.precpred(this._ctx, 25))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 25)");
 						}
+						this.state = 133;
+						this.match(RParser.T__26);
+						this.state = 134;
+						this.match(RParser.T__32);
+						this.state = 135;
+						this.match(RParser.T__33);
+						this.state = 137;
+						this._errHandler.sync(this);
+						_la = this._input.LA(1);
+						if (((((_la - 55)) & ~0x1F) === 0 && ((1 << (_la - 55)) & 131) !== 0)) {
+							{
+							this.state = 136;
+							this.formlist();
+							}
+						}
+
+						this.state = 139;
+						this.match(RParser.T__34);
 						this.state = 140;
-						this.match(RParser.T__1);
-						this.state = 141;
-						this.sublist();
-						this.state = 142;
-						this.match(RParser.T__2);
-						this.state = 143;
-						this.match(RParser.T__2);
+						this.expr(26);
 						}
 						break;
 					case 14:
 						{
 						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 145;
-						if (!(this.precpred(this._ctx, 41))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 41)");
+						this.state = 141;
+						if (!(this.precpred(this._ctx, 42))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 42)");
 						}
-						this.state = 146;
-						this.match(RParser.T__3);
-						this.state = 147;
+						this.state = 142;
+						this.match(RParser.T__1);
+						this.state = 143;
 						this.sublist();
-						this.state = 148;
+						this.state = 144;
+						this.match(RParser.T__2);
+						this.state = 145;
 						this.match(RParser.T__2);
 						}
 						break;
 					case 15:
 						{
+						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
+						this.state = 147;
+						if (!(this.precpred(this._ctx, 41))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 41)");
+						}
+						this.state = 148;
+						this.match(RParser.T__3);
+						this.state = 149;
+						this.sublist();
+						this.state = 150;
+						this.match(RParser.T__2);
+						}
+						break;
+					case 16:
+						{
 						localctx = new FunctionCallContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
-						this.state = 150;
+						this.state = 152;
 						if (!(this.precpred(this._ctx, 23))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 23)");
 						}
-						this.state = 151;
-						this.match(RParser.T__33);
-						this.state = 152;
-						this.sublist();
 						this.state = 153;
+						this.match(RParser.T__33);
+						this.state = 154;
+						this.sublist();
+						this.state = 155;
 						this.match(RParser.T__34);
 						}
 						break;
 					}
 					}
 				}
-				this.state = 159;
+				this.state = 161;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 6, this._ctx);
 			}
@@ -947,14 +951,13 @@ export default class RParser extends Parser {
 		this.enterRule(localctx, 4, RParser.RULE_exprlist);
 		let _la: number;
 		try {
-			this.state = 171;
+			this.state = 173;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 10:
 			case 11:
 			case 21:
 			case 26:
-			case 33:
 			case 34:
 			case 36:
 			case 37:
@@ -979,15 +982,15 @@ export default class RParser extends Parser {
 			case 62:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 160;
+				this.state = 162;
 				this.expr(0);
-				this.state = 167;
+				this.state = 169;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===1 || _la===64) {
 					{
 					{
-					this.state = 161;
+					this.state = 163;
 					_la = this._input.LA(1);
 					if(!(_la===1 || _la===64)) {
 					this._errHandler.recoverInline(this);
@@ -996,19 +999,19 @@ export default class RParser extends Parser {
 						this._errHandler.reportMatch(this);
 					    this.consume();
 					}
-					this.state = 163;
+					this.state = 165;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 69209088) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & 1059061083) !== 0)) {
+					if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 69209088) !== 0) || ((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & 529530541) !== 0)) {
 						{
-						this.state = 162;
+						this.state = 164;
 						this.expr(0);
 						}
 					}
 
 					}
 					}
-					this.state = 169;
+					this.state = 171;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
@@ -1046,21 +1049,21 @@ export default class RParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 173;
+			this.state = 175;
 			this.form();
-			this.state = 178;
+			this.state = 180;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===54) {
 				{
 				{
-				this.state = 174;
+				this.state = 176;
 				this.match(RParser.T__53);
-				this.state = 175;
+				this.state = 177;
 				this.form();
 				}
 				}
-				this.state = 180;
+				this.state = 182;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1085,38 +1088,38 @@ export default class RParser extends Parser {
 		let localctx: FormContext = new FormContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 8, RParser.RULE_form);
 		try {
-			this.state = 187;
+			this.state = 189;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 11, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 181;
+				this.state = 183;
 				this.match(RParser.ID);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 182;
-				this.match(RParser.ID);
-				this.state = 183;
-				this.match(RParser.T__28);
 				this.state = 184;
+				this.match(RParser.ID);
+				this.state = 185;
+				this.match(RParser.T__28);
+				this.state = 186;
 				this.expr(0);
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 185;
+				this.state = 187;
 				this.match(RParser.T__54);
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 186;
+				this.state = 188;
 				this.match(RParser.T__55);
 				}
 				break;
@@ -1144,21 +1147,21 @@ export default class RParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 189;
+			this.state = 191;
 			this.sub();
-			this.state = 194;
+			this.state = 196;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===54) {
 				{
 				{
-				this.state = 190;
+				this.state = 192;
 				this.match(RParser.T__53);
-				this.state = 191;
+				this.state = 193;
 				this.sub();
 				}
 				}
-				this.state = 196;
+				this.state = 198;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1183,87 +1186,87 @@ export default class RParser extends Parser {
 		let localctx: SubContext = new SubContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 12, RParser.RULE_sub);
 		try {
-			this.state = 216;
+			this.state = 218;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 13, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 197;
+				this.state = 199;
 				this.expr(0);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 198;
+				this.state = 200;
 				this.match(RParser.ID);
-				this.state = 199;
+				this.state = 201;
 				this.match(RParser.T__28);
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 200;
-				this.match(RParser.ID);
-				this.state = 201;
-				this.match(RParser.T__28);
 				this.state = 202;
+				this.match(RParser.ID);
+				this.state = 203;
+				this.match(RParser.T__28);
+				this.state = 204;
 				this.expr(0);
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 203;
+				this.state = 205;
 				this.match(RParser.STRING);
-				this.state = 204;
+				this.state = 206;
 				this.match(RParser.T__28);
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 205;
-				this.match(RParser.STRING);
-				this.state = 206;
-				this.match(RParser.T__28);
 				this.state = 207;
+				this.match(RParser.STRING);
+				this.state = 208;
+				this.match(RParser.T__28);
+				this.state = 209;
 				this.expr(0);
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 208;
+				this.state = 210;
 				this.match(RParser.T__47);
-				this.state = 209;
+				this.state = 211;
 				this.match(RParser.T__28);
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 210;
-				this.match(RParser.T__47);
-				this.state = 211;
-				this.match(RParser.T__28);
 				this.state = 212;
+				this.match(RParser.T__47);
+				this.state = 213;
+				this.match(RParser.T__28);
+				this.state = 214;
 				this.expr(0);
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 213;
+				this.state = 215;
 				this.match(RParser.T__54);
 				}
 				break;
 			case 9:
 				this.enterOuterAlt(localctx, 9);
 				{
-				this.state = 214;
+				this.state = 216;
 				this.match(RParser.T__55);
 				}
 				break;
@@ -1324,92 +1327,94 @@ export default class RParser extends Parser {
 		case 11:
 			return this.precpred(this._ctx, 26);
 		case 12:
-			return this.precpred(this._ctx, 42);
+			return this.precpred(this._ctx, 25);
 		case 13:
-			return this.precpred(this._ctx, 41);
+			return this.precpred(this._ctx, 42);
 		case 14:
+			return this.precpred(this._ctx, 41);
+		case 15:
 			return this.precpred(this._ctx, 23);
 		}
 		return true;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,65,219,2,0,7,0,2,
+	public static readonly _serializedATN: number[] = [4,1,65,221,2,0,7,0,2,
 	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,1,0,1,0,5,0,17,8,0,10,0,12,
 	0,20,9,0,1,0,5,0,23,8,0,10,0,12,0,26,9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,
-	1,1,1,1,1,1,1,1,1,3,1,40,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,102,8,1,1,1,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,1,3,1,95,8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,156,8,1,10,
-	1,12,1,159,9,1,1,2,1,2,1,2,3,2,164,8,2,5,2,166,8,2,10,2,12,2,169,9,2,1,
-	2,3,2,172,8,2,1,3,1,3,1,3,5,3,177,8,3,10,3,12,3,180,9,3,1,4,1,4,1,4,1,4,
-	1,4,1,4,3,4,188,8,4,1,5,1,5,1,5,5,5,193,8,5,10,5,12,5,196,9,5,1,6,1,6,1,
-	6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,217,
-	8,6,1,6,0,1,2,7,0,2,4,6,8,10,12,0,9,2,0,1,1,64,64,1,0,10,11,1,0,5,6,1,0,
-	7,8,1,0,13,14,1,0,15,20,1,0,22,23,1,0,24,25,1,0,27,32,273,0,24,1,0,0,0,
-	2,101,1,0,0,0,4,171,1,0,0,0,6,173,1,0,0,0,8,187,1,0,0,0,10,189,1,0,0,0,
-	12,216,1,0,0,0,14,18,3,2,1,0,15,17,7,0,0,0,16,15,1,0,0,0,17,20,1,0,0,0,
-	18,16,1,0,0,0,18,19,1,0,0,0,19,23,1,0,0,0,20,18,1,0,0,0,21,23,5,64,0,0,
-	22,14,1,0,0,0,22,21,1,0,0,0,23,26,1,0,0,0,24,22,1,0,0,0,24,25,1,0,0,0,25,
-	27,1,0,0,0,26,24,1,0,0,0,27,28,5,0,0,1,28,1,1,0,0,0,29,30,6,1,-1,0,30,31,
-	7,1,0,0,31,102,3,2,1,37,32,33,5,21,0,0,33,102,3,2,1,31,34,35,5,26,0,0,35,
-	102,3,2,1,28,36,37,5,33,0,0,37,39,5,34,0,0,38,40,3,6,3,0,39,38,1,0,0,0,
-	39,40,1,0,0,0,40,41,1,0,0,0,41,42,5,35,0,0,42,102,3,2,1,25,43,44,5,36,0,
-	0,44,45,3,2,1,0,45,46,5,35,0,0,46,102,1,0,0,0,47,48,5,37,0,0,48,49,3,4,
-	2,0,49,50,5,38,0,0,50,102,1,0,0,0,51,52,5,39,0,0,52,53,5,34,0,0,53,54,3,
-	2,1,0,54,55,5,35,0,0,55,56,3,2,1,21,56,102,1,0,0,0,57,58,5,39,0,0,58,59,
-	5,34,0,0,59,60,3,2,1,0,60,61,5,35,0,0,61,62,3,2,1,0,62,63,5,40,0,0,63,64,
-	3,2,1,20,64,102,1,0,0,0,65,66,5,41,0,0,66,67,5,34,0,0,67,68,5,62,0,0,68,
-	69,5,42,0,0,69,70,3,2,1,0,70,71,5,35,0,0,71,72,3,2,1,19,72,102,1,0,0,0,
-	73,74,5,43,0,0,74,75,5,34,0,0,75,76,3,2,1,0,76,77,5,35,0,0,77,78,3,2,1,
-	18,78,102,1,0,0,0,79,80,5,44,0,0,80,102,3,2,1,17,81,82,5,45,0,0,82,102,
-	3,2,1,16,83,102,5,46,0,0,84,102,5,47,0,0,85,86,5,34,0,0,86,87,3,2,1,0,87,
-	88,5,35,0,0,88,102,1,0,0,0,89,102,5,62,0,0,90,102,5,61,0,0,91,102,5,57,
-	0,0,92,102,5,58,0,0,93,102,5,59,0,0,94,102,5,60,0,0,95,102,5,48,0,0,96,
-	102,5,49,0,0,97,102,5,50,0,0,98,102,5,51,0,0,99,102,5,52,0,0,100,102,5,
-	53,0,0,101,29,1,0,0,0,101,32,1,0,0,0,101,34,1,0,0,0,101,36,1,0,0,0,101,
-	43,1,0,0,0,101,47,1,0,0,0,101,51,1,0,0,0,101,57,1,0,0,0,101,65,1,0,0,0,
-	101,73,1,0,0,0,101,79,1,0,0,0,101,81,1,0,0,0,101,83,1,0,0,0,101,84,1,0,
-	0,0,101,85,1,0,0,0,101,89,1,0,0,0,101,90,1,0,0,0,101,91,1,0,0,0,101,92,
-	1,0,0,0,101,93,1,0,0,0,101,94,1,0,0,0,101,95,1,0,0,0,101,96,1,0,0,0,101,
-	97,1,0,0,0,101,98,1,0,0,0,101,99,1,0,0,0,101,100,1,0,0,0,102,157,1,0,0,
-	0,103,104,10,40,0,0,104,105,7,2,0,0,105,156,3,2,1,41,106,107,10,39,0,0,
-	107,108,7,3,0,0,108,156,3,2,1,40,109,110,10,38,0,0,110,111,5,9,0,0,111,
-	156,3,2,1,38,112,113,10,36,0,0,113,114,5,12,0,0,114,156,3,2,1,37,115,116,
-	10,35,0,0,116,117,5,63,0,0,117,156,3,2,1,36,118,119,10,34,0,0,119,120,7,
-	4,0,0,120,156,3,2,1,35,121,122,10,33,0,0,122,123,7,1,0,0,123,156,3,2,1,
-	34,124,125,10,32,0,0,125,126,7,5,0,0,126,156,3,2,1,33,127,128,10,30,0,0,
-	128,129,7,6,0,0,129,156,3,2,1,31,130,131,10,29,0,0,131,132,7,7,0,0,132,
-	156,3,2,1,30,133,134,10,27,0,0,134,135,5,26,0,0,135,156,3,2,1,28,136,137,
-	10,26,0,0,137,138,7,8,0,0,138,156,3,2,1,27,139,140,10,42,0,0,140,141,5,
-	2,0,0,141,142,3,10,5,0,142,143,5,3,0,0,143,144,5,3,0,0,144,156,1,0,0,0,
-	145,146,10,41,0,0,146,147,5,4,0,0,147,148,3,10,5,0,148,149,5,3,0,0,149,
-	156,1,0,0,0,150,151,10,23,0,0,151,152,5,34,0,0,152,153,3,10,5,0,153,154,
-	5,35,0,0,154,156,1,0,0,0,155,103,1,0,0,0,155,106,1,0,0,0,155,109,1,0,0,
-	0,155,112,1,0,0,0,155,115,1,0,0,0,155,118,1,0,0,0,155,121,1,0,0,0,155,124,
-	1,0,0,0,155,127,1,0,0,0,155,130,1,0,0,0,155,133,1,0,0,0,155,136,1,0,0,0,
-	155,139,1,0,0,0,155,145,1,0,0,0,155,150,1,0,0,0,156,159,1,0,0,0,157,155,
-	1,0,0,0,157,158,1,0,0,0,158,3,1,0,0,0,159,157,1,0,0,0,160,167,3,2,1,0,161,
-	163,7,0,0,0,162,164,3,2,1,0,163,162,1,0,0,0,163,164,1,0,0,0,164,166,1,0,
-	0,0,165,161,1,0,0,0,166,169,1,0,0,0,167,165,1,0,0,0,167,168,1,0,0,0,168,
-	172,1,0,0,0,169,167,1,0,0,0,170,172,1,0,0,0,171,160,1,0,0,0,171,170,1,0,
-	0,0,172,5,1,0,0,0,173,178,3,8,4,0,174,175,5,54,0,0,175,177,3,8,4,0,176,
-	174,1,0,0,0,177,180,1,0,0,0,178,176,1,0,0,0,178,179,1,0,0,0,179,7,1,0,0,
-	0,180,178,1,0,0,0,181,188,5,62,0,0,182,183,5,62,0,0,183,184,5,29,0,0,184,
-	188,3,2,1,0,185,188,5,55,0,0,186,188,5,56,0,0,187,181,1,0,0,0,187,182,1,
-	0,0,0,187,185,1,0,0,0,187,186,1,0,0,0,188,9,1,0,0,0,189,194,3,12,6,0,190,
-	191,5,54,0,0,191,193,3,12,6,0,192,190,1,0,0,0,193,196,1,0,0,0,194,192,1,
-	0,0,0,194,195,1,0,0,0,195,11,1,0,0,0,196,194,1,0,0,0,197,217,3,2,1,0,198,
-	199,5,62,0,0,199,217,5,29,0,0,200,201,5,62,0,0,201,202,5,29,0,0,202,217,
-	3,2,1,0,203,204,5,61,0,0,204,217,5,29,0,0,205,206,5,61,0,0,206,207,5,29,
-	0,0,207,217,3,2,1,0,208,209,5,48,0,0,209,217,5,29,0,0,210,211,5,48,0,0,
-	211,212,5,29,0,0,212,217,3,2,1,0,213,217,5,55,0,0,214,217,5,56,0,0,215,
-	217,1,0,0,0,216,197,1,0,0,0,216,198,1,0,0,0,216,200,1,0,0,0,216,203,1,0,
-	0,0,216,205,1,0,0,0,216,208,1,0,0,0,216,210,1,0,0,0,216,213,1,0,0,0,216,
-	214,1,0,0,0,216,215,1,0,0,0,217,13,1,0,0,0,14,18,22,24,39,101,155,157,163,
-	167,171,178,187,194,216];
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,138,8,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,158,
+	8,1,10,1,12,1,161,9,1,1,2,1,2,1,2,3,2,166,8,2,5,2,168,8,2,10,2,12,2,171,
+	9,2,1,2,3,2,174,8,2,1,3,1,3,1,3,5,3,179,8,3,10,3,12,3,182,9,3,1,4,1,4,1,
+	4,1,4,1,4,1,4,3,4,190,8,4,1,5,1,5,1,5,5,5,195,8,5,10,5,12,5,198,9,5,1,6,
+	1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,
+	3,6,219,8,6,1,6,0,1,2,7,0,2,4,6,8,10,12,0,9,2,0,1,1,64,64,1,0,10,11,1,0,
+	5,6,1,0,7,8,1,0,13,14,1,0,15,20,1,0,22,23,1,0,24,25,1,0,27,32,275,0,24,
+	1,0,0,0,2,94,1,0,0,0,4,173,1,0,0,0,6,175,1,0,0,0,8,189,1,0,0,0,10,191,1,
+	0,0,0,12,218,1,0,0,0,14,18,3,2,1,0,15,17,7,0,0,0,16,15,1,0,0,0,17,20,1,
+	0,0,0,18,16,1,0,0,0,18,19,1,0,0,0,19,23,1,0,0,0,20,18,1,0,0,0,21,23,5,64,
+	0,0,22,14,1,0,0,0,22,21,1,0,0,0,23,26,1,0,0,0,24,22,1,0,0,0,24,25,1,0,0,
+	0,25,27,1,0,0,0,26,24,1,0,0,0,27,28,5,0,0,1,28,1,1,0,0,0,29,30,6,1,-1,0,
+	30,31,7,1,0,0,31,95,3,2,1,37,32,33,5,21,0,0,33,95,3,2,1,31,34,35,5,26,0,
+	0,35,95,3,2,1,28,36,37,5,36,0,0,37,38,3,2,1,0,38,39,5,35,0,0,39,95,1,0,
+	0,0,40,41,5,37,0,0,41,42,3,4,2,0,42,43,5,38,0,0,43,95,1,0,0,0,44,45,5,39,
+	0,0,45,46,5,34,0,0,46,47,3,2,1,0,47,48,5,35,0,0,48,49,3,2,1,21,49,95,1,
+	0,0,0,50,51,5,39,0,0,51,52,5,34,0,0,52,53,3,2,1,0,53,54,5,35,0,0,54,55,
+	3,2,1,0,55,56,5,40,0,0,56,57,3,2,1,20,57,95,1,0,0,0,58,59,5,41,0,0,59,60,
+	5,34,0,0,60,61,5,62,0,0,61,62,5,42,0,0,62,63,3,2,1,0,63,64,5,35,0,0,64,
+	65,3,2,1,19,65,95,1,0,0,0,66,67,5,43,0,0,67,68,5,34,0,0,68,69,3,2,1,0,69,
+	70,5,35,0,0,70,71,3,2,1,18,71,95,1,0,0,0,72,73,5,44,0,0,73,95,3,2,1,17,
+	74,75,5,45,0,0,75,95,3,2,1,16,76,95,5,46,0,0,77,95,5,47,0,0,78,79,5,34,
+	0,0,79,80,3,2,1,0,80,81,5,35,0,0,81,95,1,0,0,0,82,95,5,62,0,0,83,95,5,61,
+	0,0,84,95,5,57,0,0,85,95,5,58,0,0,86,95,5,59,0,0,87,95,5,60,0,0,88,95,5,
+	48,0,0,89,95,5,49,0,0,90,95,5,50,0,0,91,95,5,51,0,0,92,95,5,52,0,0,93,95,
+	5,53,0,0,94,29,1,0,0,0,94,32,1,0,0,0,94,34,1,0,0,0,94,36,1,0,0,0,94,40,
+	1,0,0,0,94,44,1,0,0,0,94,50,1,0,0,0,94,58,1,0,0,0,94,66,1,0,0,0,94,72,1,
+	0,0,0,94,74,1,0,0,0,94,76,1,0,0,0,94,77,1,0,0,0,94,78,1,0,0,0,94,82,1,0,
+	0,0,94,83,1,0,0,0,94,84,1,0,0,0,94,85,1,0,0,0,94,86,1,0,0,0,94,87,1,0,0,
+	0,94,88,1,0,0,0,94,89,1,0,0,0,94,90,1,0,0,0,94,91,1,0,0,0,94,92,1,0,0,0,
+	94,93,1,0,0,0,95,159,1,0,0,0,96,97,10,40,0,0,97,98,7,2,0,0,98,158,3,2,1,
+	41,99,100,10,39,0,0,100,101,7,3,0,0,101,158,3,2,1,40,102,103,10,38,0,0,
+	103,104,5,9,0,0,104,158,3,2,1,38,105,106,10,36,0,0,106,107,5,12,0,0,107,
+	158,3,2,1,37,108,109,10,35,0,0,109,110,5,63,0,0,110,158,3,2,1,36,111,112,
+	10,34,0,0,112,113,7,4,0,0,113,158,3,2,1,35,114,115,10,33,0,0,115,116,7,
+	1,0,0,116,158,3,2,1,34,117,118,10,32,0,0,118,119,7,5,0,0,119,158,3,2,1,
+	33,120,121,10,30,0,0,121,122,7,6,0,0,122,158,3,2,1,31,123,124,10,29,0,0,
+	124,125,7,7,0,0,125,158,3,2,1,30,126,127,10,27,0,0,127,128,5,26,0,0,128,
+	158,3,2,1,28,129,130,10,26,0,0,130,131,7,8,0,0,131,158,3,2,1,27,132,133,
+	10,25,0,0,133,134,5,27,0,0,134,135,5,33,0,0,135,137,5,34,0,0,136,138,3,
+	6,3,0,137,136,1,0,0,0,137,138,1,0,0,0,138,139,1,0,0,0,139,140,5,35,0,0,
+	140,158,3,2,1,26,141,142,10,42,0,0,142,143,5,2,0,0,143,144,3,10,5,0,144,
+	145,5,3,0,0,145,146,5,3,0,0,146,158,1,0,0,0,147,148,10,41,0,0,148,149,5,
+	4,0,0,149,150,3,10,5,0,150,151,5,3,0,0,151,158,1,0,0,0,152,153,10,23,0,
+	0,153,154,5,34,0,0,154,155,3,10,5,0,155,156,5,35,0,0,156,158,1,0,0,0,157,
+	96,1,0,0,0,157,99,1,0,0,0,157,102,1,0,0,0,157,105,1,0,0,0,157,108,1,0,0,
+	0,157,111,1,0,0,0,157,114,1,0,0,0,157,117,1,0,0,0,157,120,1,0,0,0,157,123,
+	1,0,0,0,157,126,1,0,0,0,157,129,1,0,0,0,157,132,1,0,0,0,157,141,1,0,0,0,
+	157,147,1,0,0,0,157,152,1,0,0,0,158,161,1,0,0,0,159,157,1,0,0,0,159,160,
+	1,0,0,0,160,3,1,0,0,0,161,159,1,0,0,0,162,169,3,2,1,0,163,165,7,0,0,0,164,
+	166,3,2,1,0,165,164,1,0,0,0,165,166,1,0,0,0,166,168,1,0,0,0,167,163,1,0,
+	0,0,168,171,1,0,0,0,169,167,1,0,0,0,169,170,1,0,0,0,170,174,1,0,0,0,171,
+	169,1,0,0,0,172,174,1,0,0,0,173,162,1,0,0,0,173,172,1,0,0,0,174,5,1,0,0,
+	0,175,180,3,8,4,0,176,177,5,54,0,0,177,179,3,8,4,0,178,176,1,0,0,0,179,
+	182,1,0,0,0,180,178,1,0,0,0,180,181,1,0,0,0,181,7,1,0,0,0,182,180,1,0,0,
+	0,183,190,5,62,0,0,184,185,5,62,0,0,185,186,5,29,0,0,186,190,3,2,1,0,187,
+	190,5,55,0,0,188,190,5,56,0,0,189,183,1,0,0,0,189,184,1,0,0,0,189,187,1,
+	0,0,0,189,188,1,0,0,0,190,9,1,0,0,0,191,196,3,12,6,0,192,193,5,54,0,0,193,
+	195,3,12,6,0,194,192,1,0,0,0,195,198,1,0,0,0,196,194,1,0,0,0,196,197,1,
+	0,0,0,197,11,1,0,0,0,198,196,1,0,0,0,199,219,3,2,1,0,200,201,5,62,0,0,201,
+	219,5,29,0,0,202,203,5,62,0,0,203,204,5,29,0,0,204,219,3,2,1,0,205,206,
+	5,61,0,0,206,219,5,29,0,0,207,208,5,61,0,0,208,209,5,29,0,0,209,219,3,2,
+	1,0,210,211,5,48,0,0,211,219,5,29,0,0,212,213,5,48,0,0,213,214,5,29,0,0,
+	214,219,3,2,1,0,215,219,5,55,0,0,216,219,5,56,0,0,217,219,1,0,0,0,218,199,
+	1,0,0,0,218,200,1,0,0,0,218,202,1,0,0,0,218,205,1,0,0,0,218,207,1,0,0,0,
+	218,210,1,0,0,0,218,212,1,0,0,0,218,215,1,0,0,0,218,216,1,0,0,0,218,217,
+	1,0,0,0,219,13,1,0,0,0,14,18,22,24,94,137,157,159,165,169,173,180,189,196,
+	218];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -1491,9 +1496,6 @@ export class UnhandeledExpressionContext extends ExprContext {
 	}
 	public expr(i: number): ExprContext {
 		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
-	}
-	public formlist(): FormlistContext {
-		return this.getTypedRuleContext(FormlistContext, 0) as FormlistContext;
 	}
 	public exprlist(): ExprlistContext {
 		return this.getTypedRuleContext(ExprlistContext, 0) as ExprlistContext;
@@ -1638,6 +1640,39 @@ export class VariableDeclarationContext extends ExprContext {
 	public accept<Result>(visitor: RVisitor<Result>): Result {
 		if (visitor.visitVariableDeclaration) {
 			return visitor.visitVariableDeclaration(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class FunctionDefinitionContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
+	}
+	public formlist(): FormlistContext {
+		return this.getTypedRuleContext(FormlistContext, 0) as FormlistContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterFunctionDefinition) {
+	 		listener.enterFunctionDefinition(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitFunctionDefinition) {
+	 		listener.exitFunctionDefinition(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitFunctionDefinition) {
+			return visitor.visitFunctionDefinition(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

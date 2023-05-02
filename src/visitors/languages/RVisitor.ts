@@ -3,7 +3,10 @@ import ApiVisitor from '@interfaces/ApiVisitor.ts'
 import {
   BasicCalculationContext,
   FloatContext,
+  FormContext,
+  FormlistContext,
   FunctionCallContext,
+  FunctionDefinitionContext,
   GroupContext,
   IdContext,
   IntContext,
@@ -125,6 +128,7 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitFloat = (ctx: FloatContext) => {
+    // TODO: handle "e" value
     const parts = ctx.getText().split('.')
     const main = parts[0]
     const decimal = parts[1]
@@ -159,5 +163,13 @@ export default class RVisitor extends Visitor<string> {
   visitGroup = (ctx: GroupContext) => {
     const value = this.visit(ctx.getChild(1))
     return this.target.handleReturn(value)
+  }
+
+  visitFunctionDefinition = (ctx: FunctionDefinitionContext) => {
+    // TODO: handle edge cases
+    const name = this.visit(ctx.getChild(0))
+    const args = this.visit(ctx.getChild(4))
+    const body = this.visit(ctx.getChild(6))
+    return this.target.handleFunctionDefinition(name, args, body)
   }
 }
