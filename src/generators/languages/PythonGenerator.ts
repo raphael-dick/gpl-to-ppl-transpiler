@@ -4,6 +4,10 @@ import IntermediateVisitor from '../../interfaces/IntermediateVisitor'
  * The Python Langauge Generator
  */
 export default class PythonGenerator extends IntermediateVisitor {
+  handleGroup = (value: string) => {
+    return `(${value})`
+  }
+
   handleReturn = (value: string) => {
     return `return ${value}`
   }

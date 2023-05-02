@@ -68,7 +68,7 @@ expr:
 	| '?' expr												# UnhandeledExpression // get help on expr, usually string or ID
 	| 'next'												# UnhandeledExpression
 	| 'break'												# UnhandeledExpression
-	| '(' expr ')'											# UnhandeledExpression
+	| '(' expr ')'											# Group
 	| ID													# Id // e.g. Variable Names
 	| STRING												# String
 	| HEX													# UnhandeledExpression

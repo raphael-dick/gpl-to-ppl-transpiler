@@ -510,7 +510,7 @@ export default class RParser extends Parser {
 				break;
 			case 15:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new GroupContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 85;
@@ -1527,6 +1527,33 @@ export class UnhandeledExpressionContext extends ExprContext {
 	public accept<Result>(visitor: RVisitor<Result>): Result {
 		if (visitor.visitUnhandeledExpression) {
 			return visitor.visitUnhandeledExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class GroupContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr(): ExprContext {
+		return this.getTypedRuleContext(ExprContext, 0) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterGroup) {
+	 		listener.enterGroup(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitGroup) {
+	 		listener.exitGroup(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitGroup) {
+			return visitor.visitGroup(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

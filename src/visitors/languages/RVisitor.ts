@@ -4,6 +4,7 @@ import {
   BasicCalculationContext,
   FloatContext,
   FunctionCallContext,
+  GroupContext,
   IdContext,
   IntContext,
   ReturnStatementContext,
@@ -90,6 +91,7 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitVariableDeclaration = (ctx: VariableDeclarationContext) => {
+    // Todo handle other states '<<-' | '=' | '->' | '->>' | ':='
     const name = this.visit(ctx.getChild(0))
     const value = this.visit(ctx.getChild(2))
 
@@ -150,6 +152,11 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitReturnStatement = (ctx: ReturnStatementContext) => {
+    const value = this.visit(ctx.getChild(1))
+    return this.target.handleReturn(value)
+  }
+
+  visitGroup = (ctx: GroupContext) => {
     const value = this.visit(ctx.getChild(1))
     return this.target.handleReturn(value)
   }

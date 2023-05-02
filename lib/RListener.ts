@@ -5,6 +5,7 @@ import {ParseTreeListener} from "antlr4";
 
 import { ProgContext } from "./RParser";
 import { UnhandeledExpressionContext } from "./RParser";
+import { GroupContext } from "./RParser";
 import { FloatContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
@@ -47,6 +48,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUnhandeledExpression?: (ctx: UnhandeledExpressionContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Group`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterGroup?: (ctx: GroupContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Group`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitGroup?: (ctx: GroupContext) => void;
 	/**
 	 * Enter a parse tree produced by the `Float`
 	 * labeled alternative in `RParser.expr`.

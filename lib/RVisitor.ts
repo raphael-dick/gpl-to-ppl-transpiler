@@ -5,6 +5,7 @@ import {ParseTreeVisitor} from 'antlr4';
 
 import { ProgContext } from "./RParser";
 import { UnhandeledExpressionContext } from "./RParser";
+import { GroupContext } from "./RParser";
 import { FloatContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
@@ -41,6 +42,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitUnhandeledExpression?: (ctx: UnhandeledExpressionContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `Group`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroup?: (ctx: GroupContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `Float`
 	 * labeled alternative in `RParser.expr`.

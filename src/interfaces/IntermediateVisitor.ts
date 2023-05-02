@@ -89,4 +89,10 @@ export default abstract class IntermediateVisitor {
    * @param value the return value
    */
   abstract handleReturn: (value: string) => string
+
+  /**
+   * A group of expressions
+   * @param value the gourps content
+   */
+  abstract handleGroup: (value: string) => string
 }
