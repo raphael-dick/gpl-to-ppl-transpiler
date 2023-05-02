@@ -57,6 +57,7 @@ expr:
 	| expr '~' expr											# UnhandeledExpression
 	| expr ('<-' | '<<-' | '=' | '->' | '->>' | ':=') expr	# VariableDeclaration
 	| 'function' '(' formlist? ')' expr						# UnhandeledExpression // define function
+	| 'return(' expr ')'									# ReturnStatement // return statement
 	| expr '(' sublist ')'									# FunctionCall // call function
 	| '{' exprlist '}'										# UnhandeledExpression // compound statement
 	| 'if' '(' expr ')' expr								# UnhandeledExpression
@@ -72,7 +73,7 @@ expr:
 	| STRING												# String
 	| HEX													# UnhandeledExpression
 	| INT													# Int
-	| FLOAT													# UnhandeledExpression
+	| FLOAT													# Float
 	| COMPLEX												# UnhandeledExpression
 	| 'NULL'												# UnhandeledExpression
 	| 'NA'													# UnhandeledExpression

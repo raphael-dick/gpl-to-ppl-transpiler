@@ -1,5 +1,15 @@
+import { DeleteExpressionContext } from './../../../old/old_working_with_webpack/lib/ECMAScriptParser'
 import ApiVisitor from '@interfaces/ApiVisitor.ts'
-import { BasicCalculationContext, FunctionCallContext, IdContext, IntContext, StringContext, UnhandeledExpressionContext } from '@lib/RParser'
+import {
+  BasicCalculationContext,
+  FloatContext,
+  FunctionCallContext,
+  IdContext,
+  IntContext,
+  ReturnStatementContext,
+  StringContext,
+  UnhandeledExpressionContext,
+} from '@lib/RParser'
 import IntermediateVisitor from '@interfaces/IntermediateVisitor'
 
 import Visitor from '@lib/RVisitor'
@@ -59,6 +69,7 @@ export default class RVisitor extends Visitor<string> {
     switch (text) {
       case '<EOF>':
         break
+      case '\r\n':
       case '\n':
       case '\r':
         result = text
@@ -100,15 +111,23 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitString = (ctx: StringContext) => {
-    return ctx.getText()
+    return this.target.handleString(ctx.getText())
   }
 
   visitId = (ctx: IdContext) => {
-    return ctx.getText()
+    return this.target.handleId(ctx.getText())
   }
 
   visitInt = (ctx: IntContext) => {
-    return ctx.getText()
+    return this.target.handleInt(ctx.getText())
+  }
+
+  visitFloat = (ctx: FloatContext) => {
+    const parts = ctx.getText().split('.')
+    const main = parts[0]
+    const decimal = parts[1]
+
+    return this.target.handleFloat(main, decimal)
   }
 
   visitBasicCalculation = (ctx: BasicCalculationContext) => {
@@ -128,5 +147,10 @@ export default class RVisitor extends Visitor<string> {
       default:
         return this.target.handleUnhandeledExpression(sign)
     }
+  }
+
+  visitReturnStatement = (ctx: ReturnStatementContext) => {
+    const value = this.visit(ctx.getChild(1))
+    return this.target.handleReturn(value)
   }
 }

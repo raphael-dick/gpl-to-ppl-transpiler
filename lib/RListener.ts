@@ -5,6 +5,8 @@ import {ParseTreeListener} from "antlr4";
 
 import { ProgContext } from "./RParser";
 import { UnhandeledExpressionContext } from "./RParser";
+import { FloatContext } from "./RParser";
+import { ReturnStatementContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { StringContext } from "./RParser";
@@ -45,6 +47,30 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUnhandeledExpression?: (ctx: UnhandeledExpressionContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Float`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterFloat?: (ctx: FloatContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Float`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitFloat?: (ctx: FloatContext) => void;
+	/**
+	 * Enter a parse tree produced by the `ReturnStatement`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterReturnStatement?: (ctx: ReturnStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ReturnStatement`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitReturnStatement?: (ctx: ReturnStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by the `VariableDeclaration`
 	 * labeled alternative in `RParser.expr`.

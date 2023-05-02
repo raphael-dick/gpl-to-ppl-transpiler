@@ -58,4 +58,35 @@ export default abstract class IntermediateVisitor {
    * @param divisior the divisor
    */
   abstract handleDivision: (dividend: string, divisior: string) => string
+
+  /**
+   * A string
+   * @param input the input string
+   */
+  abstract handleString: (input: string) => string
+
+  /**
+   * A name of an varibale, function etc.
+   * @param input the name
+   */
+  abstract handleId: (input: string) => string
+
+  /**
+   * A integer
+   * @param input the input int value
+   */
+  abstract handleInt: (input: string) => string
+
+  /**
+   * A floating point number
+   * @param main the part befopr the decimal place
+   * @param decimal the decimal part
+   */
+  abstract handleFloat: (main: string, decimal: string) => string
+
+  /**
+   * A return statement
+   * @param value the return value
+   */
+  abstract handleReturn: (value: string) => string
 }

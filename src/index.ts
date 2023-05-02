@@ -7,7 +7,9 @@ import { transpileR } from '@transpilers/index'
 import RStandardApiVisitor from '@visitors/apis/RStandardApiVisitor'
 import RStatisticsApiVisitor from '@visitors/apis/RStatisticsApiVisitor'
 
-const input = readFileSync('examples/test.R').toString() // read input code from file (path is relative to root of project)
+const filename = 'MBCM_simulations_MH_sampler_n100'
+
+const input = readFileSync(`examples/${filename}.R`).toString() // read input code from file (path is relative to root of project)
 
 // list of apis that should be transpiled
 const apis = [new RStandardApiVisitor(new PythonStandardApiGenerator()), new RStatisticsApiVisitor(new PythonStatisticsApiGenerator())]
@@ -15,7 +17,7 @@ const apis = [new RStandardApiVisitor(new PythonStandardApiGenerator()), new RSt
 const output = await transpileR(input, new PythonGenerator(), apis)
 
 mkdirSync('examples/out', { recursive: true }) // ensure the output dir exists
-writeFileSync('examples/out/test.py', output) // save the output as a file
+writeFileSync(`examples/out/${filename}.py`, output) // save the output as a file
 
 console.log(
   `
