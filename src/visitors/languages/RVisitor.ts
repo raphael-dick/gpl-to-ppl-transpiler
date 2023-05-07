@@ -1,18 +1,22 @@
-import { DeleteExpressionContext } from './../../../old/old_working_with_webpack/lib/ECMAScriptParser'
-import ApiVisitor from '@interfaces/ApiVisitor.ts'
+import ApiVisitor, { APIS } from '@interfaces/ApiVisitor.ts'
 import {
   BasicCalculationContext,
+  BlockContext,
+  ComparisonOperationContext,
   FloatContext,
-  FormContext,
-  FormlistContext,
+  ForLoopContext,
   FunctionCallContext,
   FunctionDefinitionContext,
   GroupContext,
   IdContext,
+  IfElseStatementContext,
+  IfStatementContext,
   IntContext,
+  RangeDefinitionContext,
   ReturnStatementContext,
   StringContext,
   UnhandeledExpressionContext,
+  WhileLoopContext,
 } from '@lib/RParser'
 import IntermediateVisitor from '@interfaces/IntermediateVisitor'
 
@@ -162,7 +166,7 @@ export default class RVisitor extends Visitor<string> {
 
   visitGroup = (ctx: GroupContext) => {
     const value = this.visit(ctx.getChild(1))
-    return this.target.handleReturn(value)
+    return this.target.handleGroup(value)
   }
 
   visitFunctionDefinition = (ctx: FunctionDefinitionContext) => {
@@ -171,5 +175,69 @@ export default class RVisitor extends Visitor<string> {
     const args = this.visit(ctx.getChild(4))
     const body = this.visit(ctx.getChild(6))
     return this.target.handleFunctionDefinition(name, args, body)
+  }
+
+  visitBlock = (ctx: BlockContext) => {
+    const content = this.visit(ctx.getChild(1))
+    console.log(ctx.getChild(1).getText());
+    return this.target.handleBlock(content)
+  }
+
+  visitIfStatement = (ctx: IfStatementContext) => {
+    const condition = this.visit(ctx.getChild(2))
+    const content = this.visit(ctx.getChild(4))
+    return this.target.handleIfStatement(condition, content)
+  }
+
+  visitIfElseStatement = (ctx: IfElseStatementContext) => {
+    const condition = this.visit(ctx.getChild(2))
+    const content = this.visit(ctx.getChild(4))
+    const elseContent = this.visit(ctx.getChild(6))
+    return this.target.handleIfStatement(condition, content) + this.target.handleElseStatement(elseContent)
+  }
+
+  visitComparisonOperation = (ctx: ComparisonOperationContext) => {
+    const first = this.visit(ctx.getChild(0))
+    const symbol = ctx.getChild(1).getText()
+    const second = this.visit(ctx.getChild(2))
+
+    switch (symbol) {
+      case '>':
+        return this.target.handleLargerThan(first, second)
+      case '>=':
+        return this.target.handleLargerThanOrEqualTo(first, second)
+      case '<':
+        return this.target.handleLessThan(first, second)
+      case '<=':
+        return this.target.handleLessThanOrEqualTo(first, second)
+      case '==':
+        return this.target.handleEqualTo(first, second)
+      case '!=':
+        return this.target.handleNotEqualTo(first, second)
+    }
+
+    return this.target.handleUnhandeledExpression(symbol)
+  }
+
+  visitForLoop = (ctx: ForLoopContext) => {
+    const iterator = this.visit(ctx.getChild(2))
+    const iteration = this.visit(ctx.getChild(4))
+    const content = this.visit(ctx.getChild(6))
+    return this.target.handleForLoop(iterator, iteration, content)
+  }
+
+  visitWhileLoop = (ctx: WhileLoopContext) => {
+    const condition = this.visit(ctx.getChild(2))
+    const content = this.visit(ctx.getChild(4))
+    return this.target.handleWhileLoop(condition, content)
+  }
+
+  visitRangeDefinition = (ctx: RangeDefinitionContext) => {
+    const api = this.apis.find(item => item.getName() === APIS.STANDARD_API)
+    if(!api) return this.target.handleUnhandeledExpression(`STANDARD_API is required for handling ranges`)
+
+    const from = this.visit(ctx.getChild(0))
+    const to = this.visit(ctx.getChild(2))
+    return api.lookup('range', [from, to])
   }
 }

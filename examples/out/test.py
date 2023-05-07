@@ -1,7 +1,7 @@
-myString = "Hello, World!"
-print(myString)
-print("test")
-test = 12 - 3
-test2 = test + 2
-print(test)
-print(test2)
+for a in range(1, 4):
+  print(a)
+
+
+b = 0
+while b < 3:
+  print(b)b = b + 1

@@ -103,4 +103,88 @@ export default abstract class IntermediateVisitor {
    * @param body the functions body
    */
   abstract handleFunctionDefinition: (name: string, args: string, body: string) => string
+
+  /**
+   * A Block
+   * @param content the blocks content
+   */
+  abstract handleBlock: (content: string) => string
+
+  /**
+   * A If Statement
+   * @param condition the statements condition
+   * @param content the content
+   */
+  abstract handleIfStatement: (condition: string, content: string) => string
+
+  /**
+   * A ElseIf Statement
+   * @param condition the statements condition
+   * @param content the content
+   */
+  abstract handleElseIfStatement: (condition: string, content: string) => string
+
+  /**
+   * A Else Statement
+   * @param content the content
+   */
+  abstract handleElseStatement: (content: string) => string
+
+  /**
+   * A larger-than comparision
+   * @param first the first part
+   * @param second the second part
+   */
+  abstract handleLargerThan: (first: string, second: string) => string
+
+  /**
+   * A larger-than-or-equal-to comparision
+   * @param first the first part
+   * @param second the second part
+   */
+  abstract handleLargerThanOrEqualTo: (first: string, second: string) => string
+
+  /**
+   * A less-than comparision
+   * @param first the first part
+   * @param second the second part
+   */
+  abstract handleLessThan: (first: string, second: string) => string
+
+  /**
+   * A less-than-or-equal-to comparision
+   * @param first the first part
+   * @param second the second part
+   */
+  abstract handleLessThanOrEqualTo: (first: string, second: string) => string
+
+  /**
+   * A equal-to comparision
+   * @param first the first part
+   * @param second the second part
+   */
+  abstract handleEqualTo: (first: string, second: string) => string
+
+  /**
+   * A not-equal-to comparision
+   * @param first the first part
+   * @param second the second part
+   */
+  abstract handleNotEqualTo: (first: string, second: string) => string
+
+  /**
+   * A for loop
+   * @param iterator the iterator item
+   * @param iteration the iteration
+   * @param content the content
+   */
+  abstract handleForLoop: (iterator: string, iteration: string, content: string) => string
+
+  /**
+   * A while loop
+   * @param condition the running condition
+   * @param content the content
+   */
+  abstract handleWhileLoop: (condition: string, content: string) => string
+  
 }

@@ -45,11 +45,11 @@ expr:
 	| expr ('$' | '@') expr									# UnhandeledExpression
 	| <assoc = right> expr '^' expr							# UnhandeledExpression
 	| ('-' | '+') expr										# UnhandeledExpression
-	| expr ':' expr											# UnhandeledExpression
+	| expr ':' expr											# RangeDefinition
 	| expr USER_OP expr										# UnhandeledExpression // anything wrappedin %: '%' .* '%'
 	| expr ('*' | '/') expr									# BasicCalculation
 	| expr ('+' | '-') expr									# BasicCalculation
-	| expr ('>' | '>=' | '<' | '<=' | '==' | '!=') expr		# UnhandeledExpression
+	| expr ('>' | '>=' | '<' | '<=' | '==' | '!=') expr		# ComparisonOperation
 	| '!' expr												# UnhandeledExpression
 	| expr ('&' | '&&') expr								# UnhandeledExpression
 	| expr ('|' | '||') expr								# UnhandeledExpression
@@ -58,17 +58,17 @@ expr:
 	| expr ('<-' | '<<-' | '=' | '->' | '->>' | ':=') expr	# VariableDeclaration
 	| expr '<-' 'function' '(' formlist? ')' expr			# FunctionDefinition // define function
 	| 'return(' expr ')'									# ReturnStatement // return statement
-	| expr '(' sublist ')'									# FunctionCall // call function
-	| '{' exprlist '}'										# UnhandeledExpression // compound statement
-	| 'if' '(' expr ')' expr								# UnhandeledExpression
-	| 'if' '(' expr ')' expr 'else' expr					# UnhandeledExpression
-	| 'for' '(' ID 'in' expr ')' expr						# UnhandeledExpression
-	| 'while' '(' expr ')' expr								# UnhandeledExpression
+	| '{' exprlist '}'										# Block // compound statement
+	| 'if' '(' expr ')' expr								# IfStatement
+	| 'if' '(' expr ')' expr 'else' expr					# IfElseStatement // TODO: add "else if"
+	| 'for' '(' expr 'in' expr ')' expr						# ForLoop
+	| 'while' '(' expr ')' expr								# WhileLoop
 	| 'repeat' expr											# UnhandeledExpression
 	| '?' expr												# UnhandeledExpression // get help on expr, usually string or ID
 	| 'next'												# UnhandeledExpression
 	| 'break'												# UnhandeledExpression
 	| '(' expr ')'											# Group
+	| expr '(' sublist ')'									# FunctionCall // call function
 	| ID													# Id // e.g. Variable Names
 	| STRING												# String
 	| HEX													# UnhandeledExpression

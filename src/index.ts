@@ -1,34 +1,40 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'fs'
 import PythonStandardApiGenerator from '@generators/apis/PythonStandardApiGenerator'
-// import PythonStandardApiGenerator from './generators/apis/PythonStandardApiGenerator';
 import PythonStatisticsApiGenerator from '@generators/apis/PythonStatisticsApiGenerator'
 import PythonGenerator from '@generators/languages/PythonGenerator'
 import { transpileR } from '@transpilers/index'
 import RStandardApiVisitor from '@visitors/apis/RStandardApiVisitor'
 import RStatisticsApiVisitor from '@visitors/apis/RStatisticsApiVisitor'
 
-const filename = 'MBCM_simulations_MH_sampler_n100'
+const FILES = ['test', 'MBCM_simulations_MH_sampler_n100']
+const PRINT_OUTPUT = false
 
-const input = readFileSync(`examples/${filename}.R`).toString() // read input code from file (path is relative to root of project)
+FILES.forEach(item => transpile(item))
 
-// list of apis that should be transpiled
-const apis = [new RStandardApiVisitor(new PythonStandardApiGenerator()), new RStatisticsApiVisitor(new PythonStatisticsApiGenerator())]
+async function transpile(filename: string) {
+  const input = readFileSync(`examples/${filename}.R`).toString() // read input code from file (path is relative to root of project)
 
-const output = await transpileR(input, new PythonGenerator(), apis)
+  // list of apis that should be transpiled
+  const apis = [new RStandardApiVisitor(new PythonStandardApiGenerator()), new RStatisticsApiVisitor(new PythonStatisticsApiGenerator())]
 
-mkdirSync('examples/out', { recursive: true }) // ensure the output dir exists
-writeFileSync(`examples/out/${filename}.py`, output) // save the output as a file
+  const output = await transpileR(input, new PythonGenerator(), apis)
 
-console.log(
-  `
----------
-| INPUT |
----------
-${input}
+  mkdirSync('examples/out', { recursive: true }) // ensure the output dir exists
+  writeFileSync(`examples/out/${filename}.py`, output) // save the output as a file
 
-----------
-| OUTPUT |
-----------
-${output}
-`,
-)
+
+  PRINT_OUTPUT && console.log(
+    `
+  ---------
+  | INPUT |
+  ---------
+  ${input}
+
+  ----------
+  | OUTPUT |
+  ----------
+  ${output}
+  `,
+  )
+
+}

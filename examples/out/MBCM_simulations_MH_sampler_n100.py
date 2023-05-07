@@ -1,7 +1,9 @@
 nsim = 100
 
 
-<<<<Unhandled Expression: 'for(iin1:nsim){<missing '}'>'>>>>
+for i in range(1, NaN):
+  
+
 
 <<<<Unhandled Expression: 'si_num<-str_pad(i,3,pad="0") is not defined in one of apis'>>>>
 <<<<Unhandled Expression: 'ds<-readRDS(file.path(wd_rproj,"_prepared_data","_simstudy_data",paste0("s",si_num,"_01_100.rds"))) is not defined in one of apis'>>>>
@@ -50,7 +52,8 @@ eps_theta = 0.15
 
 
 
-def compute.LL(,,y,,,,Rth,,,,eta_star,,,,If_A,,,,Vf,,,,sigma) <<<<Unhandled Expression: '{<missing '}'>'>>>>
+def compute.LL(,,y,,,,Rth,,,,eta_star,,,,If_A,,,,Vf,,,,sigma)   
+
 mu = Rth * eta_star * If_A * Vf
 sig = sigma
 <<<<Unhandled Expression: 'LL<-sum(dnorm(x=y,mean=mu,sd=sig,log=TRUE)) is not defined in one of apis'>>>>

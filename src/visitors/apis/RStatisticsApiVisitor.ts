@@ -1,5 +1,5 @@
 import StatisticsApi from '@interfaces/apis/StatisticsApi'
-import ApiVisitor from '@interfaces/ApiVisitor'
+import ApiVisitor, { APIS } from '@interfaces/ApiVisitor'
 
 export default class RStatisticsApiVisitor extends ApiVisitor {
   /** the generator used for generating the output api code */
@@ -14,6 +14,8 @@ export default class RStatisticsApiVisitor extends ApiVisitor {
     super()
     this.target = target
   }
+
+  getName = () => APIS.STATISTICS_API
 
   lookup = (expression: string, args: string[]) => {
     switch (expression) {

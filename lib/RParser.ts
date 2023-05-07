@@ -355,7 +355,7 @@ export default class RParser extends Parser {
 				break;
 			case 5:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new BlockContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 40;
@@ -368,7 +368,7 @@ export default class RParser extends Parser {
 				break;
 			case 6:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new IfStatementContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 44;
@@ -380,12 +380,12 @@ export default class RParser extends Parser {
 				this.state = 47;
 				this.match(RParser.T__34);
 				this.state = 48;
-				this.expr(21);
+				this.expr(22);
 				}
 				break;
 			case 7:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new IfElseStatementContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 50;
@@ -401,12 +401,12 @@ export default class RParser extends Parser {
 				this.state = 55;
 				this.match(RParser.T__39);
 				this.state = 56;
-				this.expr(20);
+				this.expr(21);
 				}
 				break;
 			case 8:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new ForLoopContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 58;
@@ -414,7 +414,7 @@ export default class RParser extends Parser {
 				this.state = 59;
 				this.match(RParser.T__33);
 				this.state = 60;
-				this.match(RParser.ID);
+				this.expr(0);
 				this.state = 61;
 				this.match(RParser.T__41);
 				this.state = 62;
@@ -422,12 +422,12 @@ export default class RParser extends Parser {
 				this.state = 63;
 				this.match(RParser.T__34);
 				this.state = 64;
-				this.expr(19);
+				this.expr(20);
 				}
 				break;
 			case 9:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new WhileLoopContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 66;
@@ -439,7 +439,7 @@ export default class RParser extends Parser {
 				this.state = 69;
 				this.match(RParser.T__34);
 				this.state = 70;
-				this.expr(18);
+				this.expr(19);
 				}
 				break;
 			case 10:
@@ -450,7 +450,7 @@ export default class RParser extends Parser {
 				this.state = 72;
 				this.match(RParser.T__43);
 				this.state = 73;
-				this.expr(17);
+				this.expr(18);
 				}
 				break;
 			case 11:
@@ -461,7 +461,7 @@ export default class RParser extends Parser {
 				this.state = 74;
 				this.match(RParser.T__44);
 				this.state = 75;
-				this.expr(16);
+				this.expr(17);
 				}
 				break;
 			case 12:
@@ -676,7 +676,7 @@ export default class RParser extends Parser {
 						break;
 					case 4:
 						{
-						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
+						localctx = new RangeDefinitionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 105;
 						if (!(this.precpred(this._ctx, 36))) {
@@ -746,7 +746,7 @@ export default class RParser extends Parser {
 						break;
 					case 8:
 						{
-						localctx = new UnhandeledExpressionContext(this, new ExprContext(this, _parentctx, _parentState));
+						localctx = new ComparisonOperationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 117;
 						if (!(this.precpred(this._ctx, 32))) {
@@ -911,8 +911,8 @@ export default class RParser extends Parser {
 						localctx = new FunctionCallContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 152;
-						if (!(this.precpred(this._ctx, 23))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 23)");
+						if (!(this.precpred(this._ctx, 13))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
 						}
 						this.state = 153;
 						this.match(RParser.T__33);
@@ -1333,7 +1333,7 @@ export default class RParser extends Parser {
 		case 14:
 			return this.precpred(this._ctx, 41);
 		case 15:
-			return this.precpred(this._ctx, 23);
+			return this.precpred(this._ctx, 13);
 		}
 		return true;
 	}
@@ -1362,59 +1362,58 @@ export default class RParser extends Parser {
 	30,31,7,1,0,0,31,95,3,2,1,37,32,33,5,21,0,0,33,95,3,2,1,31,34,35,5,26,0,
 	0,35,95,3,2,1,28,36,37,5,36,0,0,37,38,3,2,1,0,38,39,5,35,0,0,39,95,1,0,
 	0,0,40,41,5,37,0,0,41,42,3,4,2,0,42,43,5,38,0,0,43,95,1,0,0,0,44,45,5,39,
-	0,0,45,46,5,34,0,0,46,47,3,2,1,0,47,48,5,35,0,0,48,49,3,2,1,21,49,95,1,
+	0,0,45,46,5,34,0,0,46,47,3,2,1,0,47,48,5,35,0,0,48,49,3,2,1,22,49,95,1,
 	0,0,0,50,51,5,39,0,0,51,52,5,34,0,0,52,53,3,2,1,0,53,54,5,35,0,0,54,55,
-	3,2,1,0,55,56,5,40,0,0,56,57,3,2,1,20,57,95,1,0,0,0,58,59,5,41,0,0,59,60,
-	5,34,0,0,60,61,5,62,0,0,61,62,5,42,0,0,62,63,3,2,1,0,63,64,5,35,0,0,64,
-	65,3,2,1,19,65,95,1,0,0,0,66,67,5,43,0,0,67,68,5,34,0,0,68,69,3,2,1,0,69,
-	70,5,35,0,0,70,71,3,2,1,18,71,95,1,0,0,0,72,73,5,44,0,0,73,95,3,2,1,17,
-	74,75,5,45,0,0,75,95,3,2,1,16,76,95,5,46,0,0,77,95,5,47,0,0,78,79,5,34,
-	0,0,79,80,3,2,1,0,80,81,5,35,0,0,81,95,1,0,0,0,82,95,5,62,0,0,83,95,5,61,
-	0,0,84,95,5,57,0,0,85,95,5,58,0,0,86,95,5,59,0,0,87,95,5,60,0,0,88,95,5,
-	48,0,0,89,95,5,49,0,0,90,95,5,50,0,0,91,95,5,51,0,0,92,95,5,52,0,0,93,95,
-	5,53,0,0,94,29,1,0,0,0,94,32,1,0,0,0,94,34,1,0,0,0,94,36,1,0,0,0,94,40,
-	1,0,0,0,94,44,1,0,0,0,94,50,1,0,0,0,94,58,1,0,0,0,94,66,1,0,0,0,94,72,1,
-	0,0,0,94,74,1,0,0,0,94,76,1,0,0,0,94,77,1,0,0,0,94,78,1,0,0,0,94,82,1,0,
-	0,0,94,83,1,0,0,0,94,84,1,0,0,0,94,85,1,0,0,0,94,86,1,0,0,0,94,87,1,0,0,
-	0,94,88,1,0,0,0,94,89,1,0,0,0,94,90,1,0,0,0,94,91,1,0,0,0,94,92,1,0,0,0,
-	94,93,1,0,0,0,95,159,1,0,0,0,96,97,10,40,0,0,97,98,7,2,0,0,98,158,3,2,1,
-	41,99,100,10,39,0,0,100,101,7,3,0,0,101,158,3,2,1,40,102,103,10,38,0,0,
-	103,104,5,9,0,0,104,158,3,2,1,38,105,106,10,36,0,0,106,107,5,12,0,0,107,
-	158,3,2,1,37,108,109,10,35,0,0,109,110,5,63,0,0,110,158,3,2,1,36,111,112,
-	10,34,0,0,112,113,7,4,0,0,113,158,3,2,1,35,114,115,10,33,0,0,115,116,7,
-	1,0,0,116,158,3,2,1,34,117,118,10,32,0,0,118,119,7,5,0,0,119,158,3,2,1,
-	33,120,121,10,30,0,0,121,122,7,6,0,0,122,158,3,2,1,31,123,124,10,29,0,0,
-	124,125,7,7,0,0,125,158,3,2,1,30,126,127,10,27,0,0,127,128,5,26,0,0,128,
-	158,3,2,1,28,129,130,10,26,0,0,130,131,7,8,0,0,131,158,3,2,1,27,132,133,
-	10,25,0,0,133,134,5,27,0,0,134,135,5,33,0,0,135,137,5,34,0,0,136,138,3,
-	6,3,0,137,136,1,0,0,0,137,138,1,0,0,0,138,139,1,0,0,0,139,140,5,35,0,0,
-	140,158,3,2,1,26,141,142,10,42,0,0,142,143,5,2,0,0,143,144,3,10,5,0,144,
-	145,5,3,0,0,145,146,5,3,0,0,146,158,1,0,0,0,147,148,10,41,0,0,148,149,5,
-	4,0,0,149,150,3,10,5,0,150,151,5,3,0,0,151,158,1,0,0,0,152,153,10,23,0,
-	0,153,154,5,34,0,0,154,155,3,10,5,0,155,156,5,35,0,0,156,158,1,0,0,0,157,
-	96,1,0,0,0,157,99,1,0,0,0,157,102,1,0,0,0,157,105,1,0,0,0,157,108,1,0,0,
-	0,157,111,1,0,0,0,157,114,1,0,0,0,157,117,1,0,0,0,157,120,1,0,0,0,157,123,
-	1,0,0,0,157,126,1,0,0,0,157,129,1,0,0,0,157,132,1,0,0,0,157,141,1,0,0,0,
-	157,147,1,0,0,0,157,152,1,0,0,0,158,161,1,0,0,0,159,157,1,0,0,0,159,160,
-	1,0,0,0,160,3,1,0,0,0,161,159,1,0,0,0,162,169,3,2,1,0,163,165,7,0,0,0,164,
-	166,3,2,1,0,165,164,1,0,0,0,165,166,1,0,0,0,166,168,1,0,0,0,167,163,1,0,
-	0,0,168,171,1,0,0,0,169,167,1,0,0,0,169,170,1,0,0,0,170,174,1,0,0,0,171,
-	169,1,0,0,0,172,174,1,0,0,0,173,162,1,0,0,0,173,172,1,0,0,0,174,5,1,0,0,
-	0,175,180,3,8,4,0,176,177,5,54,0,0,177,179,3,8,4,0,178,176,1,0,0,0,179,
-	182,1,0,0,0,180,178,1,0,0,0,180,181,1,0,0,0,181,7,1,0,0,0,182,180,1,0,0,
-	0,183,190,5,62,0,0,184,185,5,62,0,0,185,186,5,29,0,0,186,190,3,2,1,0,187,
-	190,5,55,0,0,188,190,5,56,0,0,189,183,1,0,0,0,189,184,1,0,0,0,189,187,1,
-	0,0,0,189,188,1,0,0,0,190,9,1,0,0,0,191,196,3,12,6,0,192,193,5,54,0,0,193,
-	195,3,12,6,0,194,192,1,0,0,0,195,198,1,0,0,0,196,194,1,0,0,0,196,197,1,
-	0,0,0,197,11,1,0,0,0,198,196,1,0,0,0,199,219,3,2,1,0,200,201,5,62,0,0,201,
-	219,5,29,0,0,202,203,5,62,0,0,203,204,5,29,0,0,204,219,3,2,1,0,205,206,
-	5,61,0,0,206,219,5,29,0,0,207,208,5,61,0,0,208,209,5,29,0,0,209,219,3,2,
-	1,0,210,211,5,48,0,0,211,219,5,29,0,0,212,213,5,48,0,0,213,214,5,29,0,0,
-	214,219,3,2,1,0,215,219,5,55,0,0,216,219,5,56,0,0,217,219,1,0,0,0,218,199,
-	1,0,0,0,218,200,1,0,0,0,218,202,1,0,0,0,218,205,1,0,0,0,218,207,1,0,0,0,
-	218,210,1,0,0,0,218,212,1,0,0,0,218,215,1,0,0,0,218,216,1,0,0,0,218,217,
-	1,0,0,0,219,13,1,0,0,0,14,18,22,24,94,137,157,159,165,169,173,180,189,196,
-	218];
+	3,2,1,0,55,56,5,40,0,0,56,57,3,2,1,21,57,95,1,0,0,0,58,59,5,41,0,0,59,60,
+	5,34,0,0,60,61,3,2,1,0,61,62,5,42,0,0,62,63,3,2,1,0,63,64,5,35,0,0,64,65,
+	3,2,1,20,65,95,1,0,0,0,66,67,5,43,0,0,67,68,5,34,0,0,68,69,3,2,1,0,69,70,
+	5,35,0,0,70,71,3,2,1,19,71,95,1,0,0,0,72,73,5,44,0,0,73,95,3,2,1,18,74,
+	75,5,45,0,0,75,95,3,2,1,17,76,95,5,46,0,0,77,95,5,47,0,0,78,79,5,34,0,0,
+	79,80,3,2,1,0,80,81,5,35,0,0,81,95,1,0,0,0,82,95,5,62,0,0,83,95,5,61,0,
+	0,84,95,5,57,0,0,85,95,5,58,0,0,86,95,5,59,0,0,87,95,5,60,0,0,88,95,5,48,
+	0,0,89,95,5,49,0,0,90,95,5,50,0,0,91,95,5,51,0,0,92,95,5,52,0,0,93,95,5,
+	53,0,0,94,29,1,0,0,0,94,32,1,0,0,0,94,34,1,0,0,0,94,36,1,0,0,0,94,40,1,
+	0,0,0,94,44,1,0,0,0,94,50,1,0,0,0,94,58,1,0,0,0,94,66,1,0,0,0,94,72,1,0,
+	0,0,94,74,1,0,0,0,94,76,1,0,0,0,94,77,1,0,0,0,94,78,1,0,0,0,94,82,1,0,0,
+	0,94,83,1,0,0,0,94,84,1,0,0,0,94,85,1,0,0,0,94,86,1,0,0,0,94,87,1,0,0,0,
+	94,88,1,0,0,0,94,89,1,0,0,0,94,90,1,0,0,0,94,91,1,0,0,0,94,92,1,0,0,0,94,
+	93,1,0,0,0,95,159,1,0,0,0,96,97,10,40,0,0,97,98,7,2,0,0,98,158,3,2,1,41,
+	99,100,10,39,0,0,100,101,7,3,0,0,101,158,3,2,1,40,102,103,10,38,0,0,103,
+	104,5,9,0,0,104,158,3,2,1,38,105,106,10,36,0,0,106,107,5,12,0,0,107,158,
+	3,2,1,37,108,109,10,35,0,0,109,110,5,63,0,0,110,158,3,2,1,36,111,112,10,
+	34,0,0,112,113,7,4,0,0,113,158,3,2,1,35,114,115,10,33,0,0,115,116,7,1,0,
+	0,116,158,3,2,1,34,117,118,10,32,0,0,118,119,7,5,0,0,119,158,3,2,1,33,120,
+	121,10,30,0,0,121,122,7,6,0,0,122,158,3,2,1,31,123,124,10,29,0,0,124,125,
+	7,7,0,0,125,158,3,2,1,30,126,127,10,27,0,0,127,128,5,26,0,0,128,158,3,2,
+	1,28,129,130,10,26,0,0,130,131,7,8,0,0,131,158,3,2,1,27,132,133,10,25,0,
+	0,133,134,5,27,0,0,134,135,5,33,0,0,135,137,5,34,0,0,136,138,3,6,3,0,137,
+	136,1,0,0,0,137,138,1,0,0,0,138,139,1,0,0,0,139,140,5,35,0,0,140,158,3,
+	2,1,26,141,142,10,42,0,0,142,143,5,2,0,0,143,144,3,10,5,0,144,145,5,3,0,
+	0,145,146,5,3,0,0,146,158,1,0,0,0,147,148,10,41,0,0,148,149,5,4,0,0,149,
+	150,3,10,5,0,150,151,5,3,0,0,151,158,1,0,0,0,152,153,10,13,0,0,153,154,
+	5,34,0,0,154,155,3,10,5,0,155,156,5,35,0,0,156,158,1,0,0,0,157,96,1,0,0,
+	0,157,99,1,0,0,0,157,102,1,0,0,0,157,105,1,0,0,0,157,108,1,0,0,0,157,111,
+	1,0,0,0,157,114,1,0,0,0,157,117,1,0,0,0,157,120,1,0,0,0,157,123,1,0,0,0,
+	157,126,1,0,0,0,157,129,1,0,0,0,157,132,1,0,0,0,157,141,1,0,0,0,157,147,
+	1,0,0,0,157,152,1,0,0,0,158,161,1,0,0,0,159,157,1,0,0,0,159,160,1,0,0,0,
+	160,3,1,0,0,0,161,159,1,0,0,0,162,169,3,2,1,0,163,165,7,0,0,0,164,166,3,
+	2,1,0,165,164,1,0,0,0,165,166,1,0,0,0,166,168,1,0,0,0,167,163,1,0,0,0,168,
+	171,1,0,0,0,169,167,1,0,0,0,169,170,1,0,0,0,170,174,1,0,0,0,171,169,1,0,
+	0,0,172,174,1,0,0,0,173,162,1,0,0,0,173,172,1,0,0,0,174,5,1,0,0,0,175,180,
+	3,8,4,0,176,177,5,54,0,0,177,179,3,8,4,0,178,176,1,0,0,0,179,182,1,0,0,
+	0,180,178,1,0,0,0,180,181,1,0,0,0,181,7,1,0,0,0,182,180,1,0,0,0,183,190,
+	5,62,0,0,184,185,5,62,0,0,185,186,5,29,0,0,186,190,3,2,1,0,187,190,5,55,
+	0,0,188,190,5,56,0,0,189,183,1,0,0,0,189,184,1,0,0,0,189,187,1,0,0,0,189,
+	188,1,0,0,0,190,9,1,0,0,0,191,196,3,12,6,0,192,193,5,54,0,0,193,195,3,12,
+	6,0,194,192,1,0,0,0,195,198,1,0,0,0,196,194,1,0,0,0,196,197,1,0,0,0,197,
+	11,1,0,0,0,198,196,1,0,0,0,199,219,3,2,1,0,200,201,5,62,0,0,201,219,5,29,
+	0,0,202,203,5,62,0,0,203,204,5,29,0,0,204,219,3,2,1,0,205,206,5,61,0,0,
+	206,219,5,29,0,0,207,208,5,61,0,0,208,209,5,29,0,0,209,219,3,2,1,0,210,
+	211,5,48,0,0,211,219,5,29,0,0,212,213,5,48,0,0,213,214,5,29,0,0,214,219,
+	3,2,1,0,215,219,5,55,0,0,216,219,5,56,0,0,217,219,1,0,0,0,218,199,1,0,0,
+	0,218,200,1,0,0,0,218,202,1,0,0,0,218,205,1,0,0,0,218,207,1,0,0,0,218,210,
+	1,0,0,0,218,212,1,0,0,0,218,215,1,0,0,0,218,216,1,0,0,0,218,217,1,0,0,0,
+	219,13,1,0,0,0,14,18,22,24,94,137,157,159,165,169,173,180,189,196,218];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -1486,7 +1485,34 @@ export class ExprContext extends ParserRuleContext {
 		super.copyFrom(ctx);
 	}
 }
-export class UnhandeledExpressionContext extends ExprContext {
+export class GroupContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr(): ExprContext {
+		return this.getTypedRuleContext(ExprContext, 0) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterGroup) {
+	 		listener.enterGroup(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitGroup) {
+	 		listener.exitGroup(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitGroup) {
+			return visitor.visitGroup(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class ForLoopContext extends ExprContext {
 	constructor(parser: RParser, ctx: ExprContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
@@ -1497,11 +1523,149 @@ export class UnhandeledExpressionContext extends ExprContext {
 	public expr(i: number): ExprContext {
 		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
 	}
-	public exprlist(): ExprlistContext {
-		return this.getTypedRuleContext(ExprlistContext, 0) as ExprlistContext;
+	public enterRule(listener: RListener): void {
+	    if(listener.enterForLoop) {
+	 		listener.enterForLoop(this);
+		}
 	}
-	public ID(): TerminalNode {
-		return this.getToken(RParser.ID, 0);
+	public exitRule(listener: RListener): void {
+	    if(listener.exitForLoop) {
+	 		listener.exitForLoop(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitForLoop) {
+			return visitor.visitForLoop(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class IfElseStatementContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterIfElseStatement) {
+	 		listener.enterIfElseStatement(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitIfElseStatement) {
+	 		listener.exitIfElseStatement(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitIfElseStatement) {
+			return visitor.visitIfElseStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class ComparisonOperationContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterComparisonOperation) {
+	 		listener.enterComparisonOperation(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitComparisonOperation) {
+	 		listener.exitComparisonOperation(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitComparisonOperation) {
+			return visitor.visitComparisonOperation(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class StringContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public STRING(): TerminalNode {
+		return this.getToken(RParser.STRING, 0);
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterString) {
+	 		listener.enterString(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitString) {
+	 		listener.exitString(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitString) {
+			return visitor.visitString(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class IntContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public INT(): TerminalNode {
+		return this.getToken(RParser.INT, 0);
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterInt) {
+	 		listener.enterInt(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitInt) {
+	 		listener.exitInt(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitInt) {
+			return visitor.visitInt(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class UnhandeledExpressionContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
 	}
 	public HEX(): TerminalNode {
 		return this.getToken(RParser.HEX, 0);
@@ -1534,28 +1698,31 @@ export class UnhandeledExpressionContext extends ExprContext {
 		}
 	}
 }
-export class GroupContext extends ExprContext {
+export class IfStatementContext extends ExprContext {
 	constructor(parser: RParser, ctx: ExprContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public expr(): ExprContext {
-		return this.getTypedRuleContext(ExprContext, 0) as ExprContext;
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
 	}
 	public enterRule(listener: RListener): void {
-	    if(listener.enterGroup) {
-	 		listener.enterGroup(this);
+	    if(listener.enterIfStatement) {
+	 		listener.enterIfStatement(this);
 		}
 	}
 	public exitRule(listener: RListener): void {
-	    if(listener.exitGroup) {
-	 		listener.exitGroup(this);
+	    if(listener.exitIfStatement) {
+	 		listener.exitIfStatement(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: RVisitor<Result>): Result {
-		if (visitor.visitGroup) {
-			return visitor.visitGroup(this);
+		if (visitor.visitIfStatement) {
+			return visitor.visitIfStatement(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -1610,6 +1777,33 @@ export class ReturnStatementContext extends ExprContext {
 	public accept<Result>(visitor: RVisitor<Result>): Result {
 		if (visitor.visitReturnStatement) {
 			return visitor.visitReturnStatement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class BlockContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public exprlist(): ExprlistContext {
+		return this.getTypedRuleContext(ExprlistContext, 0) as ExprlistContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterBlock) {
+	 		listener.enterBlock(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitBlock) {
+	 		listener.exitBlock(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitBlock) {
+			return visitor.visitBlock(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -1705,33 +1899,6 @@ export class IdContext extends ExprContext {
 		}
 	}
 }
-export class StringContext extends ExprContext {
-	constructor(parser: RParser, ctx: ExprContext) {
-		super(parser, ctx.parentCtx, ctx.invokingState);
-		super.copyFrom(ctx);
-	}
-	public STRING(): TerminalNode {
-		return this.getToken(RParser.STRING, 0);
-	}
-	public enterRule(listener: RListener): void {
-	    if(listener.enterString) {
-	 		listener.enterString(this);
-		}
-	}
-	public exitRule(listener: RListener): void {
-	    if(listener.exitString) {
-	 		listener.exitString(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: RVisitor<Result>): Result {
-		if (visitor.visitString) {
-			return visitor.visitString(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
 export class FunctionCallContext extends ExprContext {
 	constructor(parser: RParser, ctx: ExprContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
@@ -1762,28 +1929,61 @@ export class FunctionCallContext extends ExprContext {
 		}
 	}
 }
-export class IntContext extends ExprContext {
+export class WhileLoopContext extends ExprContext {
 	constructor(parser: RParser, ctx: ExprContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public INT(): TerminalNode {
-		return this.getToken(RParser.INT, 0);
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
 	}
 	public enterRule(listener: RListener): void {
-	    if(listener.enterInt) {
-	 		listener.enterInt(this);
+	    if(listener.enterWhileLoop) {
+	 		listener.enterWhileLoop(this);
 		}
 	}
 	public exitRule(listener: RListener): void {
-	    if(listener.exitInt) {
-	 		listener.exitInt(this);
+	    if(listener.exitWhileLoop) {
+	 		listener.exitWhileLoop(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: RVisitor<Result>): Result {
-		if (visitor.visitInt) {
-			return visitor.visitInt(this);
+		if (visitor.visitWhileLoop) {
+			return visitor.visitWhileLoop(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class RangeDefinitionContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr_list(): ExprContext[] {
+		return this.getTypedRuleContexts(ExprContext) as ExprContext[];
+	}
+	public expr(i: number): ExprContext {
+		return this.getTypedRuleContext(ExprContext, i) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterRangeDefinition) {
+	 		listener.enterRangeDefinition(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitRangeDefinition) {
+	 		listener.exitRangeDefinition(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitRangeDefinition) {
+			return visitor.visitRangeDefinition(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

@@ -4,16 +4,23 @@ import {ParseTreeListener} from "antlr4";
 
 
 import { ProgContext } from "./RParser";
-import { UnhandeledExpressionContext } from "./RParser";
 import { GroupContext } from "./RParser";
+import { ForLoopContext } from "./RParser";
+import { IfElseStatementContext } from "./RParser";
+import { ComparisonOperationContext } from "./RParser";
+import { StringContext } from "./RParser";
+import { IntContext } from "./RParser";
+import { UnhandeledExpressionContext } from "./RParser";
+import { IfStatementContext } from "./RParser";
 import { FloatContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
+import { BlockContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
 import { FunctionDefinitionContext } from "./RParser";
 import { IdContext } from "./RParser";
-import { StringContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
-import { IntContext } from "./RParser";
+import { WhileLoopContext } from "./RParser";
+import { RangeDefinitionContext } from "./RParser";
 import { BasicCalculationContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
 import { FormlistContext } from "./RParser";
@@ -38,6 +45,78 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitProg?: (ctx: ProgContext) => void;
 	/**
+	 * Enter a parse tree produced by the `Group`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterGroup?: (ctx: GroupContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Group`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitGroup?: (ctx: GroupContext) => void;
+	/**
+	 * Enter a parse tree produced by the `ForLoop`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterForLoop?: (ctx: ForLoopContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ForLoop`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitForLoop?: (ctx: ForLoopContext) => void;
+	/**
+	 * Enter a parse tree produced by the `IfElseStatement`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterIfElseStatement?: (ctx: IfElseStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by the `IfElseStatement`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitIfElseStatement?: (ctx: IfElseStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by the `ComparisonOperation`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterComparisonOperation?: (ctx: ComparisonOperationContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ComparisonOperation`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitComparisonOperation?: (ctx: ComparisonOperationContext) => void;
+	/**
+	 * Enter a parse tree produced by the `String`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterString?: (ctx: StringContext) => void;
+	/**
+	 * Exit a parse tree produced by the `String`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitString?: (ctx: StringContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Int`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterInt?: (ctx: IntContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Int`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitInt?: (ctx: IntContext) => void;
+	/**
 	 * Enter a parse tree produced by the `UnhandeledExpression`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -50,17 +129,17 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitUnhandeledExpression?: (ctx: UnhandeledExpressionContext) => void;
 	/**
-	 * Enter a parse tree produced by the `Group`
+	 * Enter a parse tree produced by the `IfStatement`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
 	 */
-	enterGroup?: (ctx: GroupContext) => void;
+	enterIfStatement?: (ctx: IfStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by the `Group`
+	 * Exit a parse tree produced by the `IfStatement`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
 	 */
-	exitGroup?: (ctx: GroupContext) => void;
+	exitIfStatement?: (ctx: IfStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by the `Float`
 	 * labeled alternative in `RParser.expr`.
@@ -85,6 +164,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitReturnStatement?: (ctx: ReturnStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Block`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterBlock?: (ctx: BlockContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Block`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitBlock?: (ctx: BlockContext) => void;
 	/**
 	 * Enter a parse tree produced by the `VariableDeclaration`
 	 * labeled alternative in `RParser.expr`.
@@ -122,18 +213,6 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitId?: (ctx: IdContext) => void;
 	/**
-	 * Enter a parse tree produced by the `String`
-	 * labeled alternative in `RParser.expr`.
-	 * @param ctx the parse tree
-	 */
-	enterString?: (ctx: StringContext) => void;
-	/**
-	 * Exit a parse tree produced by the `String`
-	 * labeled alternative in `RParser.expr`.
-	 * @param ctx the parse tree
-	 */
-	exitString?: (ctx: StringContext) => void;
-	/**
 	 * Enter a parse tree produced by the `FunctionCall`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -146,17 +225,29 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitFunctionCall?: (ctx: FunctionCallContext) => void;
 	/**
-	 * Enter a parse tree produced by the `Int`
+	 * Enter a parse tree produced by the `WhileLoop`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
 	 */
-	enterInt?: (ctx: IntContext) => void;
+	enterWhileLoop?: (ctx: WhileLoopContext) => void;
 	/**
-	 * Exit a parse tree produced by the `Int`
+	 * Exit a parse tree produced by the `WhileLoop`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
 	 */
-	exitInt?: (ctx: IntContext) => void;
+	exitWhileLoop?: (ctx: WhileLoopContext) => void;
+	/**
+	 * Enter a parse tree produced by the `RangeDefinition`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterRangeDefinition?: (ctx: RangeDefinitionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `RangeDefinition`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitRangeDefinition?: (ctx: RangeDefinitionContext) => void;
 	/**
 	 * Enter a parse tree produced by the `BasicCalculation`
 	 * labeled alternative in `RParser.expr`.
