@@ -23,6 +23,7 @@ import { WhileLoopContext } from "./RParser";
 import { RangeDefinitionContext } from "./RParser";
 import { BasicCalculationContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
+import { EndOfStatementContext } from "./RParser";
 import { FormlistContext } from "./RParser";
 import { FormContext } from "./RParser";
 import { SublistContext } from "./RParser";
@@ -270,6 +271,16 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitExprlist?: (ctx: ExprlistContext) => void;
+	/**
+	 * Enter a parse tree produced by `RParser.endOfStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterEndOfStatement?: (ctx: EndOfStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `RParser.endOfStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitEndOfStatement?: (ctx: EndOfStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by `RParser.formlist`.
 	 * @param ctx the parse tree

@@ -9,6 +9,12 @@ export default abstract class IntermediateVisitor {
    */
   abstract handleUnhandeledExpression: (expression: string) => string
 
+
+  /**
+   * The end of the statement
+   */
+  abstract handleEndOfStatement: () => string
+
   // -------------- //
   // Basic Features //
   // -------------- //

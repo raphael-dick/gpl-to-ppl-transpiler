@@ -23,6 +23,7 @@ import { WhileLoopContext } from "./RParser";
 import { RangeDefinitionContext } from "./RParser";
 import { BasicCalculationContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
+import { EndOfStatementContext } from "./RParser";
 import { FormlistContext } from "./RParser";
 import { FormContext } from "./RParser";
 import { SublistContext } from "./RParser";
@@ -175,6 +176,12 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitExprlist?: (ctx: ExprlistContext) => Result;
+	/**
+	 * Visit a parse tree produced by `RParser.endOfStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEndOfStatement?: (ctx: EndOfStatementContext) => Result;
 	/**
 	 * Visit a parse tree produced by `RParser.formlist`.
 	 * @param ctx the parse tree

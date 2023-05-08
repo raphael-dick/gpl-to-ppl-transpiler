@@ -32,7 +32,7 @@
  */
 grammar R;
 
-prog: ( expr (';' | NL)* | NL)* EOF;
+prog: ( expr (endOfStatement | NL)* | NL)* EOF;
 
 /*
  expr_or_assign : expr ('<-'|'='|'<<-') expr_or_assign | expr ;
@@ -82,7 +82,9 @@ expr:
 	| 'TRUE'												# UnhandeledExpression
 	| 'FALSE'												# UnhandeledExpression;
 
-exprlist: expr ((';' | NL) expr?)* |;
+exprlist: NL? expr (endOfStatement expr?)* NL? |;
+
+endOfStatement: ((';' NL?) | NL);
 
 formlist: form (',' form)*;
 

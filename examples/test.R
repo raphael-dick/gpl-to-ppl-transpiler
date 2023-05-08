@@ -12,4 +12,7 @@
 for( a in 1:3 ) { print(a) }
 
 b <- 0
-while( b < 3 ) { print(b); b <- b + 1; }
+while( b < 3 ) { 
+  print(b);
+  b <- b + 1;
+}

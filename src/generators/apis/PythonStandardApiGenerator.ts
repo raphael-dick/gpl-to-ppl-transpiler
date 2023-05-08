@@ -10,6 +10,6 @@ export default class PythonStandardApiGenerator extends StandardApi {
   }
   
   handleRange = (from: string, to: string) => {
-    return `range(${from}, ${parseInt(to) + 1})`
+    return `range(${from}, ${to} + 1)`
   }
 }

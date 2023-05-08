@@ -7,6 +7,10 @@ const INDENTATION = '  '
  */
 export default class PythonGenerator extends IntermediateVisitor {
   
+  handleEndOfStatement = () => {
+    return `\n`  
+  }
+  
   handleForLoop = (iterator: string, iteration: string, content: string) => {
     return `for ${iterator} in ${iteration}:\n${content}`
   }
@@ -40,9 +44,7 @@ export default class PythonGenerator extends IntermediateVisitor {
   }
 
   handleBlock = (content: string) => {
-    console.log(content);
-  
-    return INDENTATION + content.split('\n').join(`\n${INDENTATION}`) + '\n'
+    return INDENTATION + content.split('\n').join(`\n${INDENTATION}`)
   }
 
   handleIfStatement = (condition: string, content: string) => {
@@ -58,7 +60,7 @@ export default class PythonGenerator extends IntermediateVisitor {
   }
 
   handleFunctionDefinition = (name: string, value: string, body: string) => {
-    return `def ${name}(${value}) ${body}`
+    return `def ${name}(${value}):\n${body}`
   }
 
   handleGroup = (value: string) => {

@@ -10,6 +10,7 @@ const FILES = ['test', 'MBCM_simulations_MH_sampler_n100']
 const PRINT_OUTPUT = false
 
 FILES.forEach(item => transpile(item))
+// transpile(FILES[0])
 
 async function transpile(filename: string) {
   const input = readFileSync(`examples/${filename}.R`).toString() // read input code from file (path is relative to root of project)

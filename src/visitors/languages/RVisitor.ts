@@ -3,6 +3,7 @@ import {
   BasicCalculationContext,
   BlockContext,
   ComparisonOperationContext,
+  EndOfStatementContext,
   FloatContext,
   ForLoopContext,
   FunctionCallContext,
@@ -62,8 +63,6 @@ export default class RVisitor extends Visitor<string> {
 
     for (let i = 0; i < ctx.getChildCount(); i++) {
       const child = ctx.getChild(i)
-
-      // console.log(child.getText().replace('\n', 'NL'));
       code += this.visit(child)
     }
 
@@ -82,13 +81,19 @@ export default class RVisitor extends Visitor<string> {
       case '\r':
         result = text
         break
-
+      // case ';':
+      //   result = this.target.handleEndOfStatement()
+      //   break
       default:
         result = super.visit(ctx)
         break
     }
 
     return result ?? ''
+  }
+
+  visitEndOfStatement = () => {
+    return this.target.handleEndOfStatement()
   }
 
   /* Handling of expressions below */
@@ -132,7 +137,7 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitFloat = (ctx: FloatContext) => {
-    // TODO: handle "e" value
+    // TODO: handle "e" values
     const parts = ctx.getText().split('.')
     const main = parts[0]
     const decimal = parts[1]
@@ -179,7 +184,6 @@ export default class RVisitor extends Visitor<string> {
 
   visitBlock = (ctx: BlockContext) => {
     const content = this.visit(ctx.getChild(1))
-    console.log(ctx.getChild(1).getText());
     return this.target.handleBlock(content)
   }
 
