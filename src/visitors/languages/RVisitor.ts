@@ -6,6 +6,7 @@ import {
   EndOfStatementContext,
   FloatContext,
   ForLoopContext,
+  FormContext,
   FunctionCallContext,
   FunctionDefinitionContext,
   GroupContext,
@@ -112,7 +113,9 @@ export default class RVisitor extends Visitor<string> {
 
   visitFunctionCall = (ctx: FunctionCallContext) => {
     const name = ctx.getChild(0).getText()
-    const args = this.visit(ctx.sublist()).filter((item: string) => item && !item?.includes(','))
+    const args = this.visit(ctx.sublist())
+      .filter((item: string) => item && !item?.includes(','))
+      .map((item:string[]) => item?.[0])
 
     for (const api of this.apis) {
       const result = api.lookup(name, args)

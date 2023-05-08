@@ -55,6 +55,7 @@ expr:
 	| expr ('|' | '||') expr								# UnhandeledExpression
 	| '~' expr												# UnhandeledExpression
 	| expr '~' expr											# UnhandeledExpression
+	| expr '(' sublist ')'									# FunctionCall // call function
 	| expr ('<-' | '<<-' | '=' | '->' | '->>' | ':=') expr	# VariableDeclaration
 	| expr '<-' 'function' '(' formlist? ')' expr			# FunctionDefinition // define function
 	| 'return(' expr ')'									# ReturnStatement // return statement
@@ -68,7 +69,6 @@ expr:
 	| 'next'												# UnhandeledExpression
 	| 'break'												# UnhandeledExpression
 	| '(' expr ')'											# Group
-	| expr '(' sublist ')'									# FunctionCall // call function
 	| ID													# Id // e.g. Variable Names
 	| STRING												# String
 	| HEX													# UnhandeledExpression

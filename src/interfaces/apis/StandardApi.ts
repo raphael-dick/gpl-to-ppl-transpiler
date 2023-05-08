@@ -14,4 +14,12 @@ export default abstract class StandardApi {
    * @param to the end of the range
    */
   abstract handleRange: (from: string, to: string) => string
+
+  /**
+   * Adds a minimum length to a string and fills the remaining space with the given filler
+   * @param target the target string
+   * @param minLength the minimum string length
+   * @param filler the item to fill the remaining spaces
+   */
+  abstract handleStringPadding: (target: string, minLength: string, filler: string) => string
 }

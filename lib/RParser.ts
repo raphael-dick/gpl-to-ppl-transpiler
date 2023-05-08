@@ -106,11 +106,11 @@ export default class RParser extends Parser {
                                                             "'!'", "'&'", 
                                                             "'&&'", "'|'", 
                                                             "'||'", "'~'", 
+                                                            "'('", "')'", 
                                                             "'<-'", "'<<-'", 
                                                             "'='", "'->'", 
                                                             "'->>'", "':='", 
                                                             "'function'", 
-                                                            "'('", "')'", 
                                                             "'return('", 
                                                             "'{'", "'}'", 
                                                             "'if'", "'else'", 
@@ -188,7 +188,7 @@ export default class RParser extends Parser {
 			this.state = 27;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 34604544) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & 3205496493) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 101713408) !== 0) || ((((_la - 35)) & ~0x1F) === 0 && ((1 << (_la - 35)) & 801374123) !== 0)) {
 				{
 				this.state = 25;
 				this._errHandler.sync(this);
@@ -197,7 +197,7 @@ export default class RParser extends Parser {
 				case 10:
 				case 20:
 				case 25:
-				case 33:
+				case 26:
 				case 35:
 				case 36:
 				case 38:
@@ -358,7 +358,7 @@ export default class RParser extends Parser {
 				this.state = 40;
 				this.expr(0);
 				this.state = 41;
-				this.match(RParser.T__33);
+				this.match(RParser.T__26);
 				}
 				break;
 			case 5:
@@ -382,13 +382,13 @@ export default class RParser extends Parser {
 				this.state = 47;
 				this.match(RParser.T__37);
 				this.state = 48;
-				this.match(RParser.T__32);
+				this.match(RParser.T__25);
 				this.state = 49;
 				this.expr(0);
 				this.state = 50;
-				this.match(RParser.T__33);
+				this.match(RParser.T__26);
 				this.state = 51;
-				this.expr(22);
+				this.expr(21);
 				}
 				break;
 			case 7:
@@ -399,17 +399,17 @@ export default class RParser extends Parser {
 				this.state = 53;
 				this.match(RParser.T__37);
 				this.state = 54;
-				this.match(RParser.T__32);
+				this.match(RParser.T__25);
 				this.state = 55;
 				this.expr(0);
 				this.state = 56;
-				this.match(RParser.T__33);
+				this.match(RParser.T__26);
 				this.state = 57;
 				this.expr(0);
 				this.state = 58;
 				this.match(RParser.T__38);
 				this.state = 59;
-				this.expr(21);
+				this.expr(20);
 				}
 				break;
 			case 8:
@@ -420,7 +420,7 @@ export default class RParser extends Parser {
 				this.state = 61;
 				this.match(RParser.T__39);
 				this.state = 62;
-				this.match(RParser.T__32);
+				this.match(RParser.T__25);
 				this.state = 63;
 				this.expr(0);
 				this.state = 64;
@@ -428,9 +428,9 @@ export default class RParser extends Parser {
 				this.state = 65;
 				this.expr(0);
 				this.state = 66;
-				this.match(RParser.T__33);
+				this.match(RParser.T__26);
 				this.state = 67;
-				this.expr(20);
+				this.expr(19);
 				}
 				break;
 			case 9:
@@ -441,13 +441,13 @@ export default class RParser extends Parser {
 				this.state = 69;
 				this.match(RParser.T__41);
 				this.state = 70;
-				this.match(RParser.T__32);
+				this.match(RParser.T__25);
 				this.state = 71;
 				this.expr(0);
 				this.state = 72;
-				this.match(RParser.T__33);
+				this.match(RParser.T__26);
 				this.state = 73;
-				this.expr(19);
+				this.expr(18);
 				}
 				break;
 			case 10:
@@ -458,7 +458,7 @@ export default class RParser extends Parser {
 				this.state = 75;
 				this.match(RParser.T__42);
 				this.state = 76;
-				this.expr(18);
+				this.expr(17);
 				}
 				break;
 			case 11:
@@ -469,7 +469,7 @@ export default class RParser extends Parser {
 				this.state = 77;
 				this.match(RParser.T__43);
 				this.state = 78;
-				this.expr(17);
+				this.expr(16);
 				}
 				break;
 			case 12:
@@ -496,11 +496,11 @@ export default class RParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 81;
-				this.match(RParser.T__32);
+				this.match(RParser.T__25);
 				this.state = 82;
 				this.expr(0);
 				this.state = 83;
-				this.match(RParser.T__33);
+				this.match(RParser.T__26);
 				}
 				break;
 			case 15:
@@ -834,12 +834,12 @@ export default class RParser extends Parser {
 						localctx = new VariableDeclarationContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 132;
-						if (!(this.precpred(this._ctx, 26))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 26)");
+						if (!(this.precpred(this._ctx, 25))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 25)");
 						}
 						this.state = 133;
 						_la = this._input.LA(1);
-						if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 4227858432) !== 0))) {
+						if(!(((((_la - 28)) & ~0x1F) === 0 && ((1 << (_la - 28)) & 63) !== 0))) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
@@ -847,7 +847,7 @@ export default class RParser extends Parser {
 						    this.consume();
 						}
 						this.state = 134;
-						this.expr(27);
+						this.expr(26);
 						}
 						break;
 					case 13:
@@ -855,15 +855,15 @@ export default class RParser extends Parser {
 						localctx = new FunctionDefinitionContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 135;
-						if (!(this.precpred(this._ctx, 25))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 25)");
+						if (!(this.precpred(this._ctx, 24))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 24)");
 						}
 						this.state = 136;
-						this.match(RParser.T__25);
+						this.match(RParser.T__27);
 						this.state = 137;
-						this.match(RParser.T__31);
+						this.match(RParser.T__33);
 						this.state = 138;
-						this.match(RParser.T__32);
+						this.match(RParser.T__25);
 						this.state = 140;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
@@ -875,9 +875,9 @@ export default class RParser extends Parser {
 						}
 
 						this.state = 142;
-						this.match(RParser.T__33);
+						this.match(RParser.T__26);
 						this.state = 143;
-						this.expr(26);
+						this.expr(25);
 						}
 						break;
 					case 14:
@@ -919,15 +919,15 @@ export default class RParser extends Parser {
 						localctx = new FunctionCallContext(this, new ExprContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, RParser.RULE_expr);
 						this.state = 155;
-						if (!(this.precpred(this._ctx, 13))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
+						if (!(this.precpred(this._ctx, 26))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 26)");
 						}
 						this.state = 156;
-						this.match(RParser.T__32);
+						this.match(RParser.T__25);
 						this.state = 157;
 						this.sublist();
 						this.state = 158;
-						this.match(RParser.T__33);
+						this.match(RParser.T__26);
 						}
 						break;
 					}
@@ -967,7 +967,7 @@ export default class RParser extends Parser {
 			case 10:
 			case 20:
 			case 25:
-			case 33:
+			case 26:
 			case 35:
 			case 36:
 			case 38:
@@ -1016,7 +1016,7 @@ export default class RParser extends Parser {
 						this.state = 171;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 34604544) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & 1058012845) !== 0)) {
+						if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 101713408) !== 0) || ((((_la - 35)) & ~0x1F) === 0 && ((1 << (_la - 35)) & 264503211) !== 0)) {
 							{
 							this.state = 170;
 							this.expr(0);
@@ -1182,7 +1182,7 @@ export default class RParser extends Parser {
 				this.state = 200;
 				this.match(RParser.ID);
 				this.state = 201;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				this.state = 202;
 				this.expr(0);
 				}
@@ -1280,7 +1280,7 @@ export default class RParser extends Parser {
 				this.state = 216;
 				this.match(RParser.ID);
 				this.state = 217;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				}
 				break;
 			case 3:
@@ -1289,7 +1289,7 @@ export default class RParser extends Parser {
 				this.state = 218;
 				this.match(RParser.ID);
 				this.state = 219;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				this.state = 220;
 				this.expr(0);
 				}
@@ -1300,7 +1300,7 @@ export default class RParser extends Parser {
 				this.state = 221;
 				this.match(RParser.STRING);
 				this.state = 222;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				}
 				break;
 			case 5:
@@ -1309,7 +1309,7 @@ export default class RParser extends Parser {
 				this.state = 223;
 				this.match(RParser.STRING);
 				this.state = 224;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				this.state = 225;
 				this.expr(0);
 				}
@@ -1320,7 +1320,7 @@ export default class RParser extends Parser {
 				this.state = 226;
 				this.match(RParser.T__46);
 				this.state = 227;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				}
 				break;
 			case 7:
@@ -1329,7 +1329,7 @@ export default class RParser extends Parser {
 				this.state = 228;
 				this.match(RParser.T__46);
 				this.state = 229;
-				this.match(RParser.T__27);
+				this.match(RParser.T__29);
 				this.state = 230;
 				this.expr(0);
 				}
@@ -1403,15 +1403,15 @@ export default class RParser extends Parser {
 		case 10:
 			return this.precpred(this._ctx, 27);
 		case 11:
-			return this.precpred(this._ctx, 26);
-		case 12:
 			return this.precpred(this._ctx, 25);
+		case 12:
+			return this.precpred(this._ctx, 24);
 		case 13:
 			return this.precpred(this._ctx, 42);
 		case 14:
 			return this.precpred(this._ctx, 41);
 		case 15:
-			return this.precpred(this._ctx, 13);
+			return this.precpred(this._ctx, 26);
 		}
 		return true;
 	}
@@ -1432,7 +1432,7 @@ export default class RParser extends Parser {
 	5,1,5,1,5,1,5,1,5,1,5,3,5,206,8,5,1,6,1,6,1,6,5,6,211,8,6,10,6,12,6,214,
 	9,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,
 	1,7,1,7,3,7,235,8,7,1,7,0,1,2,8,0,2,4,6,8,10,12,14,0,8,1,0,9,10,1,0,4,5,
-	1,0,6,7,1,0,12,13,1,0,14,19,1,0,21,22,1,0,23,24,1,0,26,31,295,0,27,1,0,
+	1,0,6,7,1,0,12,13,1,0,14,19,1,0,21,22,1,0,23,24,1,0,28,33,295,0,27,1,0,
 	0,0,2,97,1,0,0,0,4,182,1,0,0,0,6,189,1,0,0,0,8,191,1,0,0,0,10,205,1,0,0,
 	0,12,207,1,0,0,0,14,234,1,0,0,0,16,21,3,2,1,0,17,20,3,6,3,0,18,20,5,64,
 	0,0,19,17,1,0,0,0,19,18,1,0,0,0,20,23,1,0,0,0,21,19,1,0,0,0,21,22,1,0,0,
@@ -1440,15 +1440,15 @@ export default class RParser extends Parser {
 	0,26,29,1,0,0,0,27,25,1,0,0,0,27,28,1,0,0,0,28,30,1,0,0,0,29,27,1,0,0,0,
 	30,31,5,0,0,1,31,1,1,0,0,0,32,33,6,1,-1,0,33,34,7,0,0,0,34,98,3,2,1,37,
 	35,36,5,20,0,0,36,98,3,2,1,31,37,38,5,25,0,0,38,98,3,2,1,28,39,40,5,35,
-	0,0,40,41,3,2,1,0,41,42,5,34,0,0,42,98,1,0,0,0,43,44,5,36,0,0,44,45,3,4,
-	2,0,45,46,5,37,0,0,46,98,1,0,0,0,47,48,5,38,0,0,48,49,5,33,0,0,49,50,3,
-	2,1,0,50,51,5,34,0,0,51,52,3,2,1,22,52,98,1,0,0,0,53,54,5,38,0,0,54,55,
-	5,33,0,0,55,56,3,2,1,0,56,57,5,34,0,0,57,58,3,2,1,0,58,59,5,39,0,0,59,60,
-	3,2,1,21,60,98,1,0,0,0,61,62,5,40,0,0,62,63,5,33,0,0,63,64,3,2,1,0,64,65,
-	5,41,0,0,65,66,3,2,1,0,66,67,5,34,0,0,67,68,3,2,1,20,68,98,1,0,0,0,69,70,
-	5,42,0,0,70,71,5,33,0,0,71,72,3,2,1,0,72,73,5,34,0,0,73,74,3,2,1,19,74,
-	98,1,0,0,0,75,76,5,43,0,0,76,98,3,2,1,18,77,78,5,44,0,0,78,98,3,2,1,17,
-	79,98,5,45,0,0,80,98,5,46,0,0,81,82,5,33,0,0,82,83,3,2,1,0,83,84,5,34,0,
+	0,0,40,41,3,2,1,0,41,42,5,27,0,0,42,98,1,0,0,0,43,44,5,36,0,0,44,45,3,4,
+	2,0,45,46,5,37,0,0,46,98,1,0,0,0,47,48,5,38,0,0,48,49,5,26,0,0,49,50,3,
+	2,1,0,50,51,5,27,0,0,51,52,3,2,1,21,52,98,1,0,0,0,53,54,5,38,0,0,54,55,
+	5,26,0,0,55,56,3,2,1,0,56,57,5,27,0,0,57,58,3,2,1,0,58,59,5,39,0,0,59,60,
+	3,2,1,20,60,98,1,0,0,0,61,62,5,40,0,0,62,63,5,26,0,0,63,64,3,2,1,0,64,65,
+	5,41,0,0,65,66,3,2,1,0,66,67,5,27,0,0,67,68,3,2,1,19,68,98,1,0,0,0,69,70,
+	5,42,0,0,70,71,5,26,0,0,71,72,3,2,1,0,72,73,5,27,0,0,73,74,3,2,1,18,74,
+	98,1,0,0,0,75,76,5,43,0,0,76,98,3,2,1,17,77,78,5,44,0,0,78,98,3,2,1,16,
+	79,98,5,45,0,0,80,98,5,46,0,0,81,82,5,26,0,0,82,83,3,2,1,0,83,84,5,27,0,
 	0,84,98,1,0,0,0,85,98,5,62,0,0,86,98,5,61,0,0,87,98,5,57,0,0,88,98,5,58,
 	0,0,89,98,5,59,0,0,90,98,5,60,0,0,91,98,5,47,0,0,92,98,5,48,0,0,93,98,5,
 	49,0,0,94,98,5,50,0,0,95,98,5,51,0,0,96,98,5,52,0,0,97,32,1,0,0,0,97,35,
@@ -1465,13 +1465,13 @@ export default class RParser extends Parser {
 	120,121,10,32,0,0,121,122,7,4,0,0,122,161,3,2,1,33,123,124,10,30,0,0,124,
 	125,7,5,0,0,125,161,3,2,1,31,126,127,10,29,0,0,127,128,7,6,0,0,128,161,
 	3,2,1,30,129,130,10,27,0,0,130,131,5,25,0,0,131,161,3,2,1,28,132,133,10,
-	26,0,0,133,134,7,7,0,0,134,161,3,2,1,27,135,136,10,25,0,0,136,137,5,26,
-	0,0,137,138,5,32,0,0,138,140,5,33,0,0,139,141,3,8,4,0,140,139,1,0,0,0,140,
-	141,1,0,0,0,141,142,1,0,0,0,142,143,5,34,0,0,143,161,3,2,1,26,144,145,10,
+	25,0,0,133,134,7,7,0,0,134,161,3,2,1,26,135,136,10,24,0,0,136,137,5,28,
+	0,0,137,138,5,34,0,0,138,140,5,26,0,0,139,141,3,8,4,0,140,139,1,0,0,0,140,
+	141,1,0,0,0,141,142,1,0,0,0,142,143,5,27,0,0,143,161,3,2,1,25,144,145,10,
 	42,0,0,145,146,5,1,0,0,146,147,3,12,6,0,147,148,5,2,0,0,148,149,5,2,0,0,
 	149,161,1,0,0,0,150,151,10,41,0,0,151,152,5,3,0,0,152,153,3,12,6,0,153,
-	154,5,2,0,0,154,161,1,0,0,0,155,156,10,13,0,0,156,157,5,33,0,0,157,158,
-	3,12,6,0,158,159,5,34,0,0,159,161,1,0,0,0,160,99,1,0,0,0,160,102,1,0,0,
+	154,5,2,0,0,154,161,1,0,0,0,155,156,10,26,0,0,156,157,5,26,0,0,157,158,
+	3,12,6,0,158,159,5,27,0,0,159,161,1,0,0,0,160,99,1,0,0,0,160,102,1,0,0,
 	0,160,105,1,0,0,0,160,108,1,0,0,0,160,111,1,0,0,0,160,114,1,0,0,0,160,117,
 	1,0,0,0,160,120,1,0,0,0,160,123,1,0,0,0,160,126,1,0,0,0,160,129,1,0,0,0,
 	160,132,1,0,0,0,160,135,1,0,0,0,160,144,1,0,0,0,160,150,1,0,0,0,160,155,
@@ -1486,14 +1486,14 @@ export default class RParser extends Parser {
 	0,0,0,189,188,1,0,0,0,190,7,1,0,0,0,191,196,3,10,5,0,192,193,5,54,0,0,193,
 	195,3,10,5,0,194,192,1,0,0,0,195,198,1,0,0,0,196,194,1,0,0,0,196,197,1,
 	0,0,0,197,9,1,0,0,0,198,196,1,0,0,0,199,206,5,62,0,0,200,201,5,62,0,0,201,
-	202,5,28,0,0,202,206,3,2,1,0,203,206,5,55,0,0,204,206,5,56,0,0,205,199,
+	202,5,30,0,0,202,206,3,2,1,0,203,206,5,55,0,0,204,206,5,56,0,0,205,199,
 	1,0,0,0,205,200,1,0,0,0,205,203,1,0,0,0,205,204,1,0,0,0,206,11,1,0,0,0,
 	207,212,3,14,7,0,208,209,5,54,0,0,209,211,3,14,7,0,210,208,1,0,0,0,211,
 	214,1,0,0,0,212,210,1,0,0,0,212,213,1,0,0,0,213,13,1,0,0,0,214,212,1,0,
-	0,0,215,235,3,2,1,0,216,217,5,62,0,0,217,235,5,28,0,0,218,219,5,62,0,0,
-	219,220,5,28,0,0,220,235,3,2,1,0,221,222,5,61,0,0,222,235,5,28,0,0,223,
-	224,5,61,0,0,224,225,5,28,0,0,225,235,3,2,1,0,226,227,5,47,0,0,227,235,
-	5,28,0,0,228,229,5,47,0,0,229,230,5,28,0,0,230,235,3,2,1,0,231,235,5,55,
+	0,0,215,235,3,2,1,0,216,217,5,62,0,0,217,235,5,30,0,0,218,219,5,62,0,0,
+	219,220,5,30,0,0,220,235,3,2,1,0,221,222,5,61,0,0,222,235,5,30,0,0,223,
+	224,5,61,0,0,224,225,5,30,0,0,225,235,3,2,1,0,226,227,5,47,0,0,227,235,
+	5,30,0,0,228,229,5,47,0,0,229,230,5,30,0,0,230,235,3,2,1,0,231,235,5,55,
 	0,0,232,235,5,56,0,0,233,235,1,0,0,0,234,215,1,0,0,0,234,216,1,0,0,0,234,
 	218,1,0,0,0,234,221,1,0,0,0,234,223,1,0,0,0,234,226,1,0,0,0,234,228,1,0,
 	0,0,234,231,1,0,0,0,234,232,1,0,0,0,234,233,1,0,0,0,235,15,1,0,0,0,19,19,
