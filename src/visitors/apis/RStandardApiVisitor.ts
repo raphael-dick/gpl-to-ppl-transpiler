@@ -27,6 +27,8 @@ export default class RStandardApiVisitor extends ApiVisitor {
         return this.target.handlePrint(args[0])
       case 'range':
         return this.target.handleRange(args[0], args[1])
+      case 'length':
+        return this.target.handleArrayLength(args[0])
       case 'str_pad': // str_pad <- function(string, width, side = c("left", "right", "both"), pad = " ", use_width = TRUE)
         return this.target.handleStringPadding(
           unnamedArgs[0],

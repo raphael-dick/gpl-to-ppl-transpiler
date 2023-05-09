@@ -1,14 +1,11 @@
 nsim = 100
 
 
-
-
 for i in range(1, nsim + 1):
   si_num = f'{i:{"0"}>{3}}'
   ds = <<<<Unhandled Expression: 'readRDS(file.path(wd_rproj,"_prepared_data","_simstudy_data",paste0("s",si_num,"_01_100.rds"))) is not defined in one of apis'>>>>
   
-  n = <<<<Unhandled Expression: 'length(ds) is not defined in one of apis'>>>>
-  
+  n = len(ds)
   
   
   m_Rth_start = <<<<Unhandled Expression: 'runif(1,30,50) is not defined in one of apis'>>>>
@@ -18,13 +15,11 @@ for i in range(1, nsim + 1):
   Rth0_start = <<<<Unhandled Expression: 'rlnorm(n,meanlog=location,sdlog=shape) is not defined in one of apis'>>>>
   Rth0 = Rth0_start
   
-  
   sigma = 0.5
   eta = 0.65
   eta_star = 1 - eta
   If_A = 0.68
   Vf = 11.909
-  
   
   muRth0 = m_Rth_start
   sigmaRth0 = sd_Rth_start
@@ -39,23 +34,18 @@ for i in range(1, nsim + 1):
   <<<<Unhandled Expression: 'mcmc$nmc'>>>> = <<<<Unhandled Expression: 'with(mcmc,M+burnin) is not defined in one of apis'>>>>
   <<<<Unhandled Expression: 'mcmc$verbose'>>>> = 1000
   
-  
   Rth.accept = theta.accept = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
   Rth_MH = <<<<Unhandled Expression: 'matrix(0,mcmc$nmc,n) is not defined in one of apis'>>>>
   muRth_MH = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
   sigmaRth_MH = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
-  
   
   u1 = 0
   u2 = 100
   s1 = 0
   s2 = 10
   
-  
   eps_Rth = 0.035
   eps_theta = 0.15
-  
-  
   
   
   
@@ -73,19 +63,14 @@ for i in range(1, nsim + 1):
   
   
   
-  
-  
   for m in range(1, <<<<Unhandled Expression: 'mcmc$nmc'>>>> + 1):
-    if m == (<<<<Unhandled Expression: 'mcmc$burnin'>>>> + 1):
-    starttimeM = <<<<Unhandled Expression: 'proc.time()[3]'>>>>
-    
+    if :
     
     
     
     Rth1 = <<<<Unhandled Expression: 'rnorm(n,mean=Rth0,sd=eps_Rth) is not defined in one of apis'>>>>
     mlog0 = <<<<Unhandled Expression: 'log(theta0[1]^2/sqrt(theta0[2]^2+theta0[1]^2)) is not defined in one of apis'>>>>
     slog0 = <<<<Unhandled Expression: 'sqrt(log(1+(theta0[2]^2/theta0[1]^2))) is not defined in one of apis'>>>>
-    
     
     D1 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth1,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
 sum(dlnorm(x=Rth1,meanlog=mlog0,sdlog=slog0,log=TRUE)) is not defined in one of apis'>>>>
@@ -103,11 +88,6 @@ if <<<<Unhandled Expression: 'log(u)<=min(Rth.alph,0) is not defined in one of a
   <<<<Unhandled Expression: 'Rth.accept[m]'>>>> = 1else:
   Rth0 = Rth0
 Rth.alph
-
-
-
-
-
 
 
 
@@ -134,8 +114,6 @@ if <<<<Unhandled Expression: 'log(u)<=min(theta.alph,0) is not defined in one of
   theta0 = theta1
   <<<<Unhandled Expression: 'theta.accept[m]'>>>> = 1else:
   theta0 = theta0
-
-
 
 <<<<Unhandled Expression: 'Rth_MH[m,]'>>>> = Rth0
 <<<<Unhandled Expression: 'muRth_MH[m]'>>>> = <<<<Unhandled Expression: 'theta0[1]'>>>>

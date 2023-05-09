@@ -6,6 +6,10 @@ const INDENTATION = '  '
  * The Python Langauge Generator
  */
 export default class PythonGenerator extends IntermediateVisitor {
+
+  handleComment = (content: string) => {
+    return `#${content}`
+  }
   
   handleEndOfStatement = () => {
     return `\n`  

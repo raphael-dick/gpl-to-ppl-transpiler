@@ -149,7 +149,7 @@ fragment LETTER: [a-zA-Z];
 
 USER_OP: '%' .*? '%';
 
-COMMENT: '#' .*? '\r'? '\n' -> type(NL);
+COMMENT: '#' .*? '\r'? '\n' -> skip;
 
 // Match both UNIX and Windows newlines
 NL: '\r'? '\n';

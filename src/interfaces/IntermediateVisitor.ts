@@ -192,5 +192,11 @@ export default abstract class IntermediateVisitor {
    * @param content the content
    */
   abstract handleWhileLoop: (condition: string, content: string) => string
+
+  /**
+   * A code comment
+   * @param content the comment
+   */
+  abstract handleComment: (content: string) => string
   
 }
