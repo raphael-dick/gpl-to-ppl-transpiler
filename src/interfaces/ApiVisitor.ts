@@ -1,3 +1,5 @@
+import ApiHandler from "./apis/Api"
+
 /**
  * Used to define APIs on the side of the visitor, which calls the related generator of the output language
  */
@@ -12,6 +14,13 @@ export default abstract class ApiVisitor {
   abstract lookup: (expression: string, args: string[]) => string | undefined
 
   abstract getName: () => APIS
+
+  /**
+   * Get the target handler
+   * 
+   * @returns the target / generator
+   */
+  abstract getTarget: () => ApiHandler
 }
 
 

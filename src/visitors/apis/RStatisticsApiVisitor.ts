@@ -16,6 +16,7 @@ export default class RStatisticsApiVisitor extends ApiVisitor {
   }
 
   getName = () => APIS.STATISTICS_API
+  getTarget = () => this.target
 
   lookup = (expression: string, args: string[]) => {
     switch (expression) {

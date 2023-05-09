@@ -1,3 +1,4 @@
+import { Dependencies } from '@interfaces/apis/Api';
 export default abstract class IntermediateVisitor {
   // ---- //
   // Util //
@@ -14,6 +15,11 @@ export default abstract class IntermediateVisitor {
    * The end of the statement
    */
   abstract handleEndOfStatement: () => string
+
+  /**
+   * Load a dependency
+   */
+  abstract handleDependencies: (dependencies: Dependencies) => string
 
   // -------------- //
   // Basic Features //

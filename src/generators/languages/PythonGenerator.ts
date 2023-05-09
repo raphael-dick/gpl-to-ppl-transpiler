@@ -1,4 +1,5 @@
-import IntermediateVisitor from '../../interfaces/IntermediateVisitor'
+import { Dependencies } from '@src/interfaces/apis/Api'
+import IntermediateVisitor from '@src/interfaces/IntermediateVisitor'
 
 const INDENTATION = '  '
 
@@ -6,6 +7,10 @@ const INDENTATION = '  '
  * The Python Langauge Generator
  */
 export default class PythonGenerator extends IntermediateVisitor {
+  handleDependencies = (dependencies: Dependencies) => {
+    const value = Object.keys(dependencies).map(key => `from ${ key } import ${ dependencies[ key ] }`).join('\n')
+    return value ? value + '\n\n' : ''
+  }
 
   handleComment = (content: string) => {
     return `#${content}`

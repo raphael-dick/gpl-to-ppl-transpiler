@@ -1,6 +1,7 @@
 import StandardApi from '@interfaces/apis/StandardApi'
 import ApiVisitor, { APIS } from '@interfaces/ApiVisitor'
 import { extractNamedArgs } from '../util/RApiVisitorUtil'
+import ApiHandler from '@src/interfaces/apis/Api'
 
 export default class RStandardApiVisitor extends ApiVisitor {
   /** the generator used for generating the output api code */
@@ -17,6 +18,7 @@ export default class RStandardApiVisitor extends ApiVisitor {
   }
 
   getName = () => APIS.STANDARD_API
+  getTarget = () => this.target
 
   lookup = (expression: string, args: string[]) => {
 

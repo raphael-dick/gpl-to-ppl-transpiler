@@ -23,6 +23,7 @@ import IntermediateVisitor from '@interfaces/IntermediateVisitor'
 import Visitor from '@lib/RVisitor'
 import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/RParser'
 import { ParseTree } from 'antlr4'
+import { mergeDependencies } from '@src/interfaces/apis/Api'
 
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
@@ -50,7 +51,14 @@ export default class RVisitor extends Visitor<string> {
    * @returns the code in the output language
    */
   start(ctx: ProgContext) {
-    return this.visitProg(ctx)
+    const content = this.visitProg(ctx)
+    const dependencies = this.target.handleDependencies(
+      mergeDependencies(
+        this.apis.map(api => api.getTarget().getDependencies() )
+      )
+    )
+    
+    return dependencies + content
   }
 
   visitProg = (ctx: ProgContext) => {
