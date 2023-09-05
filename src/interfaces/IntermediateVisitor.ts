@@ -1,4 +1,4 @@
-import { Dependencies } from '@interfaces/apis/Api';
+import { Dependencies } from '@interfaces/apis/Api'
 export default abstract class IntermediateVisitor {
   // ---- //
   // Util //
@@ -9,7 +9,6 @@ export default abstract class IntermediateVisitor {
    * @param expression the name of the expression or error message
    */
   abstract handleUnhandeledExpression: (expression: string) => string
-
 
   /**
    * The end of the statement
@@ -204,5 +203,10 @@ export default abstract class IntermediateVisitor {
    * @param content the comment
    */
   abstract handleComment: (content: string) => string
-  
+
+  /**
+   * A boolean
+   * @param value the value
+   */
+  abstract handleBoolean: (value: boolean) => string
 }

@@ -12,9 +12,11 @@ import {
   IfElseStatementContext,
   IfStatementContext,
   IntContext,
+  PowerOfContext,
   RangeDefinitionContext,
   ReturnStatementContext,
   StringContext,
+  SymbolContext,
   UnhandeledExpressionContext,
   WhileLoopContext,
 } from '@lib/RParser'
@@ -24,6 +26,7 @@ import Visitor from '@lib/RVisitor'
 import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/RParser'
 import { ParseTree } from 'antlr4'
 import { mergeDependencies } from '@src/interfaces/apis/Api'
+import RMathApiVisitor from '../apis/RMathApiVisitor'
 
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
@@ -52,12 +55,8 @@ export default class RVisitor extends Visitor<string> {
    */
   start(ctx: ProgContext) {
     const content = this.visitProg(ctx)
-    const dependencies = this.target.handleDependencies(
-      mergeDependencies(
-        this.apis.map(api => api.getTarget().getDependencies() )
-      )
-    )
-    
+    const dependencies = this.target.handleDependencies(mergeDependencies(this.apis.map((api) => api.getTarget().getDependencies())))
+
     return dependencies + content
   }
 
@@ -96,6 +95,10 @@ export default class RVisitor extends Visitor<string> {
         break
     }
 
+    // console.log(result);
+    // const dt = new Date().getTime();
+    // while (new Date().getTime() - dt <= 100) { /* Do nothing */ }
+
     return result ?? ''
   }
 
@@ -121,7 +124,7 @@ export default class RVisitor extends Visitor<string> {
     const name = ctx.getChild(0).getText()
     const args = this.visit(ctx.sublist())
       .filter((item: string) => item && !item?.includes(','))
-      .map((item:string[]) => item?.[0])
+      .map((item: string[]) => item?.[0])
 
     for (const api of this.apis) {
       const result = api.lookup(name, args)
@@ -187,7 +190,11 @@ export default class RVisitor extends Visitor<string> {
     // TODO: handle edge cases
     const name = this.visit(ctx.getChild(0))
     const args = this.visit(ctx.getChild(4))
+      ?.filter((x) => !!x)
+      ?.map((item) => item?.filter((x) => !!x))
     const body = this.visit(ctx.getChild(6))
+    console.log(args)
+
     return this.target.handleFunctionDefinition(name, args, body)
   }
 
@@ -246,11 +253,46 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitRangeDefinition = (ctx: RangeDefinitionContext) => {
-    const api = this.apis.find(item => item.getName() === APIS.STANDARD_API)
-    if(!api) return this.target.handleUnhandeledExpression(`STANDARD_API is required for handling ranges`)
+    const api = this.apis.find((item) => item.getName() === APIS.STANDARD_API)
+    if (!api) return this.target.handleUnhandeledExpression(`STANDARD_API is required for handling ranges`)
 
     const from = this.visit(ctx.getChild(0))
     const to = this.visit(ctx.getChild(2))
     return api.lookup('range', [from, to])
+  }
+
+  visitPowerOf = (ctx: PowerOfContext) => {
+    const api = this.apis.find((item) => item.getName() === APIS.MATH_API) as RMathApiVisitor | undefined
+    if (!api) return this.target.handleUnhandeledExpression(`MATH_API is required for handling exponents`)
+
+    const base = this.visit(ctx.getChild(0))
+    const exponent = this.visit(ctx.getChild(2))
+    return api.getTarget().handlePow(base, exponent)
+  }
+
+  visitSymbol = (ctx: SymbolContext) => {
+    const symbol = this.visit(ctx.getChild(0))
+
+    switch (symbol) {
+      case 'TRUE':
+        return this.target.handleBoolean(true)
+
+      case 'FALSE':
+        return this.target.handleBoolean(false)
+
+      case 'NULL':
+        return this.target.handleUnhandeledExpression(symbol)
+
+      case 'NA':
+        return this.target.handleUnhandeledExpression(symbol)
+
+      case 'Inf':
+        return this.target.handleUnhandeledExpression(symbol)
+
+      case 'NaN':
+        return this.target.handleUnhandeledExpression(symbol)
+    }
+
+    return this.target.handleUnhandeledExpression(symbol)
   }
 }

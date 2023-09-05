@@ -1,11 +1,13 @@
-// Generated from grammars/R.g4 by ANTLR 4.12.0
+// Generated from grammars/R.g4 by ANTLR 4.13.1
 
 import {ParseTreeListener} from "antlr4";
 
 
 import { ProgContext } from "./RParser";
 import { GroupContext } from "./RParser";
+import { PowerOfContext } from "./RParser";
 import { ForLoopContext } from "./RParser";
+import { SymbolContext } from "./RParser";
 import { IfElseStatementContext } from "./RParser";
 import { ComparisonOperationContext } from "./RParser";
 import { StringContext } from "./RParser";
@@ -58,6 +60,18 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitGroup?: (ctx: GroupContext) => void;
 	/**
+	 * Enter a parse tree produced by the `PowerOf`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterPowerOf?: (ctx: PowerOfContext) => void;
+	/**
+	 * Exit a parse tree produced by the `PowerOf`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitPowerOf?: (ctx: PowerOfContext) => void;
+	/**
 	 * Enter a parse tree produced by the `ForLoop`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -69,6 +83,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitForLoop?: (ctx: ForLoopContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Symbol`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterSymbol?: (ctx: SymbolContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Symbol`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitSymbol?: (ctx: SymbolContext) => void;
 	/**
 	 * Enter a parse tree produced by the `IfElseStatement`
 	 * labeled alternative in `RParser.expr`.

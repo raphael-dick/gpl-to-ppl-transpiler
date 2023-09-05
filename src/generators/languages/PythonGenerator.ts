@@ -7,19 +7,31 @@ const INDENTATION = '  '
  * The Python Langauge Generator
  */
 export default class PythonGenerator extends IntermediateVisitor {
+  handleBoolean = (value: boolean) => {
+    return value ? 'True' : 'False'
+  }
+
   handleDependencies = (dependencies: Dependencies) => {
-    const value = Object.keys(dependencies).map(key => `from ${ key } import ${ dependencies[ key ] }`).join('\n')
+    const value = Object.keys(dependencies)
+      .map((key) => {
+        const values = dependencies[key]
+        if (values.includes('*')) {
+          return `import ${key}`
+        }
+        return `from ${key} import ${value}`
+      })
+      .join('\n')
     return value ? value + '\n\n' : ''
   }
 
   handleComment = (content: string) => {
     return `#${content}`
   }
-  
+
   handleEndOfStatement = () => {
-    return `\n`  
+    return `\n`
   }
-  
+
   handleForLoop = (iterator: string, iteration: string, content: string) => {
     return `for ${iterator} in ${iteration}:\n${content}`
   }
@@ -63,7 +75,7 @@ export default class PythonGenerator extends IntermediateVisitor {
   handleElseIfStatement = (condition: string, content: string) => {
     return `elif ${condition}:\n${content}`
   }
-  
+
   handleElseStatement = (content: string) => {
     return `else:\n${content}`
   }
@@ -121,6 +133,7 @@ export default class PythonGenerator extends IntermediateVisitor {
   }
 
   handleUnhandeledExpression = (expression: string) => {
+    console.error(`Unhandled Expression: ${expression}`)
     return `<<<<Unhandled Expression: '${expression}'>>>>`
   }
 }

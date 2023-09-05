@@ -1,3 +1,5 @@
+import math
+
 nsim = 100
 
 
@@ -10,8 +12,8 @@ for i in range(1, nsim + 1):
   
   m_Rth_start = <<<<Unhandled Expression: 'runif(1,30,50) is not defined in one of apis'>>>>
   sd_Rth_start = <<<<Unhandled Expression: 'runif(1,0.1,10) is not defined in one of apis'>>>>
-  location = <<<<Unhandled Expression: 'log(m_Rth_start^2/sqrt(sd_Rth_start^2+m_Rth_start^2)) is not defined in one of apis'>>>>
-  shape = <<<<Unhandled Expression: 'sqrt(log(1+(sd_Rth_start^2/m_Rth_start^2))) is not defined in one of apis'>>>>
+  location = math.log(pow(m_Rth_start, 2) / math.sqrt(pow(sd_Rth_start, 2) + pow(m_Rth_start, 2)), undefined)
+  shape = math.sqrt(math.log(1 + (pow(sd_Rth_start, 2) / pow(m_Rth_start, 2)), undefined))
   Rth0_start = <<<<Unhandled Expression: 'rlnorm(n,meanlog=location,sdlog=shape) is not defined in one of apis'>>>>
   Rth0 = Rth0_start
   
@@ -49,10 +51,10 @@ for i in range(1, nsim + 1):
   
   
   
-  def compute.LL(,,y,,,,Rth,,,,eta_star,,,,If_A,,,,Vf,,,,sigma):
+  def compute.LL(y,Rth,eta_star,If_A,Vf,sigma):
     mu = Rth * eta_star * If_A * Vf
     sig = sigma
-    LL = <<<<Unhandled Expression: 'sum(dnorm(x=y,mean=mu,sd=sig,log=TRUE)) is not defined in one of apis'>>>>
+    LL = sum(<<<<Unhandled Expression: 'dnorm(x=y,mean=mu,sd=sig,log=TRUE) is not defined in one of apis'>>>>)
     return LL
   <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>>
   
@@ -69,52 +71,69 @@ for i in range(1, nsim + 1):
     
     
     Rth1 = <<<<Unhandled Expression: 'rnorm(n,mean=Rth0,sd=eps_Rth) is not defined in one of apis'>>>>
-    mlog0 = <<<<Unhandled Expression: 'log(theta0[1]^2/sqrt(theta0[2]^2+theta0[1]^2)) is not defined in one of apis'>>>>
-    slog0 = <<<<Unhandled Expression: 'sqrt(log(1+(theta0[2]^2/theta0[1]^2))) is not defined in one of apis'>>>>
+    mlog0 = math.log(pow(<<<<Unhandled Expression: 'theta0[1]'>>>>, 2) / math.sqrt(pow(<<<<Unhandled Expression: 'theta0[2]'>>>>, 2) + pow(<<<<Unhandled Expression: 'theta0[1]'>>>>, 2)), undefined)
+    slog0 = math.sqrt(math.log(1 + (pow(<<<<Unhandled Expression: 'theta0[2]'>>>>, 2) / pow(<<<<Unhandled Expression: 'theta0[1]'>>>>, 2)), undefined))
     
-    D1 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth1,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
-sum(dlnorm(x=Rth1,meanlog=mlog0,sdlog=slog0,log=TRUE)) is not defined in one of apis'>>>>
-D0 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
-sum(dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE)) is not defined in one of apis'>>>>
-
-q1 = <<<<Unhandled Expression: 'sum(dnorm(x=Rth1,mean=Rth0,sd=eps_Rth,log=TRUE)) is not defined in one of apis'>>>>
-q0 = <<<<Unhandled Expression: 'sum(dnorm(x=Rth0,mean=Rth1,sd=eps_Rth,log=TRUE)) is not defined in one of apis'>>>>
-
-Rth.alph = D1 - D0 - (q1 - q0)
-
-u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
-if <<<<Unhandled Expression: 'log(u)<=min(Rth.alph,0) is not defined in one of apis'>>>>:
-  Rth0 = Rth1
-  <<<<Unhandled Expression: 'Rth.accept[m]'>>>> = 1else:
-  Rth0 = Rth0
-Rth.alph
-
-
-
-theta1 = <<<<Unhandled Expression: 'rnorm(2,mean=theta0,sd=eps_theta) is not defined in one of apis'>>>>
-
-mlog1 = <<<<Unhandled Expression: 'log(theta1[1]^2/sqrt(theta1[2]^2+theta1[1]^2)) is not defined in one of apis'>>>>
-slog1 = <<<<Unhandled Expression: 'sqrt(log(1+(theta1[2]^2/theta1[1]^2))) is not defined in one of apis'>>>>
-
-D1 = <<<<Unhandled Expression: 'sum(dlnorm(x=Rth0,meanlog=mlog1,sdlog=slog1,log=TRUE)) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
-dunif(x=theta1[1],u1,u2,log=TRUE) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
-dunif(x=theta1[2],s1,s2,log=TRUE) is not defined in one of apis'>>>>
-
-D0 = <<<<Unhandled Expression: 'sum(dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE)) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
-dunif(x=theta0[1],u1,u2,log=TRUE) is not defined in one of apis'>>>><<<<Unhandled Expression: '+
-dunif(x=theta0[2],s1,s2,log=TRUE) is not defined in one of apis'>>>>
-
-q1 = <<<<Unhandled Expression: 'sum(dnorm(x=theta1,mean=theta0,sd=eps_Rth,log=TRUE)) is not defined in one of apis'>>>>
-q0 = <<<<Unhandled Expression: 'sum(dnorm(x=theta0,mean=theta1,sd=eps_Rth,log=TRUE)) is not defined in one of apis'>>>>
-
-theta.alph = D1 - D0 - (q1 - q0)
-
-u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
-if <<<<Unhandled Expression: 'log(u)<=min(theta.alph,0) is not defined in one of apis'>>>>:
-  theta0 = theta1
-  <<<<Unhandled Expression: 'theta.accept[m]'>>>> = 1else:
-  theta0 = theta0
-
-<<<<Unhandled Expression: 'Rth_MH[m,]'>>>> = Rth0
-<<<<Unhandled Expression: 'muRth_MH[m]'>>>> = <<<<Unhandled Expression: 'theta0[1]'>>>>
-<<<<Unhandled Expression: 'sigmaRth_MH[m]'>>>> = <<<<Unhandled Expression: 'theta0[2]'>>>>
+    D1 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth1,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>> + 
+    
+    D0 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>> + 
+    
+    
+    q1 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth1,mean=Rth0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
+    q0 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth0,mean=Rth1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
+    
+    Rth.alph = D1 - D0 - (q1 - q0)
+    
+    u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
+    if math.log(u, undefined) <= min(Rth.alph, 0):
+      Rth0 = Rth1
+      <<<<Unhandled Expression: 'Rth.accept[m]'>>>> = 1else:
+      Rth0 = Rth0
+    Rth.alph
+    
+    
+    
+    theta1 = <<<<Unhandled Expression: 'rnorm(2,mean=theta0,sd=eps_theta) is not defined in one of apis'>>>>
+    
+    mlog1 = math.log(pow(<<<<Unhandled Expression: 'theta1[1]'>>>>, 2) / math.sqrt(pow(<<<<Unhandled Expression: 'theta1[2]'>>>>, 2) + pow(<<<<Unhandled Expression: 'theta1[1]'>>>>, 2)), undefined)
+    slog1 = math.sqrt(math.log(1 + (pow(<<<<Unhandled Expression: 'theta1[2]'>>>>, 2) / pow(<<<<Unhandled Expression: 'theta1[1]'>>>>, 2)), undefined))
+    
+    D1 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog1,sdlog=slog1,log=TRUE) is not defined in one of apis'>>>>) + 
+     + 
+    
+    
+    D0 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>) + 
+     + 
+    
+    
+    q1 = sum(<<<<Unhandled Expression: 'dnorm(x=theta1,mean=theta0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
+    q0 = sum(<<<<Unhandled Expression: 'dnorm(x=theta0,mean=theta1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
+    
+    theta.alph = D1 - D0 - (q1 - q0)
+    
+    u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
+    if math.log(u, undefined) <= min(theta.alph, 0):
+      theta0 = theta1
+      <<<<Unhandled Expression: 'theta.accept[m]'>>>> = 1else:
+      theta0 = theta0
+    
+    <<<<Unhandled Expression: 'Rth_MH[m,]'>>>> = Rth0
+    <<<<Unhandled Expression: 'muRth_MH[m]'>>>> = <<<<Unhandled Expression: 'theta0[1]'>>>>
+    <<<<Unhandled Expression: 'sigmaRth_MH[m]'>>>> = <<<<Unhandled Expression: 'theta0[2]'>>>>
+  finish = <<<<Unhandled Expression: 'proc.time()[3]'>>>>
+  durT = finish - starttime
+  durM = finish - starttimeM
+  dur = <<<<Unhandled Expression: 'list(total=durT,durM=durM) is not defined in one of apis'>>>>
+  
+  acc.rate_Rth = <<<<Unhandled Expression: 'round(mean(Rth.accept[-c(1:mcmc$burnin)])*100,2) is not defined in one of apis'>>>>
+  acc.rate_theta = <<<<Unhandled Expression: 'round(mean(theta.accept[-c(1:mcmc$burnin)])*100,2) is not defined in one of apis'>>>>
+  
+  <<<<Unhandled Expression: 'cat("\nMCMC info: \n","acceptance Rth:  ",acc.rate_Rth,"\n","acceptance theta:",acc.rate_theta,"\n\n") is not defined in one of apis'>>>>
+  
+  
+  
+  
+  results_i = list(
+mcmc = mcmc)
+start = <<<<Unhandled Expression: 'list(m_Rth_start=m_Rth_start,<missing ')'> is not defined in one of apis'>>>>
+sd_Rth_start = sd_Rth_start

@@ -1,4 +1,4 @@
-import ApiHandler from "./apis/Api"
+import ApiHandler from './apis/Api'
 
 /**
  * Used to define APIs on the side of the visitor, which calls the related generator of the output language
@@ -17,14 +17,15 @@ export default abstract class ApiVisitor {
 
   /**
    * Get the target handler
-   * 
+   *
    * @returns the target / generator
    */
   abstract getTarget: () => ApiHandler
 }
 
-
 export enum APIS {
   STANDARD_API,
   STATISTICS_API,
+  MATH_API,
+  FILE_API,
 }

@@ -40,22 +40,22 @@ prog: ( expr (endOfStatement | NL)* | NL)* EOF;
 
 expr:
 	expr '[[' sublist ']' ']'								# UnhandeledExpression // '[[' follows R's yacc grammar
+	| expr '(' sublist ')'									# FunctionCall // call function
 	| expr '[' sublist ']'									# UnhandeledExpression
 	| expr ('::' | ':::') expr								# UnhandeledExpression
 	| expr ('$' | '@') expr									# UnhandeledExpression
-	| <assoc = right> expr '^' expr							# UnhandeledExpression
+	| <assoc = right> expr '^' expr							# PowerOf
 	| ('-' | '+') expr										# UnhandeledExpression
 	| expr ':' expr											# RangeDefinition
 	| expr USER_OP expr										# UnhandeledExpression // anything wrappedin %: '%' .* '%'
 	| expr ('*' | '/') expr									# BasicCalculation
-	| expr ('+' | '-') expr									# BasicCalculation
+	| expr ('+' | '-') (NL)? expr							# BasicCalculation
 	| expr ('>' | '>=' | '<' | '<=' | '==' | '!=') expr		# ComparisonOperation
 	| '!' expr												# UnhandeledExpression
 	| expr ('&' | '&&') expr								# UnhandeledExpression
 	| expr ('|' | '||') expr								# UnhandeledExpression
 	| '~' expr												# UnhandeledExpression
 	| expr '~' expr											# UnhandeledExpression
-	| expr '(' sublist ')'									# FunctionCall // call function
 	| expr ('<-' | '<<-' | '=' | '->' | '->>' | ':=') expr	# VariableDeclaration
 	| expr '<-' 'function' '(' formlist? ')' expr			# FunctionDefinition // define function
 	| 'return(' expr ')'									# ReturnStatement // return statement
@@ -75,12 +75,12 @@ expr:
 	| INT													# Int
 	| FLOAT													# Float
 	| COMPLEX												# UnhandeledExpression
-	| 'NULL'												# UnhandeledExpression
-	| 'NA'													# UnhandeledExpression
-	| 'Inf'													# UnhandeledExpression
-	| 'NaN'													# UnhandeledExpression
-	| 'TRUE'												# UnhandeledExpression
-	| 'FALSE'												# UnhandeledExpression;
+	| 'NULL'												# Symbol
+	| 'NA'													# Symbol
+	| 'Inf'													# Symbol
+	| 'NaN'													# Symbol
+	| 'TRUE'												# Symbol
+	| 'FALSE'												# Symbol;
 
 exprlist: NL? expr (endOfStatement expr?)* NL? |;
 

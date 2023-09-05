@@ -1,11 +1,13 @@
-// Generated from grammars/R.g4 by ANTLR 4.12.0
+// Generated from grammars/R.g4 by ANTLR 4.13.1
 
 import {ParseTreeVisitor} from 'antlr4';
 
 
 import { ProgContext } from "./RParser";
 import { GroupContext } from "./RParser";
+import { PowerOfContext } from "./RParser";
 import { ForLoopContext } from "./RParser";
+import { SymbolContext } from "./RParser";
 import { IfElseStatementContext } from "./RParser";
 import { ComparisonOperationContext } from "./RParser";
 import { StringContext } from "./RParser";
@@ -52,12 +54,26 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitGroup?: (ctx: GroupContext) => Result;
 	/**
+	 * Visit a parse tree produced by the `PowerOf`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPowerOf?: (ctx: PowerOfContext) => Result;
+	/**
 	 * Visit a parse tree produced by the `ForLoop`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitForLoop?: (ctx: ForLoopContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `Symbol`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSymbol?: (ctx: SymbolContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `IfElseStatement`
 	 * labeled alternative in `RParser.expr`.
