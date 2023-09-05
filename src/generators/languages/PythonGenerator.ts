@@ -80,8 +80,8 @@ export default class PythonGenerator extends IntermediateVisitor {
     return `else:\n${content}`
   }
 
-  handleFunctionDefinition = (name: string, value: string, body: string) => {
-    return `def ${name}(${value}):\n${body}`
+  handleFunctionDefinition = (name: string, value: string[], body: string) => {
+    return `def ${name}(${value.join(',')}):\n${body}`
   }
 
   handleGroup = (value: string) => {
@@ -133,7 +133,7 @@ export default class PythonGenerator extends IntermediateVisitor {
   }
 
   handleUnhandeledExpression = (expression: string) => {
-    console.error(`Unhandled Expression: ${expression}`)
+    // console.error(`Unhandled Expression: ${expression}`)
     return `<<<<Unhandled Expression: '${expression}'>>>>`
   }
 }

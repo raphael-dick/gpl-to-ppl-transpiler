@@ -84,7 +84,8 @@ for (i in 1:nsim){
     LL  <- sum(dnorm(x = y, mean = mu, sd = sig, log = TRUE))
     return(LL)
   }
-  compute.LL(y = ds, Rth = Rth0, eta_star = eta_star, If_A = If_A, Vf = Vf, sigma = sigma)
+  # compute.LL(y = ds, Rth = Rth0, eta_star = eta_star, If_A = If_A, Vf = Vf, sigma = sigma)
+  compute.LL(ds, Rth = Rth0, eta_star = eta_star, If_A = If_A, Vf = Vf, sigma = sigma)
   
   
   

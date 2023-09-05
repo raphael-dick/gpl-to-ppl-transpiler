@@ -36,7 +36,7 @@ for i in range(1, nsim + 1):
   <<<<Unhandled Expression: 'mcmc$nmc'>>>> = <<<<Unhandled Expression: 'with(mcmc,M+burnin) is not defined in one of apis'>>>>
   <<<<Unhandled Expression: 'mcmc$verbose'>>>> = 1000
   
-  Rth.accept = theta.accept = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
+  Rth_accept = theta_accept = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
   Rth_MH = <<<<Unhandled Expression: 'matrix(0,mcmc$nmc,n) is not defined in one of apis'>>>>
   muRth_MH = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
   sigmaRth_MH = <<<<Unhandled Expression: 'rep(0,mcmc$nmc) is not defined in one of apis'>>>>
@@ -51,12 +51,12 @@ for i in range(1, nsim + 1):
   
   
   
-  def compute.LL(y,Rth,eta_star,If_A,Vf,sigma):
+  def compute_LL(y,Rth,eta_star,If_A,Vf,sigma):
     mu = Rth * eta_star * If_A * Vf
     sig = sigma
     LL = sum(<<<<Unhandled Expression: 'dnorm(x=y,mean=mu,sd=sig,log=TRUE) is not defined in one of apis'>>>>)
     return LL
-  <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>>
+  <<<<Unhandled Expression: 'compute.LL(ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>>
   
   
   
@@ -82,14 +82,14 @@ for i in range(1, nsim + 1):
     q1 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth1,mean=Rth0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
     q0 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth0,mean=Rth1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
     
-    Rth.alph = D1 - D0 - (q1 - q0)
+    Rth_alph = D1 - D0 - (q1 - q0)
     
     u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
-    if math.log(u, undefined) <= min(Rth.alph, 0):
+    if math.log(u, undefined) <= min(Rth_alph, 0):
       Rth0 = Rth1
       <<<<Unhandled Expression: 'Rth.accept[m]'>>>> = 1else:
       Rth0 = Rth0
-    Rth.alph
+    Rth_alph
     
     
     
@@ -109,10 +109,10 @@ for i in range(1, nsim + 1):
     q1 = sum(<<<<Unhandled Expression: 'dnorm(x=theta1,mean=theta0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
     q0 = sum(<<<<Unhandled Expression: 'dnorm(x=theta0,mean=theta1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
     
-    theta.alph = D1 - D0 - (q1 - q0)
+    theta_alph = D1 - D0 - (q1 - q0)
     
     u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
-    if math.log(u, undefined) <= min(theta.alph, 0):
+    if math.log(u, undefined) <= min(theta_alph, 0):
       theta0 = theta1
       <<<<Unhandled Expression: 'theta.accept[m]'>>>> = 1else:
       theta0 = theta0
@@ -125,8 +125,8 @@ for i in range(1, nsim + 1):
   durM = finish - starttimeM
   dur = <<<<Unhandled Expression: 'list(total=durT,durM=durM) is not defined in one of apis'>>>>
   
-  acc.rate_Rth = <<<<Unhandled Expression: 'round(mean(Rth.accept[-c(1:mcmc$burnin)])*100,2) is not defined in one of apis'>>>>
-  acc.rate_theta = <<<<Unhandled Expression: 'round(mean(theta.accept[-c(1:mcmc$burnin)])*100,2) is not defined in one of apis'>>>>
+  acc_rate_Rth = <<<<Unhandled Expression: 'round(mean(Rth.accept[-c(1:mcmc$burnin)])*100,2) is not defined in one of apis'>>>>
+  acc_rate_theta = <<<<Unhandled Expression: 'round(mean(theta.accept[-c(1:mcmc$burnin)])*100,2) is not defined in one of apis'>>>>
   
   <<<<Unhandled Expression: 'cat("\nMCMC info: \n","acceptance Rth:  ",acc.rate_Rth,"\n","acceptance theta:",acc.rate_theta,"\n\n") is not defined in one of apis'>>>>
   

@@ -27,13 +27,21 @@ import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/R
 import { ParseTree } from 'antlr4'
 import { mergeDependencies } from '@src/interfaces/apis/Api'
 import RMathApiVisitor from '../apis/RMathApiVisitor'
-
+import SymbolTable, { BaseValueType } from '@src/symbols/SymbolTable'
+import { extractNamedArgs } from '../util/RApiVisitorUtil'
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
   private target: IntermediateVisitor
 
   /** a list of apis which are handled during the transpilation */
   private apis: ApiVisitor[]
+
+  private unifySymbolName(symbol: string) {
+    return symbol.replaceAll('.', '_')
+  }
+
+  private functionSymbolTable = new SymbolTable<{ args: string[] } & BaseValueType>(this.unifySymbolName)
+  private variableSymbolTable = new SymbolTable<BaseValueType>(this.unifySymbolName)
 
   /**
    * Setup the transpiler
@@ -131,6 +139,20 @@ export default class RVisitor extends Visitor<string> {
       if (result) return result
     }
 
+    const symbolData = this.functionSymbolTable.get(name)
+
+    if (symbolData) {
+      const [namedArgs, unnamedArgs] = extractNamedArgs(args)
+      const computedArgs = unnamedArgs
+
+      for (let i = unnamedArgs.length; i < symbolData.args.length; i++) {
+        const arg = namedArgs[symbolData.args[i]] ?? undefined
+        computedArgs.push(arg)
+      }
+
+      return this.target.handleFunctionCall(symbolData.symbol, computedArgs)
+    }
+
     return this.target.handleUnhandeledExpression(`${ctx.getText()} is not defined in one of apis`)
 
     // return this.target.handleFunctionCall(name, args)
@@ -141,7 +163,14 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitId = (ctx: IdContext) => {
-    return this.target.handleId(ctx.getText())
+    const id = ctx.getText()
+    let symbol = this.variableSymbolTable.getSymbol(id)
+    if (!symbol) {
+      this.variableSymbolTable.add(id, {})
+      symbol = this.variableSymbolTable.getSymbol(id)
+    }
+
+    return this.target.handleId(symbol)
   }
 
   visitInt = (ctx: IntContext) => {
@@ -191,11 +220,16 @@ export default class RVisitor extends Visitor<string> {
     const name = this.visit(ctx.getChild(0))
     const args = this.visit(ctx.getChild(4))
       ?.filter((x) => !!x)
-      ?.map((item) => item?.filter((x) => !!x))
+      ?.map((item) => item?.filter((x) => !!x)[0]) as string[]
     const body = this.visit(ctx.getChild(6))
+
+    this.functionSymbolTable.add(name, {
+      args,
+    })
+
     console.log(args)
 
-    return this.target.handleFunctionDefinition(name, args, body)
+    return this.target.handleFunctionDefinition(this.functionSymbolTable.getSymbol(name), args, body)
   }
 
   visitBlock = (ctx: BlockContext) => {

@@ -5,6 +5,12 @@ export default abstract class IntermediateVisitor {
   // ---- //
 
   /**
+   * Handles the generation of symbol names
+   * @param symbol
+   */
+  // abstract handleSymbol: (symbol: string) => string
+
+  /**
    * Output if an expression is not currently handled by the transpiler
    * @param expression the name of the expression or error message
    */
@@ -113,7 +119,7 @@ export default abstract class IntermediateVisitor {
    * @param args the args
    * @param body the functions body
    */
-  abstract handleFunctionDefinition: (name: string, args: string, body: string) => string
+  abstract handleFunctionDefinition: (name: string, args: string[], body: string) => string
 
   /**
    * A Block
