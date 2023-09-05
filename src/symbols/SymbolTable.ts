@@ -5,7 +5,7 @@ export type BaseValueType = {
 type HandleNameFunctionType = (symbol: string) => BaseValueType['symbol']
 
 export default class SymbolTable<ValueType extends BaseValueType> {
-  symbols = new Map<string, ValueType>()
+  public symbols = new Map<string, ValueType>()
   handleName: HandleNameFunctionType
 
   constructor(handleName: HandleNameFunctionType) {

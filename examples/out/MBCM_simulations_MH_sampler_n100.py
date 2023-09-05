@@ -56,7 +56,7 @@ for i in range(1, nsim + 1):
     sig = sigma
     LL = sum(<<<<Unhandled Expression: 'dnorm(x=y,mean=mu,sd=sig,log=TRUE) is not defined in one of apis'>>>>)
     return LL
-  <<<<Unhandled Expression: 'compute.LL(ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>>
+  compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma)
   
   
   
@@ -74,9 +74,9 @@ for i in range(1, nsim + 1):
     mlog0 = math.log(pow(<<<<Unhandled Expression: 'theta0[1]'>>>>, 2) / math.sqrt(pow(<<<<Unhandled Expression: 'theta0[2]'>>>>, 2) + pow(<<<<Unhandled Expression: 'theta0[1]'>>>>, 2)), undefined)
     slog0 = math.sqrt(math.log(1 + (pow(<<<<Unhandled Expression: 'theta0[2]'>>>>, 2) / pow(<<<<Unhandled Expression: 'theta0[1]'>>>>, 2)), undefined))
     
-    D1 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth1,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>> + 
+    D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + 
     
-    D0 = <<<<Unhandled Expression: 'compute.LL(y=ds,Rth=Rth0,eta_star=eta_star,If_A=If_A,Vf=Vf,sigma=sigma) is not defined in one of apis'>>>> + 
+    D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + 
     
     
     q1 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth1,mean=Rth0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)

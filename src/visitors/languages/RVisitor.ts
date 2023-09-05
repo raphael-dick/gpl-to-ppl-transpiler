@@ -217,7 +217,7 @@ export default class RVisitor extends Visitor<string> {
 
   visitFunctionDefinition = (ctx: FunctionDefinitionContext) => {
     // TODO: handle edge cases
-    const name = this.visit(ctx.getChild(0))
+    const name = ctx.getChild(0).getText()
     const args = this.visit(ctx.getChild(4))
       ?.filter((x) => !!x)
       ?.map((item) => item?.filter((x) => !!x)[0]) as string[]
