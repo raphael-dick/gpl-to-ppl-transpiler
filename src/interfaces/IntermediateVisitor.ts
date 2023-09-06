@@ -215,4 +215,24 @@ export default abstract class IntermediateVisitor {
    * @param value the value
    */
   abstract handleBoolean: (value: boolean) => string
+
+  /**
+   * Accessing an index of an array
+   * @param array the name of the array
+   * @param index the index
+   */
+  abstract handleArrayItem: (array: string, index: string) => string
+
+  /**
+   * Array definition
+   * @param items the arrays items
+   */
+  abstract handleArray: (items: string[]) => string
+
+  /**
+   * Accessing Properties of dictonaries etc.
+   * @param target the target variable
+   * @param property the accessed property
+   */
+  abstract handlePropertyAccess: (target: string, property: string) => string
 }

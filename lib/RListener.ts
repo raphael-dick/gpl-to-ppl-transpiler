@@ -9,16 +9,19 @@ import { PowerOfContext } from "./RParser";
 import { ForLoopContext } from "./RParser";
 import { SymbolContext } from "./RParser";
 import { IfElseStatementContext } from "./RParser";
+import { CFunctionContext } from "./RParser";
 import { ComparisonOperationContext } from "./RParser";
 import { StringContext } from "./RParser";
 import { IntContext } from "./RParser";
+import { PropertyAccessContext } from "./RParser";
 import { UnhandeledExpressionContext } from "./RParser";
 import { IfStatementContext } from "./RParser";
 import { FloatContext } from "./RParser";
+import { ArrayItemContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { BlockContext } from "./RParser";
-import { VariableDeclarationContext } from "./RParser";
 import { FunctionDefinitionContext } from "./RParser";
+import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
 import { WhileLoopContext } from "./RParser";
@@ -108,6 +111,18 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitIfElseStatement?: (ctx: IfElseStatementContext) => void;
 	/**
+	 * Enter a parse tree produced by the `CFunction`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterCFunction?: (ctx: CFunctionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `CFunction`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitCFunction?: (ctx: CFunctionContext) => void;
+	/**
 	 * Enter a parse tree produced by the `ComparisonOperation`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -143,6 +158,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitInt?: (ctx: IntContext) => void;
+	/**
+	 * Enter a parse tree produced by the `PropertyAccess`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterPropertyAccess?: (ctx: PropertyAccessContext) => void;
+	/**
+	 * Exit a parse tree produced by the `PropertyAccess`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitPropertyAccess?: (ctx: PropertyAccessContext) => void;
 	/**
 	 * Enter a parse tree produced by the `UnhandeledExpression`
 	 * labeled alternative in `RParser.expr`.
@@ -180,6 +207,18 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitFloat?: (ctx: FloatContext) => void;
 	/**
+	 * Enter a parse tree produced by the `ArrayItem`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterArrayItem?: (ctx: ArrayItemContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ArrayItem`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitArrayItem?: (ctx: ArrayItemContext) => void;
+	/**
 	 * Enter a parse tree produced by the `ReturnStatement`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -204,18 +243,6 @@ export default class RListener extends ParseTreeListener {
 	 */
 	exitBlock?: (ctx: BlockContext) => void;
 	/**
-	 * Enter a parse tree produced by the `VariableDeclaration`
-	 * labeled alternative in `RParser.expr`.
-	 * @param ctx the parse tree
-	 */
-	enterVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
-	/**
-	 * Exit a parse tree produced by the `VariableDeclaration`
-	 * labeled alternative in `RParser.expr`.
-	 * @param ctx the parse tree
-	 */
-	exitVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
-	/**
 	 * Enter a parse tree produced by the `FunctionDefinition`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -227,6 +254,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFunctionDefinition?: (ctx: FunctionDefinitionContext) => void;
+	/**
+	 * Enter a parse tree produced by the `VariableDeclaration`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
+	/**
+	 * Exit a parse tree produced by the `VariableDeclaration`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
 	/**
 	 * Enter a parse tree produced by the `Id`
 	 * labeled alternative in `RParser.expr`.

@@ -1,7 +1,9 @@
 import ApiVisitor, { APIS } from '@interfaces/ApiVisitor.ts'
 import {
+  ArrayItemContext,
   BasicCalculationContext,
   BlockContext,
+  CFunctionContext,
   ComparisonOperationContext,
   FloatContext,
   ForLoopContext,
@@ -13,6 +15,7 @@ import {
   IfStatementContext,
   IntContext,
   PowerOfContext,
+  PropertyAccessContext,
   RangeDefinitionContext,
   ReturnStatementContext,
   StringContext,
@@ -29,6 +32,7 @@ import { mergeDependencies } from '@src/interfaces/apis/Api'
 import RMathApiVisitor from '../apis/RMathApiVisitor'
 import SymbolTable, { BaseValueType } from '@src/symbols/SymbolTable'
 import { extractNamedArgs } from '../util/RApiVisitorUtil'
+import RStandardApiVisitor from '../apis/RStandardApiVisitor'
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
   private target: IntermediateVisitor
@@ -53,6 +57,22 @@ export default class RVisitor extends Visitor<string> {
     super()
     this.target = target
     this.apis = apis
+  }
+
+  /**
+   * Handle inline statements as blocks (in order to unify the code)
+   * @param element the target element
+   * @returns the target element as a block
+   */
+  private handleAsBlockAndVisit = (element: ParseTree) => {
+    const content = this.visit(element)
+
+    // if the content is inline we still want to handle it as a block
+    if (element.getText().indexOf('{') !== -1) {
+      return content
+    }
+
+    return this.target.handleBlock(content)
   }
 
   /**
@@ -238,15 +258,15 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitIfStatement = (ctx: IfStatementContext) => {
-    const condition = this.visit(ctx.getChild(2))
-    const content = this.visit(ctx.getChild(4))
+    const condition = this.visit(ctx.getChild(3))
+    const content = this.handleAsBlockAndVisit(ctx.getChild(5))
     return this.target.handleIfStatement(condition, content)
   }
 
   visitIfElseStatement = (ctx: IfElseStatementContext) => {
     const condition = this.visit(ctx.getChild(2))
-    const content = this.visit(ctx.getChild(4))
-    const elseContent = this.visit(ctx.getChild(6))
+    const content = this.handleAsBlockAndVisit(ctx.getChild(4))
+    const elseContent = this.handleAsBlockAndVisit(ctx.getChild(6))
     return this.target.handleIfStatement(condition, content) + this.target.handleElseStatement(elseContent)
   }
 
@@ -287,12 +307,12 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitRangeDefinition = (ctx: RangeDefinitionContext) => {
-    const api = this.apis.find((item) => item.getName() === APIS.STANDARD_API)
+    const api = this.apis.find((item) => item.getName() === APIS.STANDARD_API) as RStandardApiVisitor | undefined
     if (!api) return this.target.handleUnhandeledExpression(`STANDARD_API is required for handling ranges`)
 
     const from = this.visit(ctx.getChild(0))
     const to = this.visit(ctx.getChild(2))
-    return api.lookup('range', [from, to])
+    return api.getTarget().handleRange(from, to)
   }
 
   visitPowerOf = (ctx: PowerOfContext) => {
@@ -328,5 +348,27 @@ export default class RVisitor extends Visitor<string> {
     }
 
     return this.target.handleUnhandeledExpression(symbol)
+  }
+
+  visitArrayItem = (ctx: ArrayItemContext) => {
+    const array = this.visit(ctx.getChild(0))
+    const index = this.visit(ctx.getChild(2))
+
+    return this.target.handleArrayItem(array, index)
+  }
+
+  visitCFunction = (ctx: CFunctionContext) => {
+    const content = this.visit(ctx.getChild(1))
+      .filter((item) => !!item)
+      .map((item) => item[0]) as string[]
+    console.log(JSON.stringify(content))
+
+    return this.target.handleArray(content)
+  }
+
+  visitPropertyAccess = (ctx: PropertyAccessContext) => {
+    const target = this.visit(ctx.getChild(0))
+    const property = this.visit(ctx.getChild(2))
+    return this.target.handlePropertyAccess(target, property)
   }
 }

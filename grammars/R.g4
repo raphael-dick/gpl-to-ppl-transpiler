@@ -41,9 +41,10 @@ prog: ( expr (endOfStatement | NL)* | NL)* EOF;
 expr:
 	expr '[[' sublist ']' ']'								# UnhandeledExpression // '[[' follows R's yacc grammar
 	| expr '(' sublist ')'									# FunctionCall // call function
-	| expr '[' sublist ']'									# UnhandeledExpression
+	| expr '[' sublist ']'									# ArrayItem
+	| 'c(' sublist ')'										# CFunction
 	| expr ('::' | ':::') expr								# UnhandeledExpression
-	| expr ('$' | '@') expr									# UnhandeledExpression
+	| expr ('$' | '@') expr									# PropertyAccess
 	| <assoc = right> expr '^' expr							# PowerOf
 	| ('-' | '+') expr										# UnhandeledExpression
 	| expr ':' expr											# RangeDefinition

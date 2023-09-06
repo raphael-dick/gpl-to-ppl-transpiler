@@ -1,4 +1,4 @@
-import ApiHandler from "./Api"
+import ApiHandler from './Api'
 
 /**
  * Defines the functionality of the languages Standard API
@@ -6,9 +6,9 @@ import ApiHandler from "./Api"
 export default abstract class StandardApi extends ApiHandler {
   /**
    * Handles a console output
-   * @param content the text content of the print statement
+   * @param items the text contents of the print statement
    */
-  abstract handlePrint: (content: string) => string
+  abstract handlePrint: (items: string[]) => string
 
   /**
    * Handles a range definition
@@ -30,4 +30,29 @@ export default abstract class StandardApi extends ApiHandler {
    * @param target the array
    */
   abstract handleArrayLength: (target: string) => string
+
+  /**
+   * List Constructor
+   * @param items the lists items
+   */
+  abstract handleList: (items?: string[]) => string
+
+  /**
+   * Creates a new Dictonary
+   * @param items the lists items
+   */
+  abstract handelDictionary: (items?: Record<string, string>) => string
+
+  /**
+   * Integer type cast
+   * @param content the content to be cast
+   */
+  abstract handleTypeCastInt: (content: string) => string
+
+  /**
+   * Repeat contents
+   * @param content the content which is repeated
+   * @param count how often it should be repeated
+   */
+  abstract handleRepeat: (content: string, count: string) => string
 }

@@ -7,6 +7,22 @@ const INDENTATION = '  '
  * The Python Langauge Generator
  */
 export default class PythonGenerator extends IntermediateVisitor {
+  /** number of layers of indentations */
+  indentations = 0
+
+  handlePropertyAccess = (target: string, property: string) => {
+    return `${target}["${property}"]`
+  }
+
+  handleArray = (items: string[]) => {
+    const modified = items.map((item) => (item.startsWith('range') ? `*list(${item})` : item))
+    return `[${modified.join(', ')}]`
+  }
+
+  handleArrayItem = (array: string, index: string) => {
+    return `${array}[${index}]`
+  }
+
   handleBoolean = (value: boolean) => {
     return value ? 'True' : 'False'
   }
@@ -14,11 +30,18 @@ export default class PythonGenerator extends IntermediateVisitor {
   handleDependencies = (dependencies: Dependencies) => {
     const value = Object.keys(dependencies)
       .map((key) => {
-        const values = dependencies[key]
-        if (values.includes('*')) {
-          return `import ${key}`
+        const allValues = dependencies[key]
+        const values = allValues.filter((item) => item !== '*')
+
+        const lines = []
+
+        if (values.length != allValues.length) {
+          lines.push(`import ${key}`)
         }
-        return `from ${key} import ${value}`
+        if (values.length > 0) {
+          lines.push(`from ${key} import ${values.join(', ')}`)
+        }
+        return lines.join('\n')
       })
       .join('\n')
     return value ? value + '\n\n' : ''
@@ -65,19 +88,23 @@ export default class PythonGenerator extends IntermediateVisitor {
   }
 
   handleBlock = (content: string) => {
-    return INDENTATION + content.split('\n').join(`\n${INDENTATION}`)
+    this.indentations++
+    const indentation = new Array(this.indentations).fill(INDENTATION).join('')
+    const result = indentation + content.split('\n').join(`\n${indentation}`)
+    this.indentations--
+    return result
   }
 
   handleIfStatement = (condition: string, content: string) => {
-    return `if ${condition}:\n${content}`
+    return `if ${condition}:\n${content}\n`
   }
 
   handleElseIfStatement = (condition: string, content: string) => {
-    return `elif ${condition}:\n${content}`
+    return `elif ${condition}:\n${content}\n`
   }
 
   handleElseStatement = (content: string) => {
-    return `else:\n${content}`
+    return `else:\n${content}\n`
   }
 
   handleFunctionDefinition = (name: string, value: string[], body: string) => {
@@ -133,7 +160,8 @@ export default class PythonGenerator extends IntermediateVisitor {
   }
 
   handleUnhandeledExpression = (expression: string) => {
-    // console.error(`Unhandled Expression: ${expression}`)
+    // eslint-disable-next-line no-extra-boolean-cast
+    if (process.env.REPORT_MISSING_FEATURES.toLocaleLowerCase() === 'true') console.error(`Unhandled Expression: ${expression}`)
     return `<<<<Unhandled Expression: '${expression}'>>>>`
   }
 }

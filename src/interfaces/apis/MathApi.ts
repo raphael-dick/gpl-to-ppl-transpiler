@@ -36,4 +36,30 @@ export default abstract class MathApi extends ApiHandler {
    * @param exponent the exponent
    */
   abstract handlePow: (base: string, exponent: string) => string
+
+  /**
+   * Calculate the mean
+   * @param content the content where the mean should be calculated from
+   */
+  abstract handleMean: (content: string) => string
+
+  /**
+   * Rounds a number
+   * @param number the number which gets rounded
+   * @param digits to what digit it gets rounded
+   */
+  abstract handleRound: (number: string, digits: string) => string
+
+  /**
+   * Eulers number constant
+   */
+  abstract handleE: () => string
+
+  /**
+   * Convert an array into a matrix
+   * @param content
+   * @param rows
+   * @param columns
+   */
+  abstract handleMatrix: (content: string, rows: string, columns: string) => string
 }

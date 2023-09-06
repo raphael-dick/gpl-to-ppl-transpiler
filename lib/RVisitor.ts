@@ -9,16 +9,19 @@ import { PowerOfContext } from "./RParser";
 import { ForLoopContext } from "./RParser";
 import { SymbolContext } from "./RParser";
 import { IfElseStatementContext } from "./RParser";
+import { CFunctionContext } from "./RParser";
 import { ComparisonOperationContext } from "./RParser";
 import { StringContext } from "./RParser";
 import { IntContext } from "./RParser";
+import { PropertyAccessContext } from "./RParser";
 import { UnhandeledExpressionContext } from "./RParser";
 import { IfStatementContext } from "./RParser";
 import { FloatContext } from "./RParser";
+import { ArrayItemContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { BlockContext } from "./RParser";
-import { VariableDeclarationContext } from "./RParser";
 import { FunctionDefinitionContext } from "./RParser";
+import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
 import { FunctionCallContext } from "./RParser";
 import { WhileLoopContext } from "./RParser";
@@ -82,6 +85,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitIfElseStatement?: (ctx: IfElseStatementContext) => Result;
 	/**
+	 * Visit a parse tree produced by the `CFunction`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCFunction?: (ctx: CFunctionContext) => Result;
+	/**
 	 * Visit a parse tree produced by the `ComparisonOperation`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -102,6 +112,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitInt?: (ctx: IntContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `PropertyAccess`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPropertyAccess?: (ctx: PropertyAccessContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `UnhandeledExpression`
 	 * labeled alternative in `RParser.expr`.
@@ -124,6 +141,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitFloat?: (ctx: FloatContext) => Result;
 	/**
+	 * Visit a parse tree produced by the `ArrayItem`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitArrayItem?: (ctx: ArrayItemContext) => Result;
+	/**
 	 * Visit a parse tree produced by the `ReturnStatement`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
@@ -138,19 +162,19 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitBlock?: (ctx: BlockContext) => Result;
 	/**
-	 * Visit a parse tree produced by the `VariableDeclaration`
-	 * labeled alternative in `RParser.expr`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableDeclaration?: (ctx: VariableDeclarationContext) => Result;
-	/**
 	 * Visit a parse tree produced by the `FunctionDefinition`
 	 * labeled alternative in `RParser.expr`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitFunctionDefinition?: (ctx: FunctionDefinitionContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `VariableDeclaration`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableDeclaration?: (ctx: VariableDeclarationContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `Id`
 	 * labeled alternative in `RParser.expr`.
