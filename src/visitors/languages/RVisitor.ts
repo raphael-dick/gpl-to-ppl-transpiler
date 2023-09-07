@@ -24,7 +24,7 @@ import {
   UnhandeledExpressionContext,
   WhileLoopContext,
 } from '@lib/RParser'
-import IntermediateVisitor from '@interfaces/IntermediateVisitor'
+import Generator from '@src/interfaces/Generator'
 
 import Visitor from '@lib/RVisitor'
 import { ExprlistContext, ProgContext, VariableDeclarationContext } from '@lib/RParser'
@@ -36,7 +36,7 @@ import { extractNamedArgs } from '../util/RApiVisitorUtil'
 import RStandardApiVisitor from '../apis/RStandardApiVisitor'
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
-  private target: IntermediateVisitor
+  private target: Generator
 
   /** a list of apis which are handled during the transpilation */
   private apis: ApiVisitor[]
@@ -54,7 +54,7 @@ export default class RVisitor extends Visitor<string> {
    * @param target the generator for generating the output code
    * @param apis a list of apis which are handled during the transpilation
    */
-  constructor(target: IntermediateVisitor, apis: ApiVisitor[]) {
+  constructor(target: Generator, apis: ApiVisitor[]) {
     super()
     this.target = target
     this.apis = apis

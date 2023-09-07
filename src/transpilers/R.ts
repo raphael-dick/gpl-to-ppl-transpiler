@@ -1,5 +1,5 @@
 import ApiVisitor from '@interfaces/ApiVisitor.ts'
-import IntermediateVisitor from '@interfaces/IntermediateVisitor'
+import Generator from '@src/interfaces/Generator'
 import antlr from 'antlr4'
 import Lexer from '@lib/RLexer'
 import Parser from '@lib/RParser'
@@ -14,7 +14,7 @@ import RVisitor from '@visitors/languages/RVisitor'
  *
  * @returns the output code in the given output language with transpiled api codes
  */
-export async function transpile(input: string, generator: IntermediateVisitor, apis: ApiVisitor[]) {
+export async function transpile(input: string, generator: Generator, apis: ApiVisitor[]) {
   const chars = new antlr.CharStream(input)
   const lexer = new Lexer(chars)
 

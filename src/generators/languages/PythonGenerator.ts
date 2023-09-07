@@ -1,12 +1,12 @@
 import { Dependencies } from '@src/interfaces/apis/Api'
-import IntermediateVisitor from '@src/interfaces/IntermediateVisitor'
+import Generator from '@src/interfaces/Generator'
 
 const INDENTATION = '  '
 
 /**
  * The Python Langauge Generator
  */
-export default class PythonGenerator extends IntermediateVisitor {
+export default class PythonGenerator extends Generator {
   handleSign = (sign: '+' | '-', content: string) => {
     return `${sign}${content}`
   }

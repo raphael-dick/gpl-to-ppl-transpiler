@@ -1,5 +1,5 @@
 import { Dependencies } from '@interfaces/apis/Api'
-export default abstract class IntermediateVisitor {
+export default abstract class Generator {
   // ---- //
   // Util //
   // ---- //
