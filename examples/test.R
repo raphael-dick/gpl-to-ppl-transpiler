@@ -17,16 +17,20 @@
 #   b <- b + 1;
 # }
 
-c(2, 1:7, 2:12)
-c(1:7)
-c(2,3,4)
-
-list(2, x = 3)
+# x <- c(1, 2, 3)
+# print(x)
+# print(-x)
 
 
-if(log(u) <= min(theta.alph, 0)){
-  theta0 <- theta1
-  theta.accept[m] <- 1
-} else {
-  theta0 <- theta0
+findMin <- function(a, b, printResult) {
+  result <- min(2,5)
+
+  if(printResult == TRUE) {
+    print(result)
+  }
 }
+
+a <- 5
+b <- 2
+
+findMin(a, b, TRUE)

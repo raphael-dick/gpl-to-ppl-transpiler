@@ -20,6 +20,7 @@ import { FloatContext } from "./RParser";
 import { ArrayItemContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { BlockContext } from "./RParser";
+import { SignContext } from "./RParser";
 import { FunctionDefinitionContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
@@ -161,6 +162,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitBlock?: (ctx: BlockContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `Sign`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSign?: (ctx: SignContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `FunctionDefinition`
 	 * labeled alternative in `RParser.expr`.

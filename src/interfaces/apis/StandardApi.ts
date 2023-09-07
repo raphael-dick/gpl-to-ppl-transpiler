@@ -55,4 +55,9 @@ export default abstract class StandardApi extends ApiHandler {
    * @param count how often it should be repeated
    */
   abstract handleRepeat: (content: string, count: string) => string
+
+  /**
+   * Return the current process time
+   */
+  abstract handleProcessTime: () => string
 }

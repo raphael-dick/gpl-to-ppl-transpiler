@@ -33,6 +33,8 @@ export default class RStandardApiVisitor extends ApiVisitor {
         return this.target.handleList(unnamedArgs)
       case 'cat':
         return this.target.handlePrint(args)
+      case 'proc.time':
+        return this.target.handleProcessTime()
       case 'print':
         return this.target.handlePrint(args)
       case 'range':

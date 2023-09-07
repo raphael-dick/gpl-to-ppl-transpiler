@@ -46,7 +46,7 @@ expr:
 	| expr ('::' | ':::') expr								# UnhandeledExpression
 	| expr ('$' | '@') expr									# PropertyAccess
 	| <assoc = right> expr '^' expr							# PowerOf
-	| ('-' | '+') expr										# UnhandeledExpression
+	| ('-' | '+') expr										# Sign
 	| expr ':' expr											# RangeDefinition
 	| expr USER_OP expr										# UnhandeledExpression // anything wrappedin %: '%' .* '%'
 	| expr ('*' | '/') expr									# BasicCalculation

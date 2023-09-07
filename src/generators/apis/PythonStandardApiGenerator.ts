@@ -4,6 +4,11 @@ import StandardApi from '@interfaces/apis/StandardApi'
  * The Python API Generator for the Standard API
  */
 export default class PythonStandardApiGenerator extends StandardApi {
+  handleProcessTime = () => {
+    this.addDependency('time', 'process_time')
+    return `[None, None, process_time()]`
+  }
+
   handleRepeat = (content: string, count: string) => {
     this.addDependency('numpy', '*')
     return `numpy.repeat(${content}, ${count})`

@@ -220,8 +220,9 @@ export default abstract class IntermediateVisitor {
    * Accessing an index of an array
    * @param array the name of the array
    * @param index the index
+   * @param offset how much the indexing is offset to 0 (e.g.: R indexing starts with 1 => offset: 1)
    */
-  abstract handleArrayItem: (array: string, index: string) => string
+  abstract handleArrayItem: (array: string, index: string, offset?: number) => string
 
   /**
    * Array definition
@@ -235,4 +236,11 @@ export default abstract class IntermediateVisitor {
    * @param property the accessed property
    */
   abstract handlePropertyAccess: (target: string, property: string) => string
+
+  /**
+   * Handles a sign
+   * @param sign the sign
+   * @param content the content following the sign
+   */
+  abstract handleSign: (sign: '+' | '-', content: string) => string
 }

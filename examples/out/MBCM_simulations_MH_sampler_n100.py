@@ -1,4 +1,5 @@
 import numpy
+from time import process_time
 import math
 from math import sqrt, log
 from statistics import mean
@@ -63,25 +64,23 @@ for i in range(1, nsim + 1):
   
   
   
-  starttime = <<<<Unhandled Expression: 'proc.time() is not defined in one of apis'>>>>[3]
+  starttime = [None, None, process_time()][2]
   
   
   
   
   for m in range(1, mcmc["nmc"] + 1):
     if m == (mcmc["burnin"] + 1):
-      starttimeM = <<<<Unhandled Expression: 'proc.time() is not defined in one of apis'>>>>[3]
+      starttimeM = [None, None, process_time()][2]
     
     
     
     Rth1 = <<<<Unhandled Expression: 'rnorm(n,mean=Rth0,sd=eps_Rth) is not defined in one of apis'>>>>
-    mlog0 = log(pow(theta0[1], 2) / sqrt(pow(theta0[2], 2) + pow(theta0[1], 2)), math.e)
-    slog0 = sqrt(log(1 + (pow(theta0[2], 2) / pow(theta0[1], 2)), math.e))
+    mlog0 = log(pow(theta0[0], 2) / sqrt(pow(theta0[1], 2) + pow(theta0[0], 2)), math.e)
+    slog0 = sqrt(log(1 + (pow(theta0[1], 2) / pow(theta0[0], 2)), math.e))
     
-    D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + 
-    
-    D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + 
-    
+    D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + sum(<<<<Unhandled Expression: 'dlnorm(x=Rth1,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>)
+    D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>)
     
     q1 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth1,mean=Rth0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
     q0 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth0,mean=Rth1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
@@ -91,7 +90,7 @@ for i in range(1, nsim + 1):
     u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
     if log(u, math.e) <= min(Rth_alph, 0):
       Rth0 = Rth1
-      Rth_accept[m] = 1
+      Rth_accept[m-1] = 1
     else:
       Rth0 = Rth0
     
@@ -101,16 +100,12 @@ for i in range(1, nsim + 1):
     
     theta1 = <<<<Unhandled Expression: 'rnorm(2,mean=theta0,sd=eps_theta) is not defined in one of apis'>>>>
     
-    mlog1 = log(pow(theta1[1], 2) / sqrt(pow(theta1[2], 2) + pow(theta1[1], 2)), math.e)
-    slog1 = sqrt(log(1 + (pow(theta1[2], 2) / pow(theta1[1], 2)), math.e))
+    mlog1 = log(pow(theta1[0], 2) / sqrt(pow(theta1[1], 2) + pow(theta1[0], 2)), math.e)
+    slog1 = sqrt(log(1 + (pow(theta1[1], 2) / pow(theta1[0], 2)), math.e))
     
-    D1 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog1,sdlog=slog1,log=TRUE) is not defined in one of apis'>>>>) + 
-     + 
+    D1 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog1,sdlog=slog1,log=TRUE) is not defined in one of apis'>>>>) + <<<<Unhandled Expression: 'dunif(x=theta1[1],u1,u2,log=TRUE) is not defined in one of apis'>>>> + <<<<Unhandled Expression: 'dunif(x=theta1[2],s1,s2,log=TRUE) is not defined in one of apis'>>>>
     
-    
-    D0 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>) + 
-     + 
-    
+    D0 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>) + <<<<Unhandled Expression: 'dunif(x=theta0[1],u1,u2,log=TRUE) is not defined in one of apis'>>>> + <<<<Unhandled Expression: 'dunif(x=theta0[2],s1,s2,log=TRUE) is not defined in one of apis'>>>>
     
     q1 = sum(<<<<Unhandled Expression: 'dnorm(x=theta1,mean=theta0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
     q0 = sum(<<<<Unhandled Expression: 'dnorm(x=theta0,mean=theta1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
@@ -120,21 +115,21 @@ for i in range(1, nsim + 1):
     u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
     if log(u, math.e) <= min(theta_alph, 0):
       theta0 = theta1
-      theta_accept[m] = 1
+      theta_accept[m-1] = 1
     else:
       theta0 = theta0
     
     
-    Rth_MH[m,,] = Rth0
-    muRth_MH[m] = theta0[1]
-    sigmaRth_MH[m] = theta0[2]
-  finish = <<<<Unhandled Expression: 'proc.time() is not defined in one of apis'>>>>[3]
+    Rth_MH[m,,-1] = Rth0
+    muRth_MH[m-1] = theta0[0]
+    sigmaRth_MH[m-1] = theta0[1]
+  finish = [None, None, process_time()][2]
   durT = finish - starttime
   durM = finish - starttimeM
   dur = { "total": durT, "durM": durM }
   
-  acc_rate_Rth = round(mean(Rth_accept[<<<<Unhandled Expression: '-c(1:mcmc$burnin)'>>>>]) * 100, 2)
-  acc_rate_theta = round(mean(theta_accept[<<<<Unhandled Expression: '-c(1:mcmc$burnin)'>>>>]) * 100, 2)
+  acc_rate_Rth = round(mean(Rth_accept[-[*list(range(1, mcmc["burnin"] + 1))]-1]) * 100, 2)
+  acc_rate_theta = round(mean(theta_accept[-[*list(range(1, mcmc["burnin"] + 1))]-1]) * 100, 2)
   
   print("\nMCMC info: \n", "acceptance Rth:  ", acc_rate_Rth, "\n", "acceptance theta:", acc_rate_theta, "\n\n")
   

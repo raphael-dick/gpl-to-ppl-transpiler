@@ -327,7 +327,7 @@ export default class RParser extends Parser {
 				break;
 			case 2:
 				{
-				localctx = new UnhandeledExpressionContext(this, localctx);
+				localctx = new SignContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 37;
@@ -2067,6 +2067,33 @@ export class BlockContext extends ExprContext {
 	public accept<Result>(visitor: RVisitor<Result>): Result {
 		if (visitor.visitBlock) {
 			return visitor.visitBlock(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class SignContext extends ExprContext {
+	constructor(parser: RParser, ctx: ExprContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expr(): ExprContext {
+		return this.getTypedRuleContext(ExprContext, 0) as ExprContext;
+	}
+	public enterRule(listener: RListener): void {
+	    if(listener.enterSign) {
+	 		listener.enterSign(this);
+		}
+	}
+	public exitRule(listener: RListener): void {
+	    if(listener.exitSign) {
+	 		listener.exitSign(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: RVisitor<Result>): Result {
+		if (visitor.visitSign) {
+			return visitor.visitSign(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

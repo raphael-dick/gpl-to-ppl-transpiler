@@ -20,6 +20,7 @@ import { FloatContext } from "./RParser";
 import { ArrayItemContext } from "./RParser";
 import { ReturnStatementContext } from "./RParser";
 import { BlockContext } from "./RParser";
+import { SignContext } from "./RParser";
 import { FunctionDefinitionContext } from "./RParser";
 import { VariableDeclarationContext } from "./RParser";
 import { IdContext } from "./RParser";
@@ -242,6 +243,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitBlock?: (ctx: BlockContext) => void;
+	/**
+	 * Enter a parse tree produced by the `Sign`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterSign?: (ctx: SignContext) => void;
+	/**
+	 * Exit a parse tree produced by the `Sign`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitSign?: (ctx: SignContext) => void;
 	/**
 	 * Enter a parse tree produced by the `FunctionDefinition`
 	 * labeled alternative in `RParser.expr`.

@@ -18,6 +18,7 @@ import {
   PropertyAccessContext,
   RangeDefinitionContext,
   ReturnStatementContext,
+  SignContext,
   StringContext,
   SymbolContext,
   UnhandeledExpressionContext,
@@ -123,10 +124,6 @@ export default class RVisitor extends Visitor<string> {
         break
     }
 
-    // console.log(result);
-    // const dt = new Date().getTime();
-    // while (new Date().getTime() - dt <= 100) { /* Do nothing */ }
-
     return result ?? ''
   }
 
@@ -209,7 +206,7 @@ export default class RVisitor extends Visitor<string> {
   visitBasicCalculation = (ctx: BasicCalculationContext) => {
     const item1 = this.visit(ctx.getChild(0))
     const sign = ctx.getChild(1).getText()
-    const item2 = this.visit(ctx.getChild(2))
+    const item2 = this.visit(ctx.getChild(3) ?? ctx.getChild(2))
 
     switch (sign) {
       case '+':
@@ -246,8 +243,6 @@ export default class RVisitor extends Visitor<string> {
     this.functionSymbolTable.add(name, {
       args,
     })
-
-    console.log(args)
 
     return this.target.handleFunctionDefinition(this.functionSymbolTable.getSymbol(name), args, body)
   }
@@ -354,14 +349,18 @@ export default class RVisitor extends Visitor<string> {
     const array = this.visit(ctx.getChild(0))
     const index = this.visit(ctx.getChild(2))
 
-    return this.target.handleArrayItem(array, index)
+    if (isNaN(index)) {
+      return this.target.handleArrayItem(array, index, 1)
+    }
+
+    const temp = Number(index) - 1
+    return this.target.handleArrayItem(array, temp.toString())
   }
 
   visitCFunction = (ctx: CFunctionContext) => {
     const content = this.visit(ctx.getChild(1))
       .filter((item) => !!item)
       .map((item) => item[0]) as string[]
-    console.log(JSON.stringify(content))
 
     return this.target.handleArray(content)
   }
@@ -370,5 +369,12 @@ export default class RVisitor extends Visitor<string> {
     const target = this.visit(ctx.getChild(0))
     const property = this.visit(ctx.getChild(2))
     return this.target.handlePropertyAccess(target, property)
+  }
+
+  visitSign = (ctx: SignContext) => {
+    const sign = ctx.getChild(0).getText() as '+' | '-'
+    const content = this.visit(ctx.getChild(1))
+
+    return this.target.handleSign(sign, content)
   }
 }

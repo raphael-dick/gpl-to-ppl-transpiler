@@ -7,8 +7,9 @@ const INDENTATION = '  '
  * The Python Langauge Generator
  */
 export default class PythonGenerator extends IntermediateVisitor {
-  /** number of layers of indentations */
-  indentations = 0
+  handleSign = (sign: '+' | '-', content: string) => {
+    return `${sign}${content}`
+  }
 
   handlePropertyAccess = (target: string, property: string) => {
     return `${target}["${property}"]`
@@ -19,8 +20,8 @@ export default class PythonGenerator extends IntermediateVisitor {
     return `[${modified.join(', ')}]`
   }
 
-  handleArrayItem = (array: string, index: string) => {
-    return `${array}[${index}]`
+  handleArrayItem = (array: string, index: string, offset = 0) => {
+    return `${array}[${index}${offset ? '-' + offset : ''}]`
   }
 
   handleBoolean = (value: boolean) => {
@@ -86,6 +87,9 @@ export default class PythonGenerator extends IntermediateVisitor {
   handleNotEqualTo = (first: string, second: string) => {
     return `${first} != ${second}`
   }
+
+  /** number of layers of indentations */
+  indentations = 0
 
   handleBlock = (content: string) => {
     this.indentations++
