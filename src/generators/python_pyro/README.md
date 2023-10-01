@@ -1,0 +1,1 @@
+"python_pyro" extends the basic python implementation "python" to support the PPL pyro with numpy. Therefore, it highly depends on the basic python implemention and changes there can effect the functionalityof the pyro implementation.

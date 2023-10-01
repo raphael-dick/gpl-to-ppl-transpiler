@@ -26,7 +26,6 @@ findMin <- function(a, b, printResult) {
   result <- min(2,5)
 
   if(printResult == TRUE) {
-    print(result)
   }
 }
 

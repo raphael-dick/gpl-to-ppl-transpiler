@@ -4,7 +4,7 @@ import Generator from '@src/interfaces/Generator'
 const INDENTATION = '  '
 
 /**
- * The Python Langauge Generator
+ * The Python Language Generator
  */
 export default class PythonGenerator extends Generator {
   handleSign = (sign: '+' | '-', content: string) => {
