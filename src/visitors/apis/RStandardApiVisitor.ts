@@ -22,6 +22,7 @@ export default class RStandardApiVisitor extends ApiVisitor {
 
   lookup = (expression: string, args: string[]) => {
     const [namedArgs, unnamedArgs] = extractNamedArgs(args)
+    let temp
 
     switch (expression) {
       case 'rep':
@@ -45,6 +46,16 @@ export default class RStandardApiVisitor extends ApiVisitor {
         return this.target.handleTypeCastInt(args[0])
       case 'str_pad': // str_pad <- function(string, width, side = c("left", "right", "both"), pad = " ", use_width = TRUE)
         return this.target.handleStringPadding(unnamedArgs[0], unnamedArgs[1], unnamedArgs[3] ?? namedArgs['pad'])
+      case 'with':
+        if (!unnamedArgs[1].includes('+')) return
+        temp = unnamedArgs[1].split('+').map((item) => item.trim())
+        return this.target.handleAdditionInDictiornary(unnamedArgs[0], temp[0], temp[1])
+      case 'as.list':
+        return this.target.handleConvertDictionaryToList(args[0])
+      case 'modifyList':
+        return this.target.handleMergeDictionaries(args[0], args[1])
+      case 'paste0':
+        return this.target.handleConcatinateStrings(args)
       default:
         return undefined
     }

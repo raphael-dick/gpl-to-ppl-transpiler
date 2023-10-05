@@ -60,4 +60,31 @@ export default abstract class StandardApi extends ApiHandler {
    * Return the current process time
    */
   abstract handleProcessTime: () => string
+
+  /**
+   * Adds the values of two keys in a given dictionary
+   * @param dict the dictionary
+   * @param key1 first key
+   * @param key2 second key
+   */
+  abstract handleAdditionInDictiornary: (dict: string, key1: string, key2: string) => string
+
+  /**
+   * Merges the data from one dictionary into the other
+   * @param target the dictionary where the data will be merged to
+   * @param source the dictonary which the data will be merged from
+   */
+  abstract handleMergeDictionaries: (target: string, source: string) => string
+
+  /**
+   * Dictionary to List
+   * @param dict the dictionary
+   */
+  abstract handleConvertDictionaryToList: (dict: string) => string
+
+  /**
+   * Concatinate list of strings
+   * @param strings list of strings to be concatinated
+   */
+  abstract handleConcatinateStrings: (strings: string[]) => string
 }

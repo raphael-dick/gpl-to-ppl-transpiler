@@ -4,6 +4,23 @@ import StandardApi from '@interfaces/apis/StandardApi'
  * The Python API Generator for the Standard API
  */
 export default class PythonStandardApiGenerator extends StandardApi {
+  handleConcatinateStrings = (strings: string[]) => {
+    return `${strings.join(' + ')}`
+  }
+
+  handleMergeDictionaries = (target: string, source: string) => {
+    return `{**${target}, **${source}}`
+  }
+
+  handleConvertDictionaryToList = (dict: string) => {
+    return `${dict}`
+  }
+
+  handleAdditionInDictiornary = (dict: string, key1: string, key2: string) => {
+    // return `eval("${key1} + ${key2}", ${dict})` // TODO: Optionally try this for a more generic approach
+    return `${dict}["${key1}"] + ${dict}["${key2}"]`
+  }
+
   handleProcessTime = () => {
     this.addDependency('time', 'process_time')
     return `[None, None, process_time()]`

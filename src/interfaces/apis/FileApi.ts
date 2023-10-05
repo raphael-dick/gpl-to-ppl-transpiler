@@ -5,8 +5,14 @@ import ApiHandler from './Api'
  */
 export default abstract class FileApi extends ApiHandler {
   /**
-   * Handles a console output
-   * @param content the text content of the print statement
+   * Handles the Read of an .RDS file
+   * @param path the path to the file
    */
-  abstract handlePrint: (content: string) => string
+  abstract handleReadRDS: (path: string) => string
+
+  /**
+   * Handles the creation of platform independent paths
+   * @param args a list of parts to join
+   */
+  abstract handlePathJoining: (parts: string[]) => string
 }

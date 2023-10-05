@@ -1,24 +1,28 @@
 import numpy
 from time import process_time
+import torch
+import torch.distributions
+from torch.distributions import uniform, normal
+import pyro.distributions
 import math
-from math import sqrt, log
-from statistics import mean
+import os
+import pyreadr
 
 nsim = 100
 
 
 for i in range(1, nsim + 1):
   si_num = f'{i:{"0"}>{3}}'
-  ds = <<<<Unhandled Expression: 'readRDS(file.path(wd_rproj,"_prepared_data","_simstudy_data",paste0("s",si_num,"_01_100.rds"))) is not defined in one of apis'>>>>
+  ds = pyreadr.read_r(os.path.join(wd_rproj, "_prepared_data", "_simstudy_data", "s" + si_num + "_01_100.rds"))
   
   n = len(ds)
   
   
-  m_Rth_start = <<<<Unhandled Expression: 'runif(1,30,50) is not defined in one of apis'>>>>
-  sd_Rth_start = <<<<Unhandled Expression: 'runif(1,0.1,10) is not defined in one of apis'>>>>
-  location = log(pow(m_Rth_start, 2) / sqrt(pow(sd_Rth_start, 2) + pow(m_Rth_start, 2)), math.e)
-  shape = sqrt(log(1 + (pow(sd_Rth_start, 2) / pow(m_Rth_start, 2)), math.e))
-  Rth0_start = <<<<Unhandled Expression: 'rlnorm(n,meanlog=location,sdlog=shape) is not defined in one of apis'>>>>
+  m_Rth_start = uniform.Uniform(30, 50).sample(torch.Size([1]))
+  sd_Rth_start = uniform.Uniform(0.1, 10).sample(torch.Size([1]))
+  location = torch.log(pow(m_Rth_start, 2) / torch.sqrt(pow(sd_Rth_start, 2) + pow(m_Rth_start, 2)))
+  shape = torch.sqrt(torch.log(1 + (pow(sd_Rth_start, 2) / pow(m_Rth_start, 2))))
+  Rth0_start = torch.exp(pyro.distributions.LogNormal(location, shape).sample(torch.Size([n])))
   Rth0 = Rth0_start
   
   sigma = 0.5
@@ -33,15 +37,15 @@ for i in range(1, nsim + 1):
   
   mcmc = list()
   defaultMCMC = { "M": 100000, "burnin": 20000, "thin": 1 }
-  mcmc = <<<<Unhandled Expression: 'modifyList(defaultMCMC,as.list(mcmc)) is not defined in one of apis'>>>>
+  mcmc = {**defaultMCMC, **mcmc}
   mcmc["M"] = int(mcmc["M"])
   mcmc["burnin"] = int(mcmc["burnin"])
   mcmc["thin"] = int(mcmc["thin"])
-  mcmc["nmc"] = <<<<Unhandled Expression: 'with(mcmc,M+burnin) is not defined in one of apis'>>>>
+  mcmc["nmc"] = mcmc["M"] + mcmc["burnin"]
   mcmc["verbose"] = 1000
   
   Rth_accept = theta_accept = numpy.repeat(0, mcmc["nmc"])
-  Rth_MH = numpy.full((mcmc["nmc"], n), 0)
+  Rth_MH = torch.full((n, mcmc["nmc"]), 0)
   muRth_MH = numpy.repeat(0, mcmc["nmc"])
   sigmaRth_MH = numpy.repeat(0, mcmc["nmc"])
   
@@ -58,7 +62,7 @@ for i in range(1, nsim + 1):
   def compute_LL(y,Rth,eta_star,If_A,Vf,sigma):
     mu = Rth * eta_star * If_A * Vf
     sig = sigma
-    LL = sum(<<<<Unhandled Expression: 'dnorm(x=y,mean=mu,sd=sig,log=TRUE) is not defined in one of apis'>>>>)
+    LL = torch.sum(torch.distributions.Normal(mu, sig).log_prob(y))
     return LL
   compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma)
   
@@ -75,20 +79,20 @@ for i in range(1, nsim + 1):
     
     
     
-    Rth1 = <<<<Unhandled Expression: 'rnorm(n,mean=Rth0,sd=eps_Rth) is not defined in one of apis'>>>>
-    mlog0 = log(pow(theta0[0], 2) / sqrt(pow(theta0[1], 2) + pow(theta0[0], 2)), math.e)
-    slog0 = sqrt(log(1 + (pow(theta0[1], 2) / pow(theta0[0], 2)), math.e))
+    Rth1 = normal.Normal(Rth0, eps_Rth).sample(torch.Size([n]))
+    mlog0 = torch.log(pow(theta0[0], 2) / torch.sqrt(pow(theta0[1], 2) + pow(theta0[0], 2)))
+    slog0 = torch.sqrt(torch.log(1 + (pow(theta0[1], 2) / pow(theta0[0], 2))))
     
-    D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + sum(<<<<Unhandled Expression: 'dlnorm(x=Rth1,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>)
-    D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>)
+    D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + torch.sum(torch.distributions.LogNormal(mlog0, slog0).log_prob(Rth1))
+    D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + torch.sum(torch.distributions.LogNormal(mlog0, slog0).log_prob(Rth0))
     
-    q1 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth1,mean=Rth0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
-    q0 = sum(<<<<Unhandled Expression: 'dnorm(x=Rth0,mean=Rth1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
+    q1 = torch.sum(torch.distributions.Normal(Rth0, eps_Rth).log_prob(Rth1))
+    q0 = torch.sum(torch.distributions.Normal(Rth1, eps_Rth).log_prob(Rth0))
     
     Rth_alph = D1 - D0 - (q1 - q0)
     
-    u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
-    if log(u, math.e) <= min(Rth_alph, 0):
+    u = uniform.Uniform(0, 1).sample(torch.Size([1]))
+    if torch.log(u) <= min(Rth_alph, 0):
       Rth0 = Rth1
       Rth_accept[m-1] = 1
     else:
@@ -98,22 +102,22 @@ for i in range(1, nsim + 1):
     
     
     
-    theta1 = <<<<Unhandled Expression: 'rnorm(2,mean=theta0,sd=eps_theta) is not defined in one of apis'>>>>
+    theta1 = normal.Normal(theta0, eps_theta).sample(torch.Size([2]))
     
-    mlog1 = log(pow(theta1[0], 2) / sqrt(pow(theta1[1], 2) + pow(theta1[0], 2)), math.e)
-    slog1 = sqrt(log(1 + (pow(theta1[1], 2) / pow(theta1[0], 2)), math.e))
+    mlog1 = torch.log(pow(theta1[0], 2) / torch.sqrt(pow(theta1[1], 2) + pow(theta1[0], 2)))
+    slog1 = torch.sqrt(torch.log(1 + (pow(theta1[1], 2) / pow(theta1[0], 2))))
     
-    D1 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog1,sdlog=slog1,log=TRUE) is not defined in one of apis'>>>>) + <<<<Unhandled Expression: 'dunif(x=theta1[1],u1,u2,log=TRUE) is not defined in one of apis'>>>> + <<<<Unhandled Expression: 'dunif(x=theta1[2],s1,s2,log=TRUE) is not defined in one of apis'>>>>
+    D1 = torch.sum(torch.distributions.LogNormal(mlog1, slog1).log_prob(Rth0)) + pyro.distributions.Uniform(u1, u2).log_prob(theta1[0]) + pyro.distributions.Uniform(s1, s2).log_prob(theta1[1])
     
-    D0 = sum(<<<<Unhandled Expression: 'dlnorm(x=Rth0,meanlog=mlog0,sdlog=slog0,log=TRUE) is not defined in one of apis'>>>>) + <<<<Unhandled Expression: 'dunif(x=theta0[1],u1,u2,log=TRUE) is not defined in one of apis'>>>> + <<<<Unhandled Expression: 'dunif(x=theta0[2],s1,s2,log=TRUE) is not defined in one of apis'>>>>
+    D0 = torch.sum(torch.distributions.LogNormal(mlog0, slog0).log_prob(Rth0)) + pyro.distributions.Uniform(u1, u2).log_prob(theta0[0]) + pyro.distributions.Uniform(s1, s2).log_prob(theta0[1])
     
-    q1 = sum(<<<<Unhandled Expression: 'dnorm(x=theta1,mean=theta0,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
-    q0 = sum(<<<<Unhandled Expression: 'dnorm(x=theta0,mean=theta1,sd=eps_Rth,log=TRUE) is not defined in one of apis'>>>>)
+    q1 = torch.sum(torch.distributions.Normal(theta0, eps_Rth).log_prob(theta1))
+    q0 = torch.sum(torch.distributions.Normal(theta1, eps_Rth).log_prob(theta0))
     
     theta_alph = D1 - D0 - (q1 - q0)
     
-    u = <<<<Unhandled Expression: 'runif(1,0,1) is not defined in one of apis'>>>>
-    if log(u, math.e) <= min(theta_alph, 0):
+    u = uniform.Uniform(0, 1).sample(torch.Size([1]))
+    if torch.log(u) <= min(theta_alph, 0):
       theta0 = theta1
       theta_accept[m-1] = 1
     else:
@@ -128,8 +132,8 @@ for i in range(1, nsim + 1):
   durM = finish - starttimeM
   dur = { "total": durT, "durM": durM }
   
-  acc_rate_Rth = round(mean(Rth_accept[-[*list(range(1, mcmc["burnin"] + 1))]-1]) * 100, 2)
-  acc_rate_theta = round(mean(theta_accept[-[*list(range(1, mcmc["burnin"] + 1))]-1]) * 100, 2)
+  acc_rate_Rth = round(torch.mean(Rth_accept[-[*list(range(1, mcmc["burnin"] + 1))]-1]) * 100, 2)
+  acc_rate_theta = round(torch.mean(theta_accept[-[*list(range(1, mcmc["burnin"] + 1))]-1]) * 100, 2)
   
   print("\nMCMC info: \n", "acceptance Rth:  ", acc_rate_Rth, "\n", "acceptance theta:", acc_rate_theta, "\n\n")
   

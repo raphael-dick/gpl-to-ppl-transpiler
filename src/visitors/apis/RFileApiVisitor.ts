@@ -1,6 +1,5 @@
 import FileApi from '@interfaces/apis/FileApi'
 import ApiVisitor, { APIS } from '@interfaces/ApiVisitor'
-import { extractNamedArgs } from '../util/RApiVisitorUtil'
 
 export default class RFileApiVisitor extends ApiVisitor {
   /** the generator used for generating the output api code */
@@ -20,11 +19,14 @@ export default class RFileApiVisitor extends ApiVisitor {
   getTarget = () => this.target
 
   lookup = (expression: string, args: string[]) => {
-    const [namedArgs, unnamedArgs] = extractNamedArgs(args)
+    // const [namedArgs, unnamedArgs] = extractNamedArgs(args)
 
     switch (expression) {
-      case 'print':
-        return this.target.handlePrint(args[0])
+      case 'readRDS':
+        return this.target.handleReadRDS(args[0])
+
+      case 'file.path':
+        return this.target.handlePathJoining(args)
 
       default:
         return undefined
