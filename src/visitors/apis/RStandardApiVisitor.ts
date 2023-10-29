@@ -25,10 +25,12 @@ export default class RStandardApiVisitor extends ApiVisitor {
     let temp
 
     switch (expression) {
+      case 'library':
+        return ''
       case 'rep':
         return this.target.handleRepeat(args[0], args[1])
       case 'list':
-        if (Object.keys(namedArgs).length > 0) {
+        if (Object.keys(namedArgs).length > 0 || unnamedArgs.length == 0) {
           return this.target.handelDictionary(namedArgs)
         }
         return this.target.handleList(unnamedArgs)
@@ -56,6 +58,8 @@ export default class RStandardApiVisitor extends ApiVisitor {
         return this.target.handleMergeDictionaries(args[0], args[1])
       case 'paste0':
         return this.target.handleConcatinateStrings(args)
+      case 'getwd':
+        return this.target.handleGetCurrentWorkingDirectoy()
       default:
         return undefined
     }

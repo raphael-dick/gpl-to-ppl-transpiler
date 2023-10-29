@@ -225,6 +225,15 @@ export default abstract class Generator {
   abstract handleArrayItem: (array: string, index: string, offset?: number) => string
 
   /**
+   * Subsetting an array
+   * @param array the name of the array
+   * @param from the start index
+   * @param to the end index
+   * @param offset how much the indexing is offset to 0
+   */
+  abstract handleSubsetArray: (array: string, from: string, to: string, offset: number) => string
+
+  /**
    * Array definition
    * @param items the arrays items
    */

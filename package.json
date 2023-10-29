@@ -6,7 +6,7 @@
   "types": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src -e R,ts,json --exec 'node --loader ./loader.js src/index.ts'",
+    "dev": "nodemon src -e R,ts --exec 'node --loader ./loader.js src/index.ts'",
     "antlr:generate": "antlr4 -Dlanguage=TypeScript -lib grammars -o ./lib -visitor -Xexact-output-dir grammars/R.g4",
     "lint": "eslint --ignore-path .eslintignore src",
     "lint:fix": "eslint --ignore-path .eslintignore --fix src",

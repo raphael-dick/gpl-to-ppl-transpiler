@@ -4,6 +4,11 @@ import StandardApi from '@interfaces/apis/StandardApi'
  * The Python API Generator for the Standard API
  */
 export default class PythonStandardApiGenerator extends StandardApi {
+  handleGetCurrentWorkingDirectoy = () => {
+    this.addDependency('os', '*')
+    return `os.getcwd()`
+  }
+
   handleConcatinateStrings = (strings: string[]) => {
     return `${strings.join(' + ')}`
   }
@@ -28,7 +33,8 @@ export default class PythonStandardApiGenerator extends StandardApi {
 
   handleRepeat = (content: string, count: string) => {
     this.addDependency('numpy', '*')
-    return `numpy.repeat(${content}, ${count})`
+    const contentModified = content.includes('.') ? content : content + '.'
+    return `numpy.repeat(${contentModified}, ${count})`
   }
 
   handleTypeCastInt = (content: string) => {

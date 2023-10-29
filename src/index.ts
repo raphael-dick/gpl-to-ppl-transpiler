@@ -13,12 +13,19 @@ const TRANSPILER_CONFIGS = {
   },
 } as const
 
-const FILES = ['test', 'MBCM_simulations_MH_sampler_n100']
+const FILES = [
+  'test', 
+  'isolated',
+  'test2',
+  'work-MBCM_simulations_MH_sampler_n100',
+  'modified-MBCM_simulations_MH_sampler_n100',
+  // 'original-MBCM_simulations_MH_sampler_n100',
+]
 const PRINT_OUTPUT = false
 
 // FILES.forEach((filename) => run(filename, 'PYTHON'))
 FILES.forEach((filename) => run(filename, 'PYTHON_PYRO'))
-// run(FILES[0])
+// run(FILES[0], 'PYTHON_PYRO')
 
 async function run(filename: string, transpiler_config_key: keyof typeof TRANSPILER_CONFIGS) {
   const config = TRANSPILER_CONFIGS[transpiler_config_key]

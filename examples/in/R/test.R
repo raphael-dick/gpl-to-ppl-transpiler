@@ -22,14 +22,25 @@
 # print(-x)
 
 
-findMin <- function(a, b, printResult) {
-  result <- min(2,5)
+# findMin <- function(a, b, printResult) {
+#   result <- min(2,5)
 
-  if(printResult == TRUE) {
-  }
-}
+#   if(printResult == TRUE) {
+#   }
+# }
 
-a <- 5
-b <- 2
+# a <- 5
+# b <- 2
 
-findMin(a, b, TRUE)
+# findMin(a, b, TRUE)
+
+# results_i <- list(
+#   test = 'test'
+# )
+
+# results_i <- list(test = 'test')
+
+x <- c(1,2,3,4,5)
+sub <- x[-c(1:3)]
+
+print(sub)

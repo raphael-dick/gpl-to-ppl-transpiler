@@ -87,4 +87,9 @@ export default abstract class StandardApi extends ApiHandler {
    * @param strings list of strings to be concatinated
    */
   abstract handleConcatinateStrings: (strings: string[]) => string
+
+  /**
+   * Returns the current working directory
+   */
+  abstract handleGetCurrentWorkingDirectoy: () => string
 }

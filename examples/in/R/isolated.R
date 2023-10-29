@@ -1,3 +1,6 @@
+library(stringr)
+library(rjson)
+
 ############################################################################## #
 # Filename
 #   MBCM_simulations_MH_sampler_n100.R
@@ -13,7 +16,10 @@
 # Copyright JOANNEUM RESEARCH, 2022
 ############################################################################## #
 
-nsim <- 100
+# nsim <- 1
+nsim <- 1
+
+wd_rproj <- getwd()
 
 # setting: 
 # n=100 
@@ -22,6 +28,7 @@ for (i in 1:nsim){
 
   # read simulated dataset
   si_num <- str_pad(i, 3, pad = "0")
+  # si_num <- sprintf("%03d",as.numeric(i))
   ds <- readRDS(file.path(wd_rproj, "_prepared_data", "_simstudy_data", paste0("s", si_num, "_01_100.rds")))  
 
   n <- length(ds)
@@ -90,12 +97,14 @@ for (i in 1:nsim){
   
   
   starttime <- proc.time()[3]  
+  starttimeM <- starttime
   
   
   
   ##############################################################################~#
   # MH sampler ###################################################################
   
+  # for(m in 1:1){
   for(m in 1:mcmc$nmc){
   
     ## time since burn-in phase
@@ -111,6 +120,7 @@ for (i in 1:nsim){
     # computing acceptance prob.
     D1 <- compute.LL(y = ds, Rth = Rth1, eta_star = eta_star, If_A = If_A, Vf = Vf, sigma = sigma) +
       sum(dlnorm(x = Rth1, meanlog = mlog0, sdlog = slog0, log = TRUE))
+
     D0 <- compute.LL(y = ds, Rth = Rth0, eta_star = eta_star, If_A = If_A, Vf = Vf, sigma = sigma) +
       sum(dlnorm(x = Rth0, meanlog = mlog0, sdlog = slog0, log = TRUE))
     
@@ -120,13 +130,17 @@ for (i in 1:nsim){
     Rth.alph <- D1 - D0 - (q1 - q0)
     
     u <- runif(1, 0, 1)
+    # print(c("Rth.alph", Rth.alph))
+    # print(c("log(u)", log(u)))
+    # print(c("min(Rth.alph, 0)", min(Rth.alph, 0)))
+    # print(c("log(u) <= min(Rth.alph, 0)", log(u) <= min(Rth.alph, 0)))
     if(log(u) <= min(Rth.alph, 0)){
       Rth0 <- Rth1
       Rth.accept[m] <- 1
     } else {
       Rth0 <- Rth0
     }
-    Rth.alph
+    # Rth.alph
     
     #=============================================================================~=
     # _ 2: (Block) Sample muRth0 and sigmaRth0 =====================================
@@ -134,12 +148,13 @@ for (i in 1:nsim){
     # muRth and sigmaRth have a uniform prior
     # muRth ~ U[u1,u2]
     # sigmaRth ~ U[s1,s2]
+
     
     theta1 <- rnorm(2, mean = theta0, sd = eps_theta)
     
     mlog1 <- log(theta1[1]^2 / sqrt(theta1[2]^2 + theta1[1]^2))
     slog1 <- sqrt(log(1 + (theta1[2]^2/theta1[1]^2)))
-    
+
     D1 <- sum(dlnorm(x = Rth0, meanlog = mlog1, sdlog = slog1, log = TRUE)) +
       dunif(x = theta1[1], u1, u2, log = TRUE) + 
       dunif(x = theta1[2], s1, s2, log = TRUE)
@@ -153,6 +168,11 @@ for (i in 1:nsim){
     
     theta.alph <- D1 - D0 - (q1 - q0)
     
+
+    # print(c('theta0:', theta0))
+    # print(c('theta1:', theta1))
+    # print(c('theta.alph:', theta.alph))
+
     u <- runif(1, 0, 1)
     if(log(u) <= min(theta.alph, 0)){
       theta0 <- theta1
@@ -163,10 +183,11 @@ for (i in 1:nsim){
     
     #=============================================================================~=
     # _ save draws =================================================================
-    Rth_MH[m,]     <- Rth0 
+    # Rth_MH[m,]     <- Rth0 
     muRth_MH[m]    <- theta0[1]
+    # print(c('theta0[1] :', theta0[1] ))
+    # print(c('muRth_MH[m] :', muRth_MH[m] ))
     sigmaRth_MH[m] <- theta0[2] 
-    
   } #end (MCMC)
   
   finish <- proc.time()[3]
@@ -175,6 +196,10 @@ for (i in 1:nsim){
   dur  <- list(total = durT, durM = durM) 
   
   # acceptance rates:
+  # print(c("-c(1:mcmc$burnin)", -c(1:mcmc$burnin)))
+  # print(c("Rth.accept[-c(1:mcmc$burnin)]", Rth.accept[-c(1:mcmc$burnin)]))
+  # print(c("length(Rth.accept[-c(1:mcmc$burnin)])", length(Rth.accept[-c(1:mcmc$burnin)])))
+  # print(c("mean(Rth.accept[-c(1:mcmc$burnin)])*100", mean(Rth.accept[-c(1:mcmc$burnin)])*100))
   acc.rate_Rth <- round(mean(Rth.accept[-c(1:mcmc$burnin)])*100, 2)
   acc.rate_theta <- round(mean(theta.accept[-c(1:mcmc$burnin)])*100, 2)
   
@@ -185,27 +210,31 @@ for (i in 1:nsim){
   #=============================================================================~=
   # _ SAVE RESULTS ===============================================================
   
+  round
   results_i <- list(
-    mcmc = mcmc,
+    # mcmc = mcmc,
     start = list(m_Rth_start = m_Rth_start, 
                  sd_Rth_start = sd_Rth_start),
-    Rth_MH = Rth_MH,
-    muRth_MH = muRth_MH,
-    sigmaRth_MH = sigmaRth_MH,
-    Rth.accept = Rth.accept,
-    theta.accept = theta.accept,
+    # Rth_MH = Rth_MH, # correct
+    # muRth_MH = muRth_MH, # correct
+    # sigmaRth_MH = sigmaRth_MH, # correct
+    # Rth.accept = Rth.accept, # correct
+    # theta.accept = theta.accept, # correct
     acc.rate_Rth = acc.rate_Rth,
-    acc.rate_theta = acc.rate_theta,
-    duration = dur
+    acc.rate_theta = acc.rate_theta #,
+    # duration = dur
   )
   
-  filename_i <- paste0("MH_n100_s", si_num, ".rds")
-  saveRDS(object = results_i,
-          file = file.path(wd_rproj, "_MCMC_output", "_simstudy_results", filename_i))
+  # filename_i <- paste0("MH_n100_s", si_num, ".rds")
+  # saveRDS(object = results_i,
+  #         file = file.path(wd_rproj, "_MCMC_output", "_simstudy_results", filename_i))
+
+  # we export the data as json in order to compare it, since writing to rds is not viable for python
+  filename_i <- paste0("MH_n100_s", si_num, ".json")
+  write(toJSON(results_i), file.path(wd_rproj, "_MCMC_output", "_simstudy_results", filename_i))
   
-  
-  mean(muRth_MH[(mcmc$burnin + 1):mcmc$nmc])
-  mean(sigmaRth_MH[(mcmc$burnin + 1):mcmc$nmc])
+  # mean(muRth_MH[(mcmc$burnin + 1):mcmc$nmc])
+  # mean(sigmaRth_MH[(mcmc$burnin + 1):mcmc$nmc])
   
 }
 

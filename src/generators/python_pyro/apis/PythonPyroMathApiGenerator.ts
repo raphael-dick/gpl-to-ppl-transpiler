@@ -14,6 +14,11 @@ export default class PythonPyroMathApiGenerator extends PythonMathApiGenerator {
     return `torch.sqrt(${content})`
   }
 
+  handleRound = (content: string, digits: string) => {
+    this.addDependency('torch', '*')
+    return `torch.round(${content}, decimals=${digits})`
+  }
+
   handleSum = (content: string) => {
     this.addDependency('torch', '*')
     return `torch.sum(${content})`
@@ -21,11 +26,12 @@ export default class PythonPyroMathApiGenerator extends PythonMathApiGenerator {
 
   handleMatrix = (content: string, rows: string, columns: string) => {
     this.addDependency('torch', '*')
-    return `torch.full((${columns}, ${rows}), ${content})`
+    const contentModified = content.includes('.') ? content : content + '.'
+    return `torch.full((${columns}, ${rows}), ${contentModified})`
   }
 
   handleMean = (content: string) => {
     this.addDependency('torch', '*')
-    return `torch.mean(${content})`
+    return `torch.mean(torch.tensor(${content}).float())`
   }
 }

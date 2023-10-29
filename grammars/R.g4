@@ -40,7 +40,8 @@ prog: ( expr (endOfStatement | NL)* | NL)* EOF;
 
 expr:
 	expr '[[' sublist ']' ']'								# UnhandeledExpression // '[[' follows R's yacc grammar
-	| expr '(' sublist ')'									# FunctionCall // call function
+	| expr '(' (NL)? sublist (NL)? ')'						# FunctionCall // call function
+	| expr '[-c(' expr ':' expr ')]'						# ArraySubset
 	| expr '[' sublist ']'									# ArrayItem
 	| 'c(' sublist ')'										# CFunction
 	| expr ('::' | ':::') expr								# UnhandeledExpression
@@ -91,7 +92,7 @@ formlist: form (',' form)*;
 
 form: ID | ID '=' expr | '...' | '.';
 
-sublist: sub (',' sub)*;
+sublist: sub (',' (NL?) sub)*;
 
 sub:
 	expr

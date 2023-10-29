@@ -9,6 +9,8 @@ import PythonPyroStatisticsApiGenerator from '@src/generators/python_pyro/apis/P
 import PythonPyroStandardApiGenerator from '@src/generators/python_pyro/apis/PythonPyroStandardApiGenerator'
 import PythonPyroGenerator from '@src/generators/python_pyro/PythonPyroGenerator'
 
+const SUPPRESS_ALL_WARNINGS = true // TODO: disable, use only for testing
+
 export default class RtoPythonPyroTranspiler extends RInputTranspiler {
   extension = 'py'
 
@@ -20,4 +22,11 @@ export default class RtoPythonPyroTranspiler extends RInputTranspiler {
   ]
 
   generator = new PythonPyroGenerator()
+
+  protected transpile(): string {
+    if(!SUPPRESS_ALL_WARNINGS) return super.transpile()
+    return `import warnings
+warnings.filterwarnings("ignore")
+` + super.transpile()
+  }
 }

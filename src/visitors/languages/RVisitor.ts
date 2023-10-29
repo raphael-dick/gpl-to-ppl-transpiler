@@ -1,6 +1,7 @@
 import ApiVisitor, { APIS } from '@interfaces/ApiVisitor.ts'
 import {
   ArrayItemContext,
+  ArraySubsetContext,
   BasicCalculationContext,
   BlockContext,
   CFunctionContext,
@@ -34,6 +35,9 @@ import RMathApiVisitor from '../apis/RMathApiVisitor'
 import SymbolTable, { BaseValueType } from '@src/symbols/SymbolTable'
 import { extractNamedArgs } from '../util/RApiVisitorUtil'
 import RStandardApiVisitor from '../apis/RStandardApiVisitor'
+
+// const PATTERN_SUBSET_ARRAY = new RegExp(/-c\(.*\)/)
+
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
   private target: Generator
@@ -153,7 +157,7 @@ export default class RVisitor extends Visitor<string> {
 
     for (const api of this.apis) {
       const result = api.lookup(name, args)
-      if (result) return result
+      if (result !== undefined) return result
     }
 
     const symbolData = this.functionSymbolTable.get(name)
@@ -347,7 +351,7 @@ export default class RVisitor extends Visitor<string> {
 
   visitArrayItem = (ctx: ArrayItemContext) => {
     const array = this.visit(ctx.getChild(0))
-    const index = this.visit(ctx.getChild(2))
+    const index = this.visit(ctx.getChild(2)).filter((item) => !!item) // TODO: check if this results in some bugs with expression like "[m,]"
 
     if (isNaN(index)) {
       return this.target.handleArrayItem(array, index, 1)
@@ -355,6 +359,14 @@ export default class RVisitor extends Visitor<string> {
 
     const temp = Number(index) - 1
     return this.target.handleArrayItem(array, temp.toString())
+  }
+
+  visitArraySubset = (ctx: ArraySubsetContext) => {
+    const array = this.visit(ctx.getChild(0))
+    const from = this.visit(ctx.getChild(2))
+    const to = this.visit(ctx.getChild(4))
+
+    return this.target.handleSubsetArray(array, from, to, 1)
   }
 
   visitCFunction = (ctx: CFunctionContext) => {

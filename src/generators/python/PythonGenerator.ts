@@ -20,6 +20,18 @@ export default class PythonGenerator extends Generator {
     return `[${modified.join(', ')}]`
   }
 
+  handleSubsetArray = (array: string, from: string, to: string, offset?: number) => {
+    const fromNew = offset ? (isNaN(from as never) ? `${from} - ${offset}` : `${Number(from) - offset}`) : from
+    const toNew = offset ? (isNaN(to as never) ? `${to}${offset === 1 ? '' : `- ${offset - 1}`}` : `${Number(to) - offset + 1}`) : to
+
+    let value = ''
+
+    if (fromNew !== '0') value += `${array}[:${fromNew}] + `
+    value += `${array}[${toNew}:]`
+
+    return value
+  }
+
   handleArrayItem = (array: string, index: string, offset = 0) => {
     return `${array}[${index}${offset ? '-' + offset : ''}]`
   }
