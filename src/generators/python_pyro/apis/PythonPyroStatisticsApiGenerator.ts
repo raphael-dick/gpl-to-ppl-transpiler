@@ -15,9 +15,9 @@ export default class PythonPyroStatisticsApiGenerator extends StatisticsApi {
   handleRandomNormalDistribution = (sampleCount: string, mean: string, sd: string) => {
     this.addDependency('torch', '*')
     this.addDependency('torch.distributions', 'normal')
-    // return `normal.Normal(torch.tensor(${mean}), ${sd}).sample(torch.Size([${sampleCount}]))`
     return `normal.Normal(torch.tensor(${mean}), ${sd}).sample()`
-    // return `normal.Normal(torch.tensor(${mean}), ${sd}).sample(torch.Size([${sampleCount}]))`
+    // return `torch.flatten(normal.Normal(torch.tensor(${mean}), ${sd}).sample(torch.Size([${1}])))`
+    // return `normal.Normal(torch.tensor(${mean}), ${sd}).sample()`
   }
 
   handleNormalDistributionDensityInLog = (x: string, mean: string, sd: string) => {
@@ -40,5 +40,6 @@ export default class PythonPyroStatisticsApiGenerator extends StatisticsApi {
     this.addDependency('torch', '*')
     this.addDependency('pyro.distributions', '*')
     return `pyro.distributions.LogNormal(${mean}, ${sd}).sample(torch.Size([${sampleCount}]))`
+    // return `torch.flatten(pyro.distributions.LogNormal(${mean}, ${sd}).sample(torch.Size([${sampleCount}])))`
   }
 }

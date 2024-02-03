@@ -4,3 +4,5 @@ build/
 dist/
 old/
 .Rproj.user
+
+evaluation/manual/data

@@ -27,7 +27,7 @@ export default class PythonPyroMathApiGenerator extends PythonMathApiGenerator {
   handleMatrix = (content: string, rows: string, columns: string) => {
     this.addDependency('torch', '*')
     const contentModified = content.includes('.') ? content : content + '.'
-    return `torch.full((${columns}, ${rows}), ${contentModified})`
+    return `torch.full((${rows}, ${columns}), ${contentModified})`
   }
 
   handleMean = (content: string) => {

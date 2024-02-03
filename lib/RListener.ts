@@ -27,6 +27,7 @@ import { FloatContext } from "./RParser";
 import { BlockContext } from "./RParser";
 import { SignContext } from "./RParser";
 import { IdContext } from "./RParser";
+import { MatrixItemAssignmentContext } from "./RParser";
 import { WhileLoopContext } from "./RParser";
 import { RangeDefinitionContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
@@ -328,6 +329,18 @@ export default class RListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitId?: (ctx: IdContext) => void;
+	/**
+	 * Enter a parse tree produced by the `MatrixItemAssignment`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	enterMatrixItemAssignment?: (ctx: MatrixItemAssignmentContext) => void;
+	/**
+	 * Exit a parse tree produced by the `MatrixItemAssignment`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 */
+	exitMatrixItemAssignment?: (ctx: MatrixItemAssignmentContext) => void;
 	/**
 	 * Enter a parse tree produced by the `WhileLoop`
 	 * labeled alternative in `RParser.expr`.

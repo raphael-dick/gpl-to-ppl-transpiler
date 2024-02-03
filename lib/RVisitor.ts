@@ -27,6 +27,7 @@ import { FloatContext } from "./RParser";
 import { BlockContext } from "./RParser";
 import { SignContext } from "./RParser";
 import { IdContext } from "./RParser";
+import { MatrixItemAssignmentContext } from "./RParser";
 import { WhileLoopContext } from "./RParser";
 import { RangeDefinitionContext } from "./RParser";
 import { ExprlistContext } from "./RParser";
@@ -212,6 +213,13 @@ export default class RVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitId?: (ctx: IdContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `MatrixItemAssignment`
+	 * labeled alternative in `RParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMatrixItemAssignment?: (ctx: MatrixItemAssignmentContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `WhileLoop`
 	 * labeled alternative in `RParser.expr`.

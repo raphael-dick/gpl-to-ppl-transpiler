@@ -1,0 +1,37 @@
+duration_total:
+  Pyro I (mean): 123.15758727000001
+  Pyro II (mean): 124.12038021999992
+  Pyro III (mean): 121.81198536000007
+  Pyro IV (mean): 119.50265478000003
+  Pyro V (mean): 104.66525812000003
+
+acc_rate_Rth:
+  Pyro I (mean): 31.628700008392332
+  Pyro II (mean): 31.63369997024536
+  Pyro III (mean): 31.613299903869628
+  Pyro IV (mean): 31.60930006027222
+  Pyro V (mean): 31.632200107574462
+=> (31,628700008392332 + 31,63369997024536 + 31,613299903869628 + 31,60930006027222 + 31,632200107574462) / 5 = 31.62344
+
+acc_rate_theta (rounded):
+  Pyro I (mean): 31.63
+  Pyro II (mean): 31.63
+  Pyro III (mean): 31.61
+  Pyro IV (mean): 31.61
+  Pyro V (mean): 31.63
+=> (31.63+31.63+31.61+31.61+31.63)/5 = 31.62
+
+acc_rate_theta:
+  Pyro I (mean): 33.46329977035523
+  Pyro II (mean): 33.47330009460449
+  Pyro III (mean): 33.46989995956421
+  Pyro IV (mean): 33.43870000839233
+  Pyro V (mean): 33.479300270080564
+=> (33,46329977035523 + 33,47330009460449 + 33,46989995956421 + 33,43870000839233 + 33,479300270080564) / 5 => 43.46490 => 43.465
+
+acc_rate_theta (rounded):
+  Pyro I (mean): 33.46
+  Pyro II (mean): 33.47
+  Pyro III (mean): 33.47
+  Pyro IV (mean): 33.44
+  Pyro V (mean): 33.48

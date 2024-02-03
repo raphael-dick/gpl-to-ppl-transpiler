@@ -50,7 +50,7 @@ for i in range(1, nsim + 1):
   
   Rth_accept = numpy.repeat(0., mcmc["nmc"])
   theta_accept = numpy.repeat(0., mcmc["nmc"])
-  Rth_MH = torch.full((n, mcmc["nmc"]), 0.)
+  Rth_MH = torch.full((mcmc["nmc"], n), 0.)
   muRth_MH = numpy.repeat(0., mcmc["nmc"])
   sigmaRth_MH = numpy.repeat(0., mcmc["nmc"])
   
@@ -130,6 +130,7 @@ for i in range(1, nsim + 1):
     
     
     
+    Rth_MH[m-1,] = torch.flatten(Rth0)
     muRth_MH[m-1] = theta0[0]
     sigmaRth_MH[m-1] = theta0[1]
   finish = [None, None, process_time()][2]

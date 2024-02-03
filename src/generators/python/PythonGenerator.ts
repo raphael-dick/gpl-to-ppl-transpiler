@@ -7,6 +7,14 @@ const INDENTATION = '  '
  * The Python Language Generator
  */
 export default class PythonGenerator extends Generator {
+  handleIndexOffset = (index: string | number, offset: number) => {
+    return isNaN(index as number) ? `${index}-${offset}` : `${Number(index) - 1}`
+  }
+
+  handleMatrixItemAssignment = (name: string, index: string[], value: string) => {
+    return this.handleVariableDeclaration(`${name}[${index.join(',')}]`, value)
+  }
+
   handleSign = (sign: '+' | '-', content: string) => {
     return `${sign}${content}`
   }
@@ -32,8 +40,8 @@ export default class PythonGenerator extends Generator {
     return value
   }
 
-  handleArrayItem = (array: string, index: string, offset = 0) => {
-    return `${array}[${index}${offset ? '-' + offset : ''}]`
+  handleArrayItem = (array: string, index: string) => {
+    return `${array}[${index}]`
   }
 
   handleBoolean = (value: boolean) => {

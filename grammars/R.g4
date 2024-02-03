@@ -42,6 +42,7 @@ expr:
 	expr '[[' sublist ']' ']'								# UnhandeledExpression // '[[' follows R's yacc grammar
 	| expr '(' (NL)? sublist (NL)? ')'						# FunctionCall // call function
 	| expr '[-c(' expr ':' expr ')]'						# ArraySubset
+	| expr '[' (sub ',' sublist) ']' ('<-' | '=') expr		# MatrixItemAssignment
 	| expr '[' sublist ']'									# ArrayItem
 	| 'c(' sublist ')'										# CFunction
 	| expr ('::' | ':::') expr								# UnhandeledExpression

@@ -15,6 +15,7 @@ import {
   IfElseStatementContext,
   IfStatementContext,
   IntContext,
+  MatrixItemAssignmentContext,
   PowerOfContext,
   PropertyAccessContext,
   RangeDefinitionContext,
@@ -37,6 +38,8 @@ import { extractNamedArgs } from '../util/RApiVisitorUtil'
 import RStandardApiVisitor from '../apis/RStandardApiVisitor'
 
 // const PATTERN_SUBSET_ARRAY = new RegExp(/-c\(.*\)/)
+
+const INDEX_OFFSET = 1
 
 export default class RVisitor extends Visitor<string> {
   /** the generator for generating the output code */
@@ -351,14 +354,9 @@ export default class RVisitor extends Visitor<string> {
 
   visitArrayItem = (ctx: ArrayItemContext) => {
     const array = this.visit(ctx.getChild(0))
-    const index = this.visit(ctx.getChild(2)).filter((item) => !!item) // TODO: check if this results in some bugs with expression like "[m,]"
+    const index = this.visit(ctx.getChild(2)).filter((item) => !!item)
 
-    if (isNaN(index)) {
-      return this.target.handleArrayItem(array, index, 1)
-    }
-
-    const temp = Number(index) - 1
-    return this.target.handleArrayItem(array, temp.toString())
+    return this.target.handleArrayItem(array, this.target.handleIndexOffset(index, INDEX_OFFSET))
   }
 
   visitArraySubset = (ctx: ArraySubsetContext) => {
@@ -388,5 +386,19 @@ export default class RVisitor extends Visitor<string> {
     const content = this.visit(ctx.getChild(1))
 
     return this.target.handleSign(sign, content)
+  }
+
+  visitMatrixItemAssignment = (ctx: MatrixItemAssignmentContext) => {
+
+    const name = this.visit(ctx.getChild(0))
+    const firstIndex = this.visit(ctx.getChild(2))
+    const index = [firstIndex, ...this.visit(ctx.getChild(4))].map(item => item ? this.target.handleIndexOffset(item, INDEX_OFFSET) : '')
+    console.log(index);
+    
+    
+    const value = this.visit(ctx.getChild(7))
+
+
+    return this.target.handleMatrixItemAssignment(name, index, value)
   }
 }

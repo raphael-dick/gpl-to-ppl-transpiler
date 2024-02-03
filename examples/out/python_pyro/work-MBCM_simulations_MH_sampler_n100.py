@@ -49,7 +49,7 @@ for i in range(1, nsim + 1):
   mcmc["nmc"] = mcmc["M"] + mcmc["burnin"]
   mcmc["verbose"] = 1000
   
-  Rth_accept = numpy.repeat(0., mcmc["nmc"])theta_accept = numpy.repeat(0., mcmc["nmc"])Rth_MH = torch.full((n, mcmc["nmc"]), 0.)
+  Rth_accept = numpy.repeat(0., mcmc["nmc"])theta_accept = numpy.repeat(0., mcmc["nmc"])Rth_MH = torch.full((mcmc["nmc"], n), 0.)
 muRth_MH = numpy.repeat(0., mcmc["nmc"])
 sigmaRth_MH = numpy.repeat(0., mcmc["nmc"])
 

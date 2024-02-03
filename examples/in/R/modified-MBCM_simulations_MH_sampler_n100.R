@@ -170,8 +170,8 @@ for (i in 1:nsim){
     
     #=============================================================================~=
     # _ save draws =================================================================
-    # Rth_MH[m,]     <- Rth0 # [changed] disabled line because a bug appeared # TODO: fix problem with this line
-
+    
+    Rth_MH[m,]     <- Rth0
     muRth_MH[m]    <- theta0[1]
     sigmaRth_MH[m] <- theta0[2] 
     

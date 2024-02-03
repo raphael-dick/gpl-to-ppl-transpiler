@@ -220,9 +220,8 @@ export default abstract class Generator {
    * Accessing an index of an array
    * @param array the name of the array
    * @param index the index
-   * @param offset how much the indexing is offset to 0 (e.g.: R indexing starts with 1 => offset: 1)
    */
-  abstract handleArrayItem: (array: string, index: string, offset?: number) => string
+  abstract handleArrayItem: (array: string, index: string) => string
 
   /**
    * Subsetting an array
@@ -252,4 +251,19 @@ export default abstract class Generator {
    * @param content the content following the sign
    */
   abstract handleSign: (sign: '+' | '-', content: string) => string
+
+  /**
+   * Handles a sign
+   * @param name matrix variable name
+   * @param index the index of the item
+   * @param value the value to assign
+   */
+  abstract handleMatrixItemAssignment: (name: string, index: string[], value: string) => string
+
+  /**
+   * Handles a sign
+   * @param index the index
+   * @param offset the offset
+   */
+  abstract handleIndexOffset: (index: string | number, offset: number) => string
 }
