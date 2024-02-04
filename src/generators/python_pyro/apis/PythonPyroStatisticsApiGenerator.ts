@@ -15,19 +15,19 @@ export default class PythonPyroStatisticsApiGenerator extends StatisticsApi {
   handleRandomNormalDistribution = (sampleCount: string, mean: string, sd: string) => {
     this.addDependency('torch', '*')
     this.addDependency('torch.distributions', 'normal')
-    return `normal.Normal(torch.tensor(${mean}), ${sd}).sample()`
+    return `normal.Normal(torch.as_tensor(${mean}), ${sd}).sample()`
     // return `torch.flatten(normal.Normal(torch.tensor(${mean}), ${sd}).sample(torch.Size([${1}])))`
     // return `normal.Normal(torch.tensor(${mean}), ${sd}).sample()`
   }
 
   handleNormalDistributionDensityInLog = (x: string, mean: string, sd: string) => {
     this.addDependency('torch.distributions', '*')
-    return `torch.distributions.Normal(torch.tensor(${mean}), torch.max(torch.tensor(${sd}), torch.tensor(1e-6))).log_prob(torch.tensor(${x}))`
+    return `torch.distributions.Normal(torch.as_tensor(${mean}), torch.max(torch.as_tensor(${sd}), torch.as_tensor(1e-6))).log_prob(torch.as_tensor(${x}))`
   }
 
   handleNormalDistributionLogDensity = (x: string, mean: string, sd: string) => {
     this.addDependency('torch.distributions', '*')
-    return `torch.distributions.LogNormal(${mean}, torch.max(torch.tensor(${sd}), torch.tensor(1e-6))).log_prob(${x})`
+    return `torch.distributions.LogNormal(${mean}, torch.max(torch.as_tensor(${sd}), torch.as_tensor(1e-6))).log_prob(${x})`
   }
 
   handleRandomUniformDistribution = (sampleCount: string, lower: string, upper: string) => {

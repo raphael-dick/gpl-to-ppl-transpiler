@@ -18,7 +18,7 @@ library(rjson) # [changed] added this import for saving as json instead of RDS
 
 wd_rproj <- getwd() # [changed] added this line since the variable would otherwise be undefined
 
-nsim <- 100
+nsim <- 1
 
 # setting: 
 # n=100 

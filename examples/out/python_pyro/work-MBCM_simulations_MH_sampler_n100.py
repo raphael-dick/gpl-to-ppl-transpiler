@@ -66,7 +66,7 @@ eps_theta = 0.15
 def compute_LL(y,Rth,eta_star,If_A,Vf,sigma):
   mu = Rth * eta_star * If_A * Vf
   sig = sigma
-  LL = torch.sum(torch.distributions.Normal(torch.tensor(mu), torch.max(torch.tensor(sig), torch.tensor(1e-6))).log_prob(torch.tensor(y)))
+  LL = torch.sum(torch.distributions.Normal(torch.as_tensor(mu), torch.max(torch.as_tensor(sig), torch.as_tensor(1e-6))).log_prob(torch.as_tensor(y)))
   return LL
 compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma)
 
@@ -84,16 +84,16 @@ for m in range(1, mcmc["nmc"] + 1):
   
   
   
-  Rth1 = normal.Normal(torch.tensor(Rth0), eps_Rth).sample()
+  Rth1 = normal.Normal(torch.as_tensor(Rth0), eps_Rth).sample()
   mlog0 = torch.log(pow(theta0[0], 2) / torch.sqrt(pow(theta0[1], 2) + pow(theta0[0], 2)))
   slog0 = torch.sqrt(torch.log(1 + (pow(theta0[1], 2) / pow(theta0[0], 2))))
   
-  D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + torch.sum(torch.distributions.LogNormal(mlog0, torch.max(torch.tensor(slog0), torch.tensor(1e-6))).log_prob(Rth1))
+  D1 = compute_LL(ds, Rth1, eta_star, If_A, Vf, sigma) + torch.sum(torch.distributions.LogNormal(mlog0, torch.max(torch.as_tensor(slog0), torch.as_tensor(1e-6))).log_prob(Rth1))
   
-  D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + torch.sum(torch.distributions.LogNormal(mlog0, torch.max(torch.tensor(slog0), torch.tensor(1e-6))).log_prob(Rth0))
+  D0 = compute_LL(ds, Rth0, eta_star, If_A, Vf, sigma) + torch.sum(torch.distributions.LogNormal(mlog0, torch.max(torch.as_tensor(slog0), torch.as_tensor(1e-6))).log_prob(Rth0))
   
-  q1 = torch.sum(torch.distributions.Normal(torch.tensor(Rth0), torch.max(torch.tensor(eps_Rth), torch.tensor(1e-6))).log_prob(torch.tensor(Rth1)))
-  q0 = torch.sum(torch.distributions.Normal(torch.tensor(Rth1), torch.max(torch.tensor(eps_Rth), torch.tensor(1e-6))).log_prob(torch.tensor(Rth0)))
+  q1 = torch.sum(torch.distributions.Normal(torch.as_tensor(Rth0), torch.max(torch.as_tensor(eps_Rth), torch.as_tensor(1e-6))).log_prob(torch.as_tensor(Rth1)))
+  q0 = torch.sum(torch.distributions.Normal(torch.as_tensor(Rth1), torch.max(torch.as_tensor(eps_Rth), torch.as_tensor(1e-6))).log_prob(torch.as_tensor(Rth0)))
   
   Rth_alph = (D1 - D0 - (q1 - q0))
   
@@ -108,17 +108,17 @@ for m in range(1, mcmc["nmc"] + 1):
   
   
   
-  theta1 = normal.Normal(torch.tensor(theta0), eps_theta).sample()
+  theta1 = normal.Normal(torch.as_tensor(theta0), eps_theta).sample()
   
   mlog1 = torch.log(pow(theta1[0], 2) / torch.sqrt(pow(theta1[1], 2) + pow(theta1[0], 2)))
   slog1 = torch.sqrt(torch.log(1 + (pow(theta1[1], 2) / pow(theta1[0], 2))))
   
-  D1 = torch.sum(torch.distributions.LogNormal(mlog1, torch.max(torch.tensor(slog1), torch.tensor(1e-6))).log_prob(Rth0)) + pyro.distributions.Uniform(u1, u2).log_prob(torch.clamp(theta1[0], u1, u2)) + pyro.distributions.Uniform(s1, s2).log_prob(torch.clamp(theta1[1], s1, s2))
+  D1 = torch.sum(torch.distributions.LogNormal(mlog1, torch.max(torch.as_tensor(slog1), torch.as_tensor(1e-6))).log_prob(Rth0)) + pyro.distributions.Uniform(u1, u2).log_prob(torch.clamp(theta1[0], u1, u2)) + pyro.distributions.Uniform(s1, s2).log_prob(torch.clamp(theta1[1], s1, s2))
   
-  D0 = torch.sum(torch.distributions.LogNormal(mlog0, torch.max(torch.tensor(slog0), torch.tensor(1e-6))).log_prob(Rth0)) + pyro.distributions.Uniform(u1, u2).log_prob(torch.clamp(theta0[0], u1, u2)) + pyro.distributions.Uniform(s1, s2).log_prob(torch.clamp(theta0[1], s1, s2))
+  D0 = torch.sum(torch.distributions.LogNormal(mlog0, torch.max(torch.as_tensor(slog0), torch.as_tensor(1e-6))).log_prob(Rth0)) + pyro.distributions.Uniform(u1, u2).log_prob(torch.clamp(theta0[0], u1, u2)) + pyro.distributions.Uniform(s1, s2).log_prob(torch.clamp(theta0[1], s1, s2))
   
-  q1 = torch.sum(torch.distributions.Normal(torch.tensor(theta0), torch.max(torch.tensor(eps_Rth), torch.tensor(1e-6))).log_prob(torch.tensor(theta1)))
-  q0 = torch.sum(torch.distributions.Normal(torch.tensor(theta1), torch.max(torch.tensor(eps_Rth), torch.tensor(1e-6))).log_prob(torch.tensor(theta0)))
+  q1 = torch.sum(torch.distributions.Normal(torch.as_tensor(theta0), torch.max(torch.as_tensor(eps_Rth), torch.as_tensor(1e-6))).log_prob(torch.as_tensor(theta1)))
+  q0 = torch.sum(torch.distributions.Normal(torch.as_tensor(theta1), torch.max(torch.as_tensor(eps_Rth), torch.as_tensor(1e-6))).log_prob(torch.as_tensor(theta0)))
   
   theta_alph = D1 - D0 - (q1 - q0)
   
@@ -137,8 +137,8 @@ durT = finish - starttime
 durM = finish - starttimeM
 dur = { "total": durT, "durM": durM }
 
-acc_rate_Rth = torch.round(torch.mean(torch.tensor(Rth_accept[mcmc["burnin"]:]).float()) * 100, decimals=2)
-acc_rate_theta = torch.round(torch.mean(torch.tensor(theta_accept[mcmc["burnin"]:]).float()) * 100, decimals=2)
+acc_rate_Rth = torch.round(torch.mean(torch.as_tensor(Rth_accept[mcmc["burnin"]:]).float()) * 100, decimals=2)
+acc_rate_theta = torch.round(torch.mean(torch.as_tensor(theta_accept[mcmc["burnin"]:]).float()) * 100, decimals=2)
 
 print("\nMCMC info: \n", "acceptance Rth:  ", acc_rate_Rth, "\n", "acceptance theta:", acc_rate_theta, "\n\n")
 

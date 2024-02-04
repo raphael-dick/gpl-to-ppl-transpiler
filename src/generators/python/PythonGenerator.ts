@@ -185,7 +185,7 @@ export default class PythonGenerator extends Generator {
 
   handleUnhandeledExpression = (expression: string) => {
     // eslint-disable-next-line no-extra-boolean-cast
-    if (process.env.REPORT_MISSING_FEATURES.toLocaleLowerCase() === 'true') console.error(`Unhandled Expression: ${expression}`)
+    if (process.env.REPORT_MISSING_FEATURES?.toLocaleLowerCase() === 'true') console.error(`Unhandled Expression: ${expression}`)
     return `<<<<Unhandled Expression: '${expression}'>>>>`
   }
 }

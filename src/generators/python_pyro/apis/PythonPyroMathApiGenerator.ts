@@ -32,6 +32,6 @@ export default class PythonPyroMathApiGenerator extends PythonMathApiGenerator {
 
   handleMean = (content: string) => {
     this.addDependency('torch', '*')
-    return `torch.mean(torch.tensor(${content}).float())`
+    return `torch.mean(torch.as_tensor(${content}).float())`
   }
 }

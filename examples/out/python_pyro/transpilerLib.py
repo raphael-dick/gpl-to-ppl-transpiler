@@ -19,3 +19,10 @@ def convertPytorchToJson(data):
 
   serialized_data = {k: to_serializable(v) for k, v in data.items()}
   return(json.dumps(serialized_data, indent=2))
+
+
+def asTensor(value):
+  if torch.is_tensor(value):
+    return(value)
+  else:
+    torch.tensor(value)
