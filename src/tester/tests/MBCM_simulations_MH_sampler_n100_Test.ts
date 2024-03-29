@@ -10,7 +10,7 @@ type Results = {
 
 export default class MBCM_simulations_MH_sampler_n100_Test extends Test<Results> {
   runAndGatherResults(executor: CodeExecutor, filename: string): Results {
-    // executor.run(filename)
+    executor.run(filename)
 
     const acc_rate_Rth = []
     const acc_rate_theta = []

@@ -389,15 +389,12 @@ export default class RVisitor extends Visitor<string> {
   }
 
   visitMatrixItemAssignment = (ctx: MatrixItemAssignmentContext) => {
-
     const name = this.visit(ctx.getChild(0))
     const firstIndex = this.visit(ctx.getChild(2))
-    const index = [firstIndex, ...this.visit(ctx.getChild(4))].map(item => item ? this.target.handleIndexOffset(item, INDEX_OFFSET) : '')
-    console.log(index);
-    
-    
-    const value = this.visit(ctx.getChild(7))
+    const index = [firstIndex, ...this.visit(ctx.getChild(4))].map((item) => (item ? this.target.handleIndexOffset(item, INDEX_OFFSET) : ''))
+    console.log(index)
 
+    const value = this.visit(ctx.getChild(7))
 
     return this.target.handleMatrixItemAssignment(name, index, value)
   }
